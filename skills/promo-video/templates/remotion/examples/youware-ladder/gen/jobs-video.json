@@ -1,0 +1,50 @@
+[
+ {
+  "name": "v5-craft-a",
+  "model": "seedance-2.0",
+  "input": {
+   "prompt": "Very slow push-in toward the pen display. The stylus gently drags the curve's round handle and the glowing pistachio curve bends smoothly into a softer wave, then settles; the other hand rests on the edge; faint steam rises from the tea. Keep the exact painterly 3D-to-2D look, characters, colours and lighting of the first frame; natural, calm, human motion; no text, no logos, no new objects, no cuts.",
+   "first_frame_url": "https://temp.hiapi.ai/bo22afkzi7/01M3MAY3J5A2ECBRSMKJZ0MGFS-0.png",
+   "aspect_ratio": "16:9",
+   "resolution": "1080p",
+   "duration": 5,
+   "generate_audio": false
+  }
+ },
+ {
+  "name": "v5-craft-b",
+  "model": "seedance-2.0",
+  "input": {
+   "prompt": "Slow lateral dolly from left to right across the desk. The designer's hand lifts the stylus, adds a new anchor point and pulls the pistachio curve into a graceful S shape; daylight shifts subtly across the table. Keep the exact painterly 3D-to-2D look, characters, colours and lighting of the first frame; natural, calm, human motion; no text, no logos, no new objects, no cuts.",
+   "first_frame_url": "https://temp.hiapi.ai/bo22afkzi7/01M3MAY3J5A2ECBRSMKJZ0MGFS-0.png",
+   "aspect_ratio": "16:9",
+   "resolution": "1080p",
+   "duration": 5,
+   "generate_audio": false
+  }
+ },
+ {
+  "name": "v2-listen-a",
+  "model": "seedance-2.0",
+  "input": {
+   "prompt": "Slow gentle push-in on the two people. The older woman keeps explaining warmly with open hands and a smile; the young designer nods, listens and writes a note in his notebook, then looks up at her. Keep the exact painterly 3D-to-2D look, characters, colours and lighting of the first frame; natural, calm, human motion; no text, no logos, no new objects, no cuts.",
+   "first_frame_url": "https://temp.hiapi.ai/bo22afkzi7/01M3MAY3J9XAQFQMSYH0V8DH36-0.png",
+   "aspect_ratio": "16:9",
+   "resolution": "1080p",
+   "duration": 5,
+   "generate_audio": false
+  }
+ },
+ {
+  "name": "v2-listen-b",
+  "model": "seedance-2.0",
+  "input": {
+   "prompt": "Slow orbit to the right around the small table. The woman laughs softly as she explains, the designer smiles, nods and turns his notebook toward her to show a sketch; sticky notes glow in the background light. Keep the exact painterly 3D-to-2D look, characters, colours and lighting of the first frame; natural, calm, human motion; no text, no logos, no new objects, no cuts.",
+   "first_frame_url": "https://temp.hiapi.ai/bo22afkzi7/01M3MAY3J9XAQFQMSYH0V8DH36-0.png",
+   "aspect_ratio": "16:9",
+   "resolution": "1080p",
+   "duration": 5,
+   "generate_audio": false
+  }
+ }
+]

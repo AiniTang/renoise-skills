@@ -1,0 +1,76 @@
+#!/usr/bin/env python3
+"""Namespace the two model SVGs so they can share one DOM, and emit src/pel/svgs.ts.
+
+Both files use global <style> blocks: classes (.bob exists in both!), @keyframes, ids, and B styles every `svg{}` in the
+document. We prefix every id, class, keyframe name and url()/href reference, scope B's `svg{}` rule to its own root,
+drop <title>/<desc> (Chinese, never shown) and the root width/height so the player can size it.
+"""
+import json, os, re
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+def namespace(src, p):
+    s = re.sub(r"<\?xml[^>]*\?>\s*", "", src)
+    s = re.sub(r"<title[^>]*>.*?</title>\s*", "", s, flags=re.S)
+    s = re.sub(r"<desc[^>]*>.*?</desc>\s*", "", s, flags=re.S)
+    s = re.sub(r'\s(role|aria-labelledby)="[^"]*"', "", s)
+    ids = set(re.findall(r'\sid="([^"]+)"', s))
+    for i in sorted(ids, key=len, reverse=True):
+        s = s.replace(f'id="{i}"', f'id="{p}-{i}"').replace(f"url(#{i})", f"url(#{p}-{i})").replace(f'href="#{i}"', f'href="#{p}-{i}"')
+    classes = set()
+    for m in re.findall(r'\sclass="([^"]+)"', s):
+        classes.update(m.split())
+    s = re.sub(r'\sclass="([^"]+)"', lambda m: ' class="' + " ".join(f"{p}-{c}" for c in m.group(1).split()) + '"', s)
+    def fix_css(css):
+        for c in sorted(classes, key=len, reverse=True):
+            css = re.sub(r"\." + re.escape(c) + r"(?![\w-])", f".{p}-{c}", css)
+        kf = set(re.findall(r"@keyframes\s+([\w-]+)", css))
+        for k in sorted(kf, key=len, reverse=True):
+            css = re.sub(r"@keyframes\s+" + re.escape(k) + r"(?![\w-])", f"@keyframes {p}-{k}", css)
+            css = re.sub(r"(animation\s*:\s*)" + re.escape(k) + r"(?![\w-])", rf"\g<1>{p}-{k}", css)
+        # B's `svg{...}` rule would style every svg on the page: scope it to this root
+        css = re.sub(r"(^|[}\s])svg\s*\{", rf"\1#{p}-root{{", css)
+        # frame-deterministic CSS animation: always paused, positioned by a negative delay = the film's clock (--t, s)
+        css += f"\n#{p}-root *{{animation-play-state:paused!important;animation-delay:calc(var(--t,0) * -1s)!important}}\n"
+        return css
+    s = re.sub(r"(<style[^>]*>)(.*?)(</style>)", lambda m: m.group(1) + fix_css(m.group(2)) + m.group(3), s, flags=re.S)
+    s = re.sub(r"<svg\b([^>]*)>", lambda m: "<svg" + re.sub(r'\s(width|height)="[^"]*"', "", m.group(1)) + f' id="{p}-root" width="100%" height="100%" style="width:100%;height:100%;display:block" preserveAspectRatio="xMidYMid meet">', s, count=1)
+    # <use> clones live in shadow trees: their CSS animations are invisible to getAnimations() and would run on
+    # wall-clock time. Expand every <use href="#x" x y> into a real translated copy of the referenced group.
+    def expand(m):
+        ref, attrs = m.group(1), m.group(2)
+        g = re.search(r'<g id="' + re.escape(ref) + r'">(.*?)</g>\s*(?=</defs>|<g id=)', s2, flags=re.S)
+        if not g:
+            return m.group(0)
+        x = re.search(r'\sx="([^"]+)"', attrs)
+        y = re.search(r'\sy="([^"]+)"', attrs)
+        return f'<g transform="translate({x.group(1) if x else 0} {y.group(1) if y else 0})">{g.group(1)}</g>'
+    s2 = s
+    s = re.sub(r'<use href="#([^"]+)"([^>]*)/>', expand, s)
+    # zoom wrapper: the player zooms by transforming this group, never the root viewBox (view-box-relative
+    # transform-origins — Sol's sun rays, GPT-6.1's scarf — must keep their reference box)
+    s = re.sub(r"(<svg\b[^>]*>)", rf'\1<g id="{p}-zoom">', s, count=1)
+    s = s.replace("</svg>", "</g></svg>")
+    return s.strip(), sorted(ids), sorted(classes)
+
+# GPT-6.1 Max sits in a card of Sol's aspect (1.654): widen its viewBox with paper margins (50 units each side).
+# Its scarf pivot (transform-origin 450px 238px, view-box reference) needs NO shift: Chrome places the view-box
+# reference box at the user-space origin, not at (min-x, min-y) — verified by pixel diff (ScarfTest: 0 px changed).
+WIDEN = {"g61": {"viewBox": ("0 0 760 520", "-50 0 860 520"), "css": []}}
+
+out = []
+meta = {}
+for p, name in [("sol", "GPT-6-Sol-Max.svg"), ("g61", "GPT-6.1-Max.svg")]:
+    raw = open(os.path.join(ROOT, "public/svg", name), encoding="utf-8").read()
+    ns, ids, cls = namespace(raw, p)
+    for a, b in ([WIDEN[p]["viewBox"]] if p in WIDEN else []) + (WIDEN[p]["css"] if p in WIDEN else []):
+        assert a in ns, (p, a)
+        ns = ns.replace(a, b, 1)
+    vb = re.search(r'viewBox="([^"]+)"', raw).group(1)
+    meta[p] = {"file": name, "lines": raw.count("\n") + (0 if raw.endswith("\n") else 1), "bytes": len(raw.encode()), "viewBox": vb}
+    out.append(f"export const SVG_{p.upper()} = {json.dumps(ns)};")
+    out.append(f"export const SRC_{p.upper()} = {json.dumps(raw)};")
+    print(p, meta[p], "ids", len(ids), "classes", cls)
+out.append(f"export const SVG_META = {json.dumps(meta, indent=1)} as const;")
+os.makedirs(os.path.join(ROOT, "src/pel"), exist_ok=True)
+open(os.path.join(ROOT, "src/pel/svgs.ts"), "w").write("/* generated by tools/prep_svgs.py — do not edit */\n" + "\n".join(out) + "\n")

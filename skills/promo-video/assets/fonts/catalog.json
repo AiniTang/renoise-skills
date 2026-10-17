@@ -1,0 +1,3620 @@
+{
+ "_doc": "Curated fonts for promo films. Fetch with scripts/fonts.py. Licence rules in references/typography.md. ITF-FFL (Fontshare) fonts: free for video/ads/broadcast, but never subset/convert and never ship them to third parties — fetch per machine.",
+ "tones": {
+  "tech": "精密科技",
+  "minimal": "极简中性（Apple 式）",
+  "warm": "人文温暖",
+  "editorial": "编辑高级",
+  "luxe": "奢华典雅",
+  "bold": "活力潮流",
+  "poster": "粗犷海报",
+  "friendly": "友好圆润",
+  "hand": "手写温度",
+  "retro": "复古数字",
+  "eastern": "东方诗意"
+ },
+ "fonts": [
+  {
+   "id": "fraunces",
+   "family": "Fraunces",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/fraunces",
+    "files": [
+     "Fraunces-Italic[SOFT,WONK,opsz,wght].ttf",
+     "Fraunces[SOFT,WONK,opsz,wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "serif",
+   "roles": [
+    "display",
+    "text"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "warm",
+    "editorial",
+    "friendly"
+   ],
+   "note": "软糯的旧式衬线；SOFT 轴 0→100 从利落到圆润、WONK 轴让 n/h 歪头，动画很有人味。暖调品牌片首选标题字。",
+   "pairs": [
+    "manrope",
+    "figtree",
+    "instrument-sans"
+   ]
+  },
+  {
+   "id": "instrument-serif",
+   "family": "Instrument Serif",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/instrumentserif",
+    "files": [
+     "InstrumentSerif-Italic.ttf",
+     "InstrumentSerif-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "serif",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "editorial",
+    "luxe",
+    "minimal"
+   ],
+   "note": "修长的编辑体衬线，只有 Regular/Italic；用斜体给一个关键词，Apple 式高级感最省力的做法。",
+   "pairs": [
+    "instrument-sans",
+    "inter",
+    "geist"
+   ]
+  },
+  {
+   "id": "young-serif",
+   "family": "Young Serif",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/youngserif",
+    "files": [
+     "YoungSerif-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "serif",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "warm",
+    "friendly",
+    "editorial"
+   ],
+   "note": "厚实圆润的复古衬线（Cooper 气质），亲切、有手作温度。",
+   "pairs": [
+    "figtree",
+    "onest",
+    "dm-sans"
+   ]
+  },
+  {
+   "id": "gloock",
+   "family": "Gloock",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/gloock",
+    "files": [
+     "Gloock-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "serif",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "luxe",
+    "editorial"
+   ],
+   "note": "高反差展示衬线，大字号才好看（≥ 72px）。",
+   "pairs": [
+    "hanken-grotesk",
+    "inter"
+   ]
+  },
+  {
+   "id": "bodoni-moda",
+   "family": "Bodoni Moda",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/bodonimoda",
+    "files": [
+     "BodoniModa-Italic[opsz,wght].ttf",
+     "BodoniModa[opsz,wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "serif",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "luxe"
+   ],
+   "note": "Didone 时尚体，opsz 轴；细线在 1080p 小字会闪烁，只用 ≥ 64px。",
+   "pairs": [
+    "inter-tight",
+    "switzer"
+   ]
+  },
+  {
+   "id": "playfair-display",
+   "family": "Playfair Display",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/playfairdisplay",
+    "files": [
+     "PlayfairDisplay-Italic[wght].ttf",
+     "PlayfairDisplay[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "serif",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "luxe",
+    "editorial"
+   ],
+   "note": "经典高反差衬线，稳妥但常见，优先考虑 Gloock/Instrument Serif。",
+   "pairs": [
+    "inter",
+    "dm-sans"
+   ]
+  },
+  {
+   "id": "newsreader",
+   "family": "Newsreader",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/newsreader",
+    "files": [
+     "Newsreader-Italic[opsz,wght].ttf",
+     "Newsreader[opsz,wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "serif",
+   "roles": [
+    "display",
+    "text"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "editorial",
+    "warm",
+    "minimal"
+   ],
+   "note": "报刊正文衬线，opsz 6–72 覆盖小字到标题；安静、可信，适合诗句与引语。",
+   "pairs": [
+    "inter",
+    "geist",
+    "manrope"
+   ]
+  },
+  {
+   "id": "cormorant",
+   "family": "Cormorant",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/cormorant",
+    "files": [
+     "Cormorant-Italic[wght].ttf",
+     "Cormorant[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "serif",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "luxe",
+    "eastern"
+   ],
+   "note": "极细的 Garamond 展示体，优雅、诗意；只用于大标题。",
+   "pairs": [
+    "manrope",
+    "dm-sans"
+   ]
+  },
+  {
+   "id": "italiana",
+   "family": "Italiana",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/italiana",
+    "files": [
+     "Italiana-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "serif",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "luxe"
+   ],
+   "note": "细 Didone 大写展示字，奢品 / 美妆 / 香氛。",
+   "pairs": [
+    "inter-tight"
+   ]
+  },
+  {
+   "id": "dm-serif-display",
+   "family": "DM Serif Display",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/dmserifdisplay",
+    "files": [
+     "DMSerifDisplay-Italic.ttf",
+     "DMSerifDisplay-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "serif",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "editorial",
+    "bold"
+   ],
+   "note": "粗壮的展示衬线，配 DM Sans 天然成对。",
+   "pairs": [
+    "dm-sans"
+   ]
+  },
+  {
+   "id": "hepta-slab",
+   "family": "Hepta Slab",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/heptaslab",
+    "files": [
+     "HeptaSlab[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "slab",
+   "roles": [
+    "display",
+    "text"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "warm",
+    "editorial"
+   ],
+   "note": "可变字重的板衬线（YouWare 站点字体），稳重又友好。",
+   "pairs": [
+    "manrope",
+    "dm-sans"
+   ]
+  },
+  {
+   "id": "roboto-serif",
+   "family": "Roboto Serif",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/robotoserif",
+    "files": [
+     "RobotoSerif-Italic[GRAD,opsz,wdth,wght].ttf",
+     "RobotoSerif[GRAD,opsz,wdth,wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "serif",
+   "roles": [
+    "text",
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "editorial"
+   ],
+   "note": "wdth/opsz/GRAD 四轴，屏幕上最稳的正文衬线之一。",
+   "pairs": [
+    "inter",
+    "roboto-mono"
+   ]
+  },
+  {
+   "id": "gambetta",
+   "family": "Gambetta",
+   "source": {
+    "type": "fontshare",
+    "slug": "gambetta"
+   },
+   "license": "ITF-FFL-2.0",
+   "subset_ok": false,
+   "redistribute_ok": false,
+   "cls": "serif",
+   "roles": [
+    "display",
+    "text"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "editorial",
+    "warm"
+   ],
+   "note": "现代文学感衬线（Canela / Tiempos 平替）。",
+   "pairs": [
+    "satoshi",
+    "switzer"
+   ]
+  },
+  {
+   "id": "zodiak",
+   "family": "Zodiak",
+   "source": {
+    "type": "fontshare",
+    "slug": "zodiak"
+   },
+   "license": "ITF-FFL-2.0",
+   "subset_ok": false,
+   "redistribute_ok": false,
+   "cls": "serif",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "editorial",
+    "luxe"
+   ],
+   "note": "锐利的高反差衬线，时尚杂志封面感。",
+   "pairs": [
+    "general-sans",
+    "switzer"
+   ]
+  },
+  {
+   "id": "erode",
+   "family": "Erode",
+   "source": {
+    "type": "fontshare",
+    "slug": "erode"
+   },
+   "license": "ITF-FFL-2.0",
+   "subset_ok": false,
+   "redistribute_ok": false,
+   "cls": "serif",
+   "roles": [
+    "display",
+    "text"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "warm",
+    "editorial"
+   ],
+   "note": "温润的书卷衬线，人文品牌片。",
+   "pairs": [
+    "satoshi",
+    "general-sans"
+   ]
+  },
+  {
+   "id": "sentient",
+   "family": "Sentient",
+   "source": {
+    "type": "fontshare",
+    "slug": "sentient"
+   },
+   "license": "ITF-FFL-2.0",
+   "subset_ok": false,
+   "redistribute_ok": false,
+   "cls": "serif",
+   "roles": [
+    "display",
+    "text"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "editorial",
+    "minimal"
+   ],
+   "note": "克制的当代衬线，理性又有温度。",
+   "pairs": [
+    "switzer",
+    "general-sans"
+   ]
+  },
+  {
+   "id": "boska",
+   "family": "Boska",
+   "source": {
+    "type": "fontshare",
+    "slug": "boska"
+   },
+   "license": "ITF-FFL-2.0",
+   "subset_ok": false,
+   "redistribute_ok": false,
+   "cls": "serif",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "luxe",
+    "editorial"
+   ],
+   "note": "尖锐的展示衬线（Editorial New / Ogg 气质）。",
+   "pairs": [
+    "switzer",
+    "satoshi"
+   ]
+  },
+  {
+   "id": "bespoke-serif",
+   "family": "Bespoke Serif",
+   "source": {
+    "type": "fontshare",
+    "slug": "bespoke-serif"
+   },
+   "license": "ITF-FFL-2.0",
+   "subset_ok": false,
+   "redistribute_ok": false,
+   "cls": "serif",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "luxe",
+    "bold"
+   ],
+   "note": "夸张的尖角衬线，个性强。",
+   "pairs": [
+    "general-sans"
+   ]
+  },
+  {
+   "id": "inter",
+   "family": "Inter",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/inter",
+    "files": [
+     "Inter-Italic[opsz,wght].ttf",
+     "Inter[opsz,wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "text",
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "minimal",
+    "tech"
+   ],
+   "note": "带 opsz 轴的 Inter 4（大字自动变 Display 版）；SF Pro 最近的开源替代。",
+   "pairs": [
+    "newsreader",
+    "instrument-serif",
+    "jetbrains-mono"
+   ]
+  },
+  {
+   "id": "inter-tight",
+   "family": "Inter Tight",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/intertight",
+    "files": [
+     "InterTight-Italic[wght].ttf",
+     "InterTight[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "minimal",
+    "tech",
+    "poster"
+   ],
+   "note": "字距更紧的 Inter，给大标题用。",
+   "pairs": [
+    "inter",
+    "newsreader"
+   ]
+  },
+  {
+   "id": "geist",
+   "family": "Geist",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/geist",
+    "files": [
+     "Geist-Italic[wght].ttf",
+     "Geist[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "text",
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "tech",
+    "minimal"
+   ],
+   "note": "Vercel 的开发者气质无衬线，干净、精确。",
+   "pairs": [
+    "geist-mono",
+    "instrument-serif"
+   ]
+  },
+  {
+   "id": "manrope",
+   "family": "Manrope",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/manrope",
+    "files": [
+     "Manrope[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "text",
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "warm",
+    "tech",
+    "friendly"
+   ],
+   "note": "半圆几何无衬线（YouWare 品牌正文字体）。",
+   "pairs": [
+    "fraunces",
+    "hepta-slab"
+   ]
+  },
+  {
+   "id": "dm-sans",
+   "family": "DM Sans",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/dmsans",
+    "files": [
+     "DMSans-Italic[opsz,wght].ttf",
+     "DMSans[opsz,wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "text"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "minimal",
+    "friendly"
+   ],
+   "note": "低对比几何无衬线，opsz 轴；万能但容易平庸，别当标题主角。",
+   "pairs": [
+    "dm-serif-display",
+    "fraunces"
+   ]
+  },
+  {
+   "id": "instrument-sans",
+   "family": "Instrument Sans",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/instrumentsans",
+    "files": [
+     "InstrumentSans-Italic[wdth,wght].ttf",
+     "InstrumentSans[wdth,wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "text",
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "editorial",
+    "minimal"
+   ],
+   "note": "带宽度轴的编辑体无衬线，和 Instrument Serif 同源。",
+   "pairs": [
+    "instrument-serif"
+   ]
+  },
+  {
+   "id": "hanken-grotesk",
+   "family": "Hanken Grotesk",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/hankengrotesk",
+    "files": [
+     "HankenGrotesk-Italic[wght].ttf",
+     "HankenGrotesk[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "text"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "minimal",
+    "editorial"
+   ],
+   "note": "干净的新怪诞（Graphik 平替）。",
+   "pairs": [
+    "gloock",
+    "gambetta"
+   ]
+  },
+  {
+   "id": "figtree",
+   "family": "Figtree",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/figtree",
+    "files": [
+     "Figtree-Italic[wght].ttf",
+     "Figtree[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "text"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "friendly",
+    "warm"
+   ],
+   "note": "友好的几何无衬线（Circular 气质）。",
+   "pairs": [
+    "young-serif",
+    "fraunces"
+   ]
+  },
+  {
+   "id": "onest",
+   "family": "Onest",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/onest",
+    "files": [
+     "Onest[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "text"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "minimal",
+    "friendly"
+   ],
+   "note": "现代中性无衬线，屏幕易读。",
+   "pairs": [
+    "unbounded",
+    "young-serif"
+   ]
+  },
+  {
+   "id": "plus-jakarta-sans",
+   "family": "Plus Jakarta Sans",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/plusjakartasans",
+    "files": [
+     "PlusJakartaSans-Italic[wght].ttf",
+     "PlusJakartaSans[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "text",
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "friendly",
+    "tech"
+   ],
+   "note": "SaaS 常用的亲和几何无衬线。",
+   "pairs": [
+    "fraunces"
+   ]
+  },
+  {
+   "id": "space-grotesk",
+   "family": "Space Grotesk",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/spacegrotesk",
+    "files": [
+     "SpaceGrotesk[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "display",
+    "text"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "tech",
+    "retro"
+   ],
+   "note": "带怪癖的科技无衬线，配 Space Mono。",
+   "pairs": [
+    "space-mono"
+   ]
+  },
+  {
+   "id": "bricolage-grotesque",
+   "family": "Bricolage Grotesque",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/bricolagegrotesque",
+    "files": [
+     "BricolageGrotesque[opsz,wdth,wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "bold",
+    "friendly"
+   ],
+   "note": "opsz/wdth/wght 三轴的法式怪诞，大字很有性格（ReddTrends 官网字体）。",
+   "pairs": [
+    "figtree",
+    "inter"
+   ]
+  },
+  {
+   "id": "syne",
+   "family": "Syne",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/syne",
+    "files": [
+     "Syne[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "bold",
+    "poster"
+   ],
+   "note": "字重越重越宽的艺术展览字，先锋感。",
+   "pairs": [
+    "inter",
+    "space-mono"
+   ]
+  },
+  {
+   "id": "unbounded",
+   "family": "Unbounded",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/unbounded",
+    "files": [
+     "Unbounded[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "bold",
+    "poster",
+    "tech"
+   ],
+   "note": "超宽圆角展示字（Monument Extended 平替）。",
+   "pairs": [
+    "onest",
+    "inter"
+   ]
+  },
+  {
+   "id": "archivo",
+   "family": "Archivo",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/archivo",
+    "files": [
+     "Archivo-Italic[wdth,wght].ttf",
+     "Archivo[wdth,wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "display",
+    "text"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "poster",
+    "tech"
+   ],
+   "note": "wdth 62–125：一套字从窄到宽，做宽度动画的好材料。",
+   "pairs": [
+    "archivo",
+    "space-mono"
+   ]
+  },
+  {
+   "id": "anybody",
+   "family": "Anybody",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/anybody",
+    "files": [
+     "Anybody-Italic[wdth,wght].ttf",
+     "Anybody[wdth,wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "bold",
+    "poster"
+   ],
+   "note": "wdth 50–150 的极端宽度轴，拉伸/挤压动效专用。",
+   "pairs": [
+    "inter"
+   ]
+  },
+  {
+   "id": "mona-sans",
+   "family": "Mona Sans",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/monasans",
+    "files": [
+     "MonaSans-Italic[wdth,wght].ttf",
+     "MonaSans[wdth,wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "display",
+    "text"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "tech",
+    "bold"
+   ],
+   "note": "GitHub 的变宽无衬线（wdth 75–125），科技品牌大标题。",
+   "pairs": [
+    "hubot-sans",
+    "jetbrains-mono"
+   ]
+  },
+  {
+   "id": "hubot-sans",
+   "family": "Hubot Sans",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/hubotsans",
+    "files": [
+     "HubotSans-Italic[wdth,wght].ttf",
+     "HubotSans[wdth,wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "tech",
+    "retro"
+   ],
+   "note": "Mona Sans 的机械姐妹款，硬朗几何。",
+   "pairs": [
+    "mona-sans",
+    "geist-mono"
+   ]
+  },
+  {
+   "id": "funnel-display",
+   "family": "Funnel Display",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/funneldisplay",
+    "files": [
+     "FunnelDisplay[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "bold",
+    "friendly"
+   ],
+   "note": "开口圆润的展示无衬线，活泼但不幼稚。",
+   "pairs": [
+    "funnel-sans"
+   ]
+  },
+  {
+   "id": "funnel-sans",
+   "family": "Funnel Sans",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/funnelsans",
+    "files": [
+     "FunnelSans-Italic[wght].ttf",
+     "FunnelSans[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "text"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "friendly",
+    "minimal"
+   ],
+   "note": "Funnel Display 的正文搭档。",
+   "pairs": [
+    "funnel-display"
+   ]
+  },
+  {
+   "id": "host-grotesk",
+   "family": "Host Grotesk",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/hostgrotesk",
+    "files": [
+     "HostGrotesk-Italic[wght].ttf",
+     "HostGrotesk[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "text",
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "minimal",
+    "tech"
+   ],
+   "note": "当代新怪诞（Neue Montreal 气质）。",
+   "pairs": [
+    "newsreader"
+   ]
+  },
+  {
+   "id": "parkinsans",
+   "family": "Parkinsans",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/parkinsans",
+    "files": [
+     "Parkinsans[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "friendly",
+    "bold"
+   ],
+   "note": "圆头几何展示字，亲和力强。",
+   "pairs": [
+    "figtree"
+   ]
+  },
+  {
+   "id": "big-shoulders",
+   "family": "Big Shoulders",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/bigshoulders",
+    "files": [
+     "BigShoulders[opsz,wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "poster"
+   ],
+   "note": "芝加哥工业风窄体，opsz 轴。",
+   "pairs": [
+    "space-mono"
+   ]
+  },
+  {
+   "id": "anton",
+   "family": "Anton",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/anton",
+    "files": [
+     "Anton-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "poster"
+   ],
+   "note": "粗窄海报字，体育 / 活动 / 冲击力标题。",
+   "pairs": [
+    "inter"
+   ]
+  },
+  {
+   "id": "bebas-neue",
+   "family": "Bebas Neue",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/bebasneue",
+    "files": [
+     "BebasNeue-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "poster"
+   ],
+   "note": "全大写窄体，常见，谨慎使用。",
+   "pairs": [
+    "inter"
+   ]
+  },
+  {
+   "id": "satoshi",
+   "family": "Satoshi",
+   "source": {
+    "type": "fontshare",
+    "slug": "satoshi"
+   },
+   "license": "ITF-FFL-2.0",
+   "subset_ok": false,
+   "redistribute_ok": false,
+   "cls": "sans",
+   "roles": [
+    "text",
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "minimal",
+    "tech",
+    "friendly"
+   ],
+   "note": "现代几何无衬线（GT Walsheim / Circular 平替），设计圈高频。",
+   "pairs": [
+    "gambetta",
+    "erode"
+   ]
+  },
+  {
+   "id": "general-sans",
+   "family": "General Sans",
+   "source": {
+    "type": "fontshare",
+    "slug": "general-sans"
+   },
+   "license": "ITF-FFL-2.0",
+   "subset_ok": false,
+   "redistribute_ok": false,
+   "cls": "sans",
+   "roles": [
+    "text",
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "minimal",
+    "tech"
+   ],
+   "note": "中性几何（Aeonik 气质）。",
+   "pairs": [
+    "zodiak",
+    "sentient"
+   ]
+  },
+  {
+   "id": "switzer",
+   "family": "Switzer",
+   "source": {
+    "type": "fontshare",
+    "slug": "switzer"
+   },
+   "license": "ITF-FFL-2.0",
+   "subset_ok": false,
+   "redistribute_ok": false,
+   "cls": "sans",
+   "roles": [
+    "text",
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "minimal",
+    "editorial"
+   ],
+   "note": "瑞士新怪诞（Söhne / Neue Haas 平替）。",
+   "pairs": [
+    "gambetta",
+    "boska"
+   ]
+  },
+  {
+   "id": "clash-display",
+   "family": "Clash Display",
+   "source": {
+    "type": "fontshare",
+    "slug": "clash-display"
+   },
+   "license": "ITF-FFL-2.0",
+   "subset_ok": false,
+   "redistribute_ok": false,
+   "cls": "sans",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "bold",
+    "poster"
+   ],
+   "note": "紧凑的高能展示字，年轻品牌 / 活动。",
+   "pairs": [
+    "satoshi",
+    "general-sans"
+   ]
+  },
+  {
+   "id": "clash-grotesk",
+   "family": "Clash Grotesk",
+   "source": {
+    "type": "fontshare",
+    "slug": "clash-grotesk"
+   },
+   "license": "ITF-FFL-2.0",
+   "subset_ok": false,
+   "redistribute_ok": false,
+   "cls": "sans",
+   "roles": [
+    "display",
+    "text"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "bold",
+    "tech"
+   ],
+   "note": "Clash 的正文友好版。",
+   "pairs": [
+    "satoshi"
+   ]
+  },
+  {
+   "id": "cabinet-grotesk",
+   "family": "Cabinet Grotesk",
+   "source": {
+    "type": "fontshare",
+    "slug": "cabinet-grotesk"
+   },
+   "license": "ITF-FFL-2.0",
+   "subset_ok": false,
+   "redistribute_ok": false,
+   "cls": "sans",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "bold",
+    "friendly"
+   ],
+   "note": "带俏皮细节的怪诞体，消费品 / 创意工作室。",
+   "pairs": [
+    "satoshi",
+    "erode"
+   ]
+  },
+  {
+   "id": "chillax",
+   "family": "Chillax",
+   "source": {
+    "type": "fontshare",
+    "slug": "chillax"
+   },
+   "license": "ITF-FFL-2.0",
+   "subset_ok": false,
+   "redistribute_ok": false,
+   "cls": "sans",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "friendly",
+    "bold"
+   ],
+   "note": "松弛的圆润几何，生活方式品牌。",
+   "pairs": [
+    "satoshi"
+   ]
+  },
+  {
+   "id": "panchang",
+   "family": "Panchang",
+   "source": {
+    "type": "fontshare",
+    "slug": "panchang"
+   },
+   "license": "ITF-FFL-2.0",
+   "subset_ok": false,
+   "redistribute_ok": false,
+   "cls": "sans",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "bold",
+    "poster"
+   ],
+   "note": "超宽展示字，音乐 / 潮流。",
+   "pairs": [
+    "general-sans"
+   ]
+  },
+  {
+   "id": "supreme",
+   "family": "Supreme",
+   "source": {
+    "type": "fontshare",
+    "slug": "supreme"
+   },
+   "license": "ITF-FFL-2.0",
+   "subset_ok": false,
+   "redistribute_ok": false,
+   "cls": "sans",
+   "roles": [
+    "display",
+    "text"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "tech",
+    "bold"
+   ],
+   "note": "硬朗的技术感无衬线。",
+   "pairs": [
+    "general-sans"
+   ]
+  },
+  {
+   "id": "author",
+   "family": "Author",
+   "source": {
+    "type": "fontshare",
+    "slug": "author"
+   },
+   "license": "ITF-FFL-2.0",
+   "subset_ok": false,
+   "redistribute_ok": false,
+   "cls": "sans",
+   "roles": [
+    "text",
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "editorial"
+   ],
+   "note": "偏人文的窄无衬线，杂志正文。",
+   "pairs": [
+    "gambetta"
+   ]
+  },
+  {
+   "id": "fredoka",
+   "family": "Fredoka",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/fredoka",
+    "files": [
+     "Fredoka[wdth,wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "rounded",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "friendly"
+   ],
+   "note": "圆头宽体，儿童 / 教育 / 萌系。",
+   "pairs": [
+    "nunito"
+   ]
+  },
+  {
+   "id": "nunito",
+   "family": "Nunito",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/nunito",
+    "files": [
+     "Nunito-Italic[wght].ttf",
+     "Nunito[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "rounded",
+   "roles": [
+    "text"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "friendly"
+   ],
+   "note": "圆头正文字。",
+   "pairs": [
+    "fredoka"
+   ]
+  },
+  {
+   "id": "quicksand",
+   "family": "Quicksand",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/quicksand",
+    "files": [
+     "Quicksand[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "rounded",
+   "roles": [
+    "display",
+    "text"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "friendly",
+    "minimal"
+   ],
+   "note": "细圆几何，轻盈。",
+   "pairs": [
+    "nunito"
+   ]
+  },
+  {
+   "id": "pally",
+   "family": "Pally",
+   "source": {
+    "type": "fontshare",
+    "slug": "pally"
+   },
+   "license": "ITF-FFL-2.0",
+   "subset_ok": false,
+   "redistribute_ok": false,
+   "cls": "rounded",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "friendly"
+   ],
+   "note": "饱满圆润，活泼友好。",
+   "pairs": [
+    "satoshi"
+   ]
+  },
+  {
+   "id": "geist-mono",
+   "family": "Geist Mono",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/geistmono",
+    "files": [
+     "GeistMono-Italic[wght].ttf",
+     "GeistMono[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "mono",
+   "roles": [
+    "mono"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "tech"
+   ],
+   "note": "开发者等宽，配 Geist。",
+   "pairs": [
+    "geist"
+   ]
+  },
+  {
+   "id": "jetbrains-mono",
+   "family": "JetBrains Mono",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/jetbrainsmono",
+    "files": [
+     "JetBrainsMono-Italic[wght].ttf",
+     "JetBrainsMono[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "mono",
+   "roles": [
+    "mono"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "tech"
+   ],
+   "note": "代码 / 终端画面首选。",
+   "pairs": [
+    "inter",
+    "mona-sans"
+   ]
+  },
+  {
+   "id": "martian-mono",
+   "family": "Martian Mono",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/martianmono",
+    "files": [
+     "MartianMono[wdth,wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "mono",
+   "roles": [
+    "mono",
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "tech",
+    "retro"
+   ],
+   "note": "带宽度轴的等宽，HUD / 数据。",
+   "pairs": [
+    "space-grotesk"
+   ]
+  },
+  {
+   "id": "space-mono",
+   "family": "Space Mono",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/spacemono",
+    "files": [
+     "SpaceMono-Bold.ttf",
+     "SpaceMono-BoldItalic.ttf",
+     "SpaceMono-Italic.ttf",
+     "SpaceMono-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "mono",
+   "roles": [
+    "mono",
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "retro",
+    "tech"
+   ],
+   "note": "复古打字机等宽。",
+   "pairs": [
+    "space-grotesk"
+   ]
+  },
+  {
+   "id": "ibm-plex-mono",
+   "family": "IBM Plex Mono",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/ibmplexmono",
+    "files": [
+     "IBMPlexMono-Bold.ttf",
+     "IBMPlexMono-BoldItalic.ttf",
+     "IBMPlexMono-ExtraLight.ttf",
+     "IBMPlexMono-ExtraLightItalic.ttf",
+     "IBMPlexMono-Italic.ttf",
+     "IBMPlexMono-Light.ttf",
+     "IBMPlexMono-LightItalic.ttf",
+     "IBMPlexMono-Medium.ttf",
+     "IBMPlexMono-MediumItalic.ttf",
+     "IBMPlexMono-Regular.ttf",
+     "IBMPlexMono-SemiBold.ttf",
+     "IBMPlexMono-SemiBoldItalic.ttf",
+     "IBMPlexMono-Thin.ttf",
+     "IBMPlexMono-ThinItalic.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "mono",
+   "roles": [
+    "mono"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "tech",
+    "editorial"
+   ],
+   "note": "企业可信的等宽。",
+   "pairs": [
+    "inter"
+   ]
+  },
+  {
+   "id": "departure-mono",
+   "family": "Departure Mono",
+   "source": {
+    "type": "url",
+    "url": "https://github.com/rektdeckard/departure-mono/releases/download/v1.500/DepartureMono-1.500.zip",
+    "pattern": "DepartureMono-Regular\\.otf$"
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "pixel",
+   "roles": [
+    "mono",
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "retro",
+    "tech"
+   ],
+   "note": "像素等宽，复古科技 / 游戏感 HUD。",
+   "pairs": [
+    "space-grotesk",
+    "inter"
+   ]
+  },
+  {
+   "id": "pixelify-sans",
+   "family": "Pixelify Sans",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/pixelifysans",
+    "files": [
+     "PixelifySans[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "pixel",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "retro",
+    "friendly"
+   ],
+   "note": "像素展示字，可变字重。",
+   "pairs": [
+    "inter"
+   ]
+  },
+  {
+   "id": "recursive",
+   "family": "Recursive",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/recursive",
+    "files": [
+     "Recursive[CASL,CRSV,MONO,slnt,wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "mono",
+   "roles": [
+    "mono",
+    "display",
+    "text"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "retro",
+    "friendly",
+    "tech"
+   ],
+   "note": "CASL（休闲↔严谨）、MONO（比例↔等宽）轴，能从代码字体动画变成手写感。",
+   "pairs": [
+    "inter"
+   ]
+  },
+  {
+   "id": "caveat",
+   "family": "Caveat",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/caveat",
+    "files": [
+     "Caveat[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "hand",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "hand",
+    "warm",
+    "friendly"
+   ],
+   "note": "自然的马克笔手写，便签 / 批注 / 用户原话。",
+   "pairs": [
+    "dm-sans",
+    "manrope"
+   ]
+  },
+  {
+   "id": "kalam",
+   "family": "Kalam",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/kalam",
+    "files": [
+     "Kalam-Bold.ttf",
+     "Kalam-Light.ttf",
+     "Kalam-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "hand",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "hand",
+    "friendly"
+   ],
+   "note": "圆珠笔手写，轻松。",
+   "pairs": [
+    "nunito"
+   ]
+  },
+  {
+   "id": "nothing-you-could-do",
+   "family": "Nothing You Could Do",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/nothingyoucoulddo",
+    "files": [
+     "NothingYouCouldDo.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "hand",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "hand"
+   ],
+   "note": "潦草的真实手写。",
+   "pairs": [
+    "inter"
+   ]
+  },
+  {
+   "id": "reenie-beanie",
+   "family": "Reenie Beanie",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/reeniebeanie",
+    "files": [
+     "ReenieBeanie.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "hand",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "hand"
+   ],
+   "note": "铅笔草稿感。",
+   "pairs": [
+    "inter"
+   ]
+  },
+  {
+   "id": "homemade-apple",
+   "family": "Homemade Apple",
+   "source": {
+    "type": "gf",
+    "dir": "apache/homemadeapple",
+    "files": [
+     "HomemadeApple-Regular.ttf"
+    ]
+   },
+   "license": "Apache-2.0",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "hand",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "hand",
+    "warm"
+   ],
+   "note": "连笔手写签名感。",
+   "pairs": [
+    "newsreader"
+   ]
+  },
+  {
+   "id": "dancing-script",
+   "family": "Dancing Script",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/dancingscript",
+    "files": [
+     "DancingScript[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "script",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "hand",
+    "friendly"
+   ],
+   "note": "活泼的连笔书写体。",
+   "pairs": [
+    "nunito"
+   ]
+  },
+  {
+   "id": "pinyon-script",
+   "family": "Pinyon Script",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/pinyonscript",
+    "files": [
+     "PinyonScript-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "script",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "luxe",
+    "hand"
+   ],
+   "note": "正式铜版书法体，邀请函 / 婚礼 / 高端。",
+   "pairs": [
+    "cormorant"
+   ]
+  },
+  {
+   "id": "telma",
+   "family": "Telma",
+   "source": {
+    "type": "fontshare",
+    "slug": "telma"
+   },
+   "license": "ITF-FFL-2.0",
+   "subset_ok": false,
+   "redistribute_ok": false,
+   "cls": "script",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "hand",
+    "friendly"
+   ],
+   "note": "现代圆润书写体。",
+   "pairs": [
+    "satoshi"
+   ]
+  },
+  {
+   "id": "noto-sans-sc",
+   "family": "Noto Sans SC",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/notosanssc",
+    "files": [
+     "NotoSansSC[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "text",
+    "display"
+   ],
+   "scripts": [
+    "zh-Hans"
+   ],
+   "tones": [
+    "minimal",
+    "tech"
+   ],
+   "note": "思源黑体（简），可变字重，中文正文与标题的底座。",
+   "pairs": [
+    "noto-serif-sc",
+    "inter"
+   ],
+   "native": "思源黑体"
+  },
+  {
+   "id": "noto-serif-sc",
+   "family": "Noto Serif SC",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/notoserifsc",
+    "files": [
+     "NotoSerifSC[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "serif",
+   "roles": [
+    "display",
+    "text"
+   ],
+   "scripts": [
+    "zh-Hans"
+   ],
+   "tones": [
+    "editorial",
+    "eastern",
+    "luxe"
+   ],
+   "note": "思源宋体（简），可变字重；细字重做诗意大标题很高级。",
+   "pairs": [
+    "noto-sans-sc",
+    "newsreader"
+   ],
+   "native": "思源宋体"
+  },
+  {
+   "id": "smiley-sans",
+   "family": "Smiley Sans",
+   "source": {
+    "type": "url",
+    "url": "https://github.com/atelier-anchor/smiley-sans/releases/download/v2.0.1/smiley-sans-v2.0.1.zip",
+    "pattern": "SmileySans-Oblique\\.ttf$"
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "zh-Hans"
+   ],
+   "tones": [
+    "bold",
+    "poster",
+    "friendly"
+   ],
+   "note": "得意黑：斜切窄体，年轻、有速度感，中文标题的「设计感」首选。",
+   "pairs": [
+    "noto-sans-sc",
+    "clash-display"
+   ],
+   "native": "得意黑"
+  },
+  {
+   "id": "lxgw-wenkai",
+   "family": "LXGW WenKai",
+   "source": {
+    "type": "url",
+    "url": "https://github.com/lxgw/LxgwWenKai/releases/download/v1.522/LXGWWenKai-Regular.ttf",
+    "pattern": "\\.ttf$"
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "hand",
+   "roles": [
+    "display",
+    "text"
+   ],
+   "scripts": [
+    "zh-Hans"
+   ],
+   "tones": [
+    "warm",
+    "hand",
+    "eastern"
+   ],
+   "note": "霞鹜文楷：温润的楷体，手写温度 + 可读，人文 / 教育 / 用户原话。",
+   "pairs": [
+    "noto-sans-sc",
+    "fraunces"
+   ],
+   "native": "霞鹜文楷"
+  },
+  {
+   "id": "lxgw-zhenkai",
+   "family": "LXGW ZhenKai",
+   "source": {
+    "type": "url",
+    "url": "https://github.com/lxgw/LxgwZhenKai/releases/download/v0.825/LXGWZhenKaiGB-Regular.ttf",
+    "pattern": "\\.ttf$"
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "serif",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "zh-Hans"
+   ],
+   "tones": [
+    "eastern",
+    "editorial"
+   ],
+   "note": "霞鹜臻楷：更端正的楷体，东方诗意标题。",
+   "pairs": [
+    "noto-serif-sc"
+   ],
+   "native": "霞鹜臻楷"
+  },
+  {
+   "id": "zcool-kuaile",
+   "family": "ZCOOL KuaiLe",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/zcoolkuaile",
+    "files": [
+     "ZCOOLKuaiLe-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "rounded",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "zh-Hans"
+   ],
+   "tones": [
+    "friendly"
+   ],
+   "note": "站酷快乐体：圆润可爱，儿童 / 萌系。",
+   "pairs": [
+    "noto-sans-sc"
+   ],
+   "native": "站酷快乐体"
+  },
+  {
+   "id": "zcool-qingke",
+   "family": "ZCOOL QingKe HuangYou",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/zcoolqingkehuangyou",
+    "files": [
+     "ZCOOLQingKeHuangYou-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "zh-Hans"
+   ],
+   "tones": [
+    "bold",
+    "friendly"
+   ],
+   "note": "站酷庆科黄油体：方正饱满的标题字，活力潮流。",
+   "pairs": [
+    "noto-sans-sc"
+   ],
+   "native": "站酷庆科黄油体"
+  },
+  {
+   "id": "zcool-xiaowei",
+   "family": "ZCOOL XiaoWei",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/zcoolxiaowei",
+    "files": [
+     "ZCOOLXiaoWei-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "serif",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "zh-Hans"
+   ],
+   "tones": [
+    "editorial",
+    "eastern"
+   ],
+   "note": "站酷小薇：轻盈的宋体变体，文艺标题。",
+   "pairs": [
+    "noto-sans-sc"
+   ],
+   "native": "站酷小薇"
+  },
+  {
+   "id": "ma-shan-zheng",
+   "family": "Ma Shan Zheng",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/mashanzheng",
+    "files": [
+     "MaShanZheng-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "hand",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "zh-Hans"
+   ],
+   "tones": [
+    "eastern",
+    "hand"
+   ],
+   "note": "马善政楷书：毛笔楷书，国风 / 节气。",
+   "pairs": [
+    "noto-serif-sc"
+   ],
+   "native": "马善政楷书"
+  },
+  {
+   "id": "zhi-mang-xing",
+   "family": "Zhi Mang Xing",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/zhimangxing",
+    "files": [
+     "ZhiMangXing-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "hand",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "zh-Hans"
+   ],
+   "tones": [
+    "eastern",
+    "hand"
+   ],
+   "note": "志莽行书：流畅行书，诗句 / 落款。",
+   "pairs": [
+    "noto-serif-sc"
+   ],
+   "native": "志莽行书"
+  },
+  {
+   "id": "long-cang",
+   "family": "Long Cang",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/longcang",
+    "files": [
+     "LongCang-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "hand",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "zh-Hans"
+   ],
+   "tones": [
+    "hand"
+   ],
+   "note": "龙藏体：随性手写。",
+   "pairs": [
+    "noto-sans-sc"
+   ],
+   "native": "龙藏体"
+  },
+  {
+   "id": "noto-sans-jp",
+   "family": "Noto Sans JP",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/notosansjp",
+    "files": [
+     "NotoSansJP[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "text",
+    "display"
+   ],
+   "scripts": [
+    "ja"
+   ],
+   "tones": [
+    "minimal",
+    "tech"
+   ],
+   "note": "源ノ角ゴシック，日文正文底座。",
+   "pairs": [
+    "noto-serif-jp",
+    "inter"
+   ]
+  },
+  {
+   "id": "noto-serif-jp",
+   "family": "Noto Serif JP",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/notoserifjp",
+    "files": [
+     "NotoSerifJP[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "serif",
+   "roles": [
+    "display",
+    "text"
+   ],
+   "scripts": [
+    "ja"
+   ],
+   "tones": [
+    "editorial",
+    "eastern"
+   ],
+   "note": "源ノ明朝，可变字重。",
+   "pairs": [
+    "noto-sans-jp"
+   ]
+  },
+  {
+   "id": "zen-kaku-gothic-new",
+   "family": "Zen Kaku Gothic New",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/zenkakugothicnew",
+    "files": [
+     "ZenKakuGothicNew-Black.ttf",
+     "ZenKakuGothicNew-Bold.ttf",
+     "ZenKakuGothicNew-Light.ttf",
+     "ZenKakuGothicNew-Medium.ttf",
+     "ZenKakuGothicNew-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "text",
+    "display"
+   ],
+   "scripts": [
+    "ja"
+   ],
+   "tones": [
+    "minimal",
+    "tech"
+   ],
+   "note": "端正现代的日文黑体，比 Noto 更有设计感。",
+   "pairs": [
+    "zen-old-mincho",
+    "inter"
+   ]
+  },
+  {
+   "id": "zen-maru-gothic",
+   "family": "Zen Maru Gothic",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/zenmarugothic",
+    "files": [
+     "ZenMaruGothic-Black.ttf",
+     "ZenMaruGothic-Bold.ttf",
+     "ZenMaruGothic-Light.ttf",
+     "ZenMaruGothic-Medium.ttf",
+     "ZenMaruGothic-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "rounded",
+   "roles": [
+    "text",
+    "display"
+   ],
+   "scripts": [
+    "ja"
+   ],
+   "tones": [
+    "friendly",
+    "warm"
+   ],
+   "note": "日文圆体，温柔亲切。",
+   "pairs": [
+    "zen-kaku-gothic-new",
+    "fraunces"
+   ]
+  },
+  {
+   "id": "zen-old-mincho",
+   "family": "Zen Old Mincho",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/zenoldmincho",
+    "files": [
+     "ZenOldMincho-Black.ttf",
+     "ZenOldMincho-Bold.ttf",
+     "ZenOldMincho-Medium.ttf",
+     "ZenOldMincho-Regular.ttf",
+     "ZenOldMincho-SemiBold.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "serif",
+   "roles": [
+    "display",
+    "text"
+   ],
+   "scripts": [
+    "ja"
+   ],
+   "tones": [
+    "eastern",
+    "editorial"
+   ],
+   "note": "古风明朝，文学 / 和风。",
+   "pairs": [
+    "zen-kaku-gothic-new"
+   ]
+  },
+  {
+   "id": "shippori-mincho-b1",
+   "family": "Shippori Mincho B1",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/shipporiminchob1",
+    "files": [
+     "ShipporiMinchoB1-Bold.ttf",
+     "ShipporiMinchoB1-ExtraBold.ttf",
+     "ShipporiMinchoB1-Medium.ttf",
+     "ShipporiMinchoB1-Regular.ttf",
+     "ShipporiMinchoB1-SemiBold.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "serif",
+   "roles": [
+    "display",
+    "text"
+   ],
+   "scripts": [
+    "ja"
+   ],
+   "tones": [
+    "editorial",
+    "luxe"
+   ],
+   "note": "优雅明朝，杂志 / 高端。",
+   "pairs": [
+    "zen-kaku-gothic-new",
+    "newsreader"
+   ]
+  },
+  {
+   "id": "m-plus-2",
+   "family": "M PLUS 2",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/mplus2",
+    "files": [
+     "MPLUS2[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "text",
+    "display"
+   ],
+   "scripts": [
+    "ja"
+   ],
+   "tones": [
+    "tech",
+    "minimal"
+   ],
+   "note": "可变字重的日文无衬线，科技感。",
+   "pairs": [
+    "geist-mono"
+   ]
+  },
+  {
+   "id": "dela-gothic-one",
+   "family": "Dela Gothic One",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/delagothicone",
+    "files": [
+     "DelaGothicOne-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "ja"
+   ],
+   "tones": [
+    "bold",
+    "poster"
+   ],
+   "note": "超粗日文标题黑体，冲击力。",
+   "pairs": [
+    "m-plus-2"
+   ]
+  },
+  {
+   "id": "mochiy-pop-one",
+   "family": "Mochiy Pop One",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/mochiypopone",
+    "files": [
+     "MochiyPopOne-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "rounded",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "ja"
+   ],
+   "tones": [
+    "friendly",
+    "bold"
+   ],
+   "note": "圆胖可爱的日文展示字。",
+   "pairs": [
+    "zen-maru-gothic"
+   ]
+  },
+  {
+   "id": "klee-one",
+   "family": "Klee One",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/kleeone",
+    "files": [
+     "KleeOne-Regular.ttf",
+     "KleeOne-SemiBold.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "hand",
+   "roles": [
+    "display",
+    "text"
+   ],
+   "scripts": [
+    "ja"
+   ],
+   "tones": [
+    "hand",
+    "warm"
+   ],
+   "note": "硬笔手写感日文（教科书体），温度与可读兼顾。",
+   "pairs": [
+    "zen-maru-gothic"
+   ]
+  },
+  {
+   "id": "kaisei-decol",
+   "family": "Kaisei Decol",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/kaiseidecol",
+    "files": [
+     "KaiseiDecol-Bold.ttf",
+     "KaiseiDecol-Medium.ttf",
+     "KaiseiDecol-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "serif",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "ja"
+   ],
+   "tones": [
+    "warm",
+    "editorial"
+   ],
+   "note": "装饰性明朝，柔和复古。",
+   "pairs": [
+    "zen-maru-gothic"
+   ]
+  },
+  {
+   "id": "biz-udp-gothic",
+   "family": "BIZ UDPGothic",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/bizudpgothic",
+    "files": [
+     "BIZUDPGothic-Bold.ttf",
+     "BIZUDPGothic-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "text"
+   ],
+   "scripts": [
+    "ja"
+   ],
+   "tones": [
+    "minimal"
+   ],
+   "note": "UD 通用设计黑体，小字易读。",
+   "pairs": [
+    "biz-udp-gothic"
+   ]
+  },
+  {
+   "id": "dotgothic16",
+   "family": "DotGothic16",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/dotgothic16",
+    "files": [
+     "DotGothic16-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "pixel",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "ja"
+   ],
+   "tones": [
+    "retro"
+   ],
+   "note": "日文像素字。",
+   "pairs": [
+    "departure-mono"
+   ]
+  },
+  {
+   "id": "outfit",
+   "family": "Outfit",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/outfit",
+    "files": [
+     "Outfit[wght].ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "sans",
+   "roles": [
+    "text",
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "minimal",
+    "friendly"
+   ],
+   "note": "几何无衬线（Futura / GT Walsheim 气质）。",
+   "pairs": [
+    "fraunces",
+    "newsreader"
+   ]
+  },
+  {
+   "id": "hina-mincho",
+   "family": "Hina Mincho",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/hinamincho",
+    "files": [
+     "HinaMincho-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "serif",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "ja"
+   ],
+   "tones": [
+    "eastern",
+    "warm"
+   ],
+   "note": "雏明朝：柔和的手写感明朝，诗意、温柔。",
+   "pairs": [
+    "zen-old-mincho"
+   ]
+  },
+  {
+   "id": "bangers",
+   "family": "Bangers",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/bangers",
+    "files": [
+     "Bangers-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "display",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "poster",
+    "bold"
+   ],
+   "note": "漫画拟声词字（BOOM / POW），斜切大写，波普漫画片头与音效字。",
+   "pairs": [
+    "comic-neue",
+    "nunito"
+   ]
+  },
+  {
+   "id": "luckiest-guy",
+   "family": "Luckiest Guy",
+   "source": {
+    "type": "gf",
+    "dir": "apache/luckiestguy",
+    "files": [
+     "LuckiestGuy-Regular.ttf"
+    ]
+   },
+   "license": "Apache-2.0",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "display",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "friendly",
+    "poster"
+   ],
+   "note": "圆胖卡通标题字，像 60 年代动画片头。",
+   "pairs": [
+    "nunito"
+   ]
+  },
+  {
+   "id": "lilita-one",
+   "family": "Lilita One",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/lilitaone",
+    "files": [
+     "LilitaOne-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "display",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "friendly",
+    "bold"
+   ],
+   "note": "圆润粗黑标题字，卡通 / 游戏 / 儿童。",
+   "pairs": [
+    "nunito",
+    "comic-neue"
+   ]
+  },
+  {
+   "id": "bowlby-one",
+   "family": "Bowlby One",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/bowlbyone",
+    "files": [
+     "BowlbyOne-Regular.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "display",
+   "roles": [
+    "display"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "poster"
+   ],
+   "note": "超粗 70 年代海报字，波普 / 复古。",
+   "pairs": [
+    "comic-neue"
+   ]
+  },
+  {
+   "id": "comic-neue",
+   "family": "Comic Neue",
+   "source": {
+    "type": "gf",
+    "dir": "ofl/comicneue",
+    "files": [
+     "ComicNeue-Regular.ttf",
+     "ComicNeue-Bold.ttf",
+     "ComicNeue-Italic.ttf",
+     "ComicNeue-BoldItalic.ttf"
+    ]
+   },
+   "license": "OFL-1.1",
+   "subset_ok": true,
+   "redistribute_ok": true,
+   "cls": "hand",
+   "roles": [
+    "text"
+   ],
+   "scripts": [
+    "latin"
+   ],
+   "tones": [
+    "friendly",
+    "hand"
+   ],
+   "note": "漫画对白字（Comic Sans 的体面版），气泡对白 / 便签。",
+   "pairs": [
+    "bangers",
+    "lilita-one"
+   ]
+  }
+ ],
+ "manual": [
+  {
+   "family": "阿里巴巴普惠体 3.0",
+   "tones": [
+    "minimal",
+    "tech"
+   ],
+   "license": "Alibaba 自有免费商用协议",
+   "where": "https://fonts.alibabagroup.com/",
+   "note": "需自行下载并确认协议条款后放进 public/fonts/"
+  },
+  {
+   "family": "HarmonyOS Sans",
+   "tones": [
+    "minimal",
+    "tech"
+   ],
+   "license": "HarmonyOS Sans 字体许可协议",
+   "where": "https://developer.huawei.com/consumer/cn/design/resource/",
+   "note": "免费商用但有条款限制，使用前阅读协议"
+  },
+  {
+   "family": "MiSans",
+   "tones": [
+    "minimal",
+    "tech"
+   ],
+   "license": "MiSans 字体知识产权许可协议",
+   "where": "https://hyperos.mi.com/font",
+   "note": "免费商用需遵守协议"
+  },
+  {
+   "family": "抖音美好体",
+   "tones": [
+    "friendly",
+    "bold"
+   ],
+   "license": "抖音美好体使用授权",
+   "where": "抖音官方发布渠道",
+   "note": "免费商用，自行下载确认"
+  },
+  {
+   "family": "优设标题黑",
+   "tones": [
+    "bold",
+    "poster"
+   ],
+   "license": "优设网免费商用声明",
+   "where": "https://www.uisdc.com/",
+   "note": "中文海报标题常用，自行下载确认"
+  },
+  {
+   "family": "阿里妈妈数黑体 / 方圆体",
+   "tones": [
+    "bold",
+    "tech"
+   ],
+   "license": "阿里妈妈字体免费商用协议",
+   "where": "https://fonts.alibabagroup.com/",
+   "note": "数字感 / 电商标题"
+  }
+ ],
+ "similar": {
+  "SF Pro": [
+   "inter",
+   "geist"
+  ],
+  "Helvetica / Neue Haas / Söhne": [
+   "switzer",
+   "inter-tight",
+   "hanken-grotesk"
+  ],
+  "Circular": [
+   "satoshi",
+   "figtree"
+  ],
+  "GT Walsheim": [
+   "satoshi",
+   "outfit"
+  ],
+  "Graphik": [
+   "hanken-grotesk",
+   "switzer"
+  ],
+  "Aeonik": [
+   "general-sans",
+   "onest"
+  ],
+  "Neue Montreal": [
+   "switzer",
+   "host-grotesk"
+  ],
+  "Canela / Tiempos / GT Sectra": [
+   "gambetta",
+   "newsreader",
+   "zodiak"
+  ],
+  "Ogg / Editorial New / PP Editorial": [
+   "instrument-serif",
+   "boska",
+   "gloock"
+  ],
+  "Recoleta / Cooper": [
+   "fraunces",
+   "young-serif"
+  ],
+  "PP Mori / Neue Machina": [
+   "clash-grotesk",
+   "syne"
+  ],
+  "Monument Extended": [
+   "unbounded",
+   "panchang",
+   "archivo"
+  ],
+  "GT America Mono / Berkeley Mono": [
+   "geist-mono",
+   "jetbrains-mono",
+   "martian-mono"
+  ],
+  "Futura": [
+   "outfit",
+   "general-sans"
+  ],
+  "方正兰亭黑 / 苹方": [
+   "noto-sans-sc"
+  ],
+  "方正书宋 / 华文宋体": [
+   "noto-serif-sc",
+   "zcool-xiaowei"
+  ],
+  "方正楷体 / 华文楷体": [
+   "lxgw-wenkai",
+   "lxgw-zhenkai"
+  ],
+  "ヒラギノ角ゴ": [
+   "zen-kaku-gothic-new",
+   "noto-sans-jp"
+  ],
+  "ヒラギノ明朝": [
+   "shippori-mincho-b1",
+   "noto-serif-jp"
+  ]
+ },
+ "pairings": [
+  {
+   "id": "warm-soft",
+   "tone": "warm",
+   "display": "fraunces",
+   "text": "manrope",
+   "accent": "caveat",
+   "zh": [
+    "lxgw-wenkai",
+    "noto-sans-sc"
+   ],
+   "ja": [
+    "zen-maru-gothic",
+    "klee-one"
+   ],
+   "why": "软衬线标题 + 半圆几何正文；Fraunces 的 SOFT/WONK 轴让标题会「呼吸」。人文、生活方式、教育、AI 助手。",
+   "motion": "字母由模糊软升起，SOFT 0→100 让字变圆；关键词可以 WONK 歪一下头"
+  },
+  {
+   "id": "warm-editorial",
+   "tone": "warm",
+   "display": "newsreader",
+   "text": "inter",
+   "accent": null,
+   "zh": [
+    "noto-serif-sc",
+    "noto-sans-sc"
+   ],
+   "ja": [
+    "shippori-mincho-b1",
+    "zen-kaku-gothic-new"
+   ],
+   "why": "报刊衬线 + 中性正文，像一本好杂志：可信、有温度，适合诗句、引语、品牌宣言。",
+   "motion": "逐词上浮 + 轻模糊，节奏慢；opsz 随字号自动变"
+  },
+  {
+   "id": "editorial-italic",
+   "tone": "editorial",
+   "display": "instrument-serif",
+   "text": "instrument-sans",
+   "accent": null,
+   "zh": [
+    "noto-serif-sc",
+    "noto-sans-sc"
+   ],
+   "ja": [
+    "zen-old-mincho",
+    "noto-sans-jp"
+   ],
+   "why": "修长衬线 + 同源无衬线；只给一个关键词用斜体，Apple / 高端 SaaS 发布片的招牌语气。",
+   "motion": "正体 → 斜体的词义切换（同位置交叉淡入），字距微收"
+  },
+  {
+   "id": "luxe-contrast",
+   "tone": "luxe",
+   "display": "gloock",
+   "text": "hanken-grotesk",
+   "accent": "pinyon-script",
+   "zh": [
+    "noto-serif-sc",
+    "noto-sans-sc"
+   ],
+   "ja": [
+    "shippori-mincho-b1",
+    "zen-kaku-gothic-new"
+   ],
+   "why": "高反差衬线 + 干净怪诞；奢品、美妆、香氛、酒店。标题只在大字号使用。",
+   "motion": "遮罩慢揭 + 字距从宽收紧（tracking breathe），不弹跳"
+  },
+  {
+   "id": "luxe-didone",
+   "tone": "luxe",
+   "display": "bodoni-moda",
+   "text": "inter-tight",
+   "accent": null,
+   "zh": [
+    "noto-serif-sc",
+    "noto-sans-sc"
+   ],
+   "ja": [
+    "shippori-mincho-b1",
+    "noto-sans-jp"
+   ],
+   "why": "时尚 Didone + 紧凑无衬线；时装、珠宝、艺术展。",
+   "motion": "细线从中间长出、字母逐个显影"
+  },
+  {
+   "id": "tech-precise",
+   "tone": "tech",
+   "display": "geist",
+   "text": "geist",
+   "accent": "geist-mono",
+   "zh": [
+    "noto-sans-sc",
+    "noto-sans-sc"
+   ],
+   "ja": [
+    "m-plus-2",
+    "zen-kaku-gothic-new"
+   ],
+   "why": "开发者工具、AI 基础设施、数据产品：精确、克制，等宽字做 HUD / 参数。",
+   "motion": "逐字符 mask 滑入、打字机、数字滚动；等宽字乱码解码"
+  },
+  {
+   "id": "tech-wide",
+   "tone": "tech",
+   "display": "mona-sans",
+   "text": "inter",
+   "accent": "jetbrains-mono",
+   "zh": [
+    "noto-sans-sc",
+    "noto-sans-sc"
+   ],
+   "ja": [
+    "m-plus-2",
+    "noto-sans-jp"
+   ],
+   "why": "变宽无衬线做大标题（wdth 75→125），科技发布会的力量感。",
+   "motion": "宽度轴动画：字从窄拉宽落定，像被推开"
+  },
+  {
+   "id": "minimal-apple",
+   "tone": "minimal",
+   "display": "inter",
+   "text": "inter",
+   "accent": "newsreader",
+   "zh": [
+    "noto-sans-sc",
+    "noto-sans-sc"
+   ],
+   "ja": [
+    "zen-kaku-gothic-new",
+    "noto-sans-jp"
+   ],
+   "why": "Apple 式极简：一套 Inter（opsz 让大字自动变 Display 版）+ 衬线斜体做点缀。",
+   "motion": "模糊渐显、缓推，字重对比代替动画"
+  },
+  {
+   "id": "swiss-grotesk",
+   "tone": "minimal",
+   "display": "switzer",
+   "text": "switzer",
+   "accent": "gambetta",
+   "zh": [
+    "noto-sans-sc",
+    "noto-sans-sc"
+   ],
+   "ja": [
+    "zen-kaku-gothic-new",
+    "noto-sans-jp"
+   ],
+   "why": "瑞士网格：一套新怪诞 + 一个文学衬线点缀；咨询、金融、B2B。",
+   "motion": "网格对齐的竖条遮罩、按拍换词"
+  },
+  {
+   "id": "bold-youth",
+   "tone": "bold",
+   "display": "clash-display",
+   "text": "satoshi",
+   "accent": null,
+   "zh": [
+    "smiley-sans",
+    "noto-sans-sc"
+   ],
+   "ja": [
+    "dela-gothic-one",
+    "m-plus-2"
+   ],
+   "why": "紧凑高能标题 + 现代几何正文；年轻品牌、社媒广告、活动。中文用得意黑，斜切自带速度。",
+   "motion": "逐词砸入 + 轻回弹、底色按拍翻转"
+  },
+  {
+   "id": "bold-playful",
+   "tone": "bold",
+   "display": "bricolage-grotesque",
+   "text": "figtree",
+   "accent": null,
+   "zh": [
+    "zcool-qingke",
+    "noto-sans-sc"
+   ],
+   "ja": [
+    "mochiy-pop-one",
+    "zen-maru-gothic"
+   ],
+   "why": "有性格的法式怪诞（opsz/wdth 三轴）+ 友好正文；消费品、社区、创作者工具。",
+   "motion": "宽度 + 字重一起弹（elastic），关键词放大"
+  },
+  {
+   "id": "wide-expressive",
+   "tone": "bold",
+   "display": "unbounded",
+   "text": "onest",
+   "accent": null,
+   "zh": [
+    "smiley-sans",
+    "noto-sans-sc"
+   ],
+   "ja": [
+    "dela-gothic-one",
+    "noto-sans-jp"
+   ],
+   "why": "超宽圆角展示字（Monument Extended 气质）；音乐、潮流、Web3、赛事。",
+   "motion": "横向拉伸入场 + 大字跑马灯"
+  },
+  {
+   "id": "poster-impact",
+   "tone": "poster",
+   "display": "anton",
+   "text": "space-grotesk",
+   "accent": "space-mono",
+   "zh": [
+    "smiley-sans",
+    "noto-sans-sc"
+   ],
+   "ja": [
+    "dela-gothic-one",
+    "m-plus-2"
+   ],
+   "why": "粗窄海报字 + 怪诞正文；体育、活动、促销、强节奏快剪。",
+   "motion": "满屏大字按拍切换、竖条遮罩、描边 ↔ 实心交替"
+  },
+  {
+   "id": "friendly-round",
+   "tone": "friendly",
+   "display": "fredoka",
+   "text": "nunito",
+   "accent": null,
+   "zh": [
+    "zcool-kuaile",
+    "noto-sans-sc"
+   ],
+   "ja": [
+    "zen-maru-gothic",
+    "zen-maru-gothic"
+   ],
+   "why": "圆头宽体 + 圆头正文；儿童、教育、萌系、宠物。",
+   "motion": "挤压拉伸弹跳（squash & stretch），字母像软糖"
+  },
+  {
+   "id": "hand-note",
+   "tone": "hand",
+   "display": "caveat",
+   "text": "dm-sans",
+   "accent": null,
+   "zh": [
+    "lxgw-wenkai",
+    "noto-sans-sc"
+   ],
+   "ja": [
+    "klee-one",
+    "zen-maru-gothic"
+   ],
+   "why": "马克笔手写 + 干净正文；用户原话、便签、批注、「人」的声音。",
+   "motion": "笔迹从左到右书写揭示（HandReveal），下划线手绘"
+  },
+  {
+   "id": "retro-digital",
+   "tone": "retro",
+   "display": "departure-mono",
+   "text": "space-grotesk",
+   "accent": "pixelify-sans",
+   "zh": [
+    "noto-sans-sc",
+    "noto-sans-sc"
+   ],
+   "ja": [
+    "dotgothic16",
+    "m-plus-2"
+   ],
+   "why": "像素等宽 + 怪诞；游戏、复古科技、极客社区。",
+   "motion": "乱码解码、逐字符打出、扫描线"
+  },
+  {
+   "id": "eastern-poetic",
+   "tone": "eastern",
+   "display": "cormorant",
+   "text": "manrope",
+   "accent": null,
+   "zh": [
+    "lxgw-zhenkai",
+    "noto-serif-sc"
+   ],
+   "ja": [
+    "zen-old-mincho",
+    "hina-mincho"
+   ],
+   "why": "细 Garamond + 楷 / 明朝；国风、茶、文旅、节气、东方美学。中文可竖排。",
+   "motion": "竖排逐字由模糊晕开、墨色渐深"
+  },
+  {
+   "id": "comic-pop",
+   "tone": "poster",
+   "display": "bangers",
+   "text": "comic-neue",
+   "zh": [
+    "zcool-kuaile",
+    "noto-sans-sc"
+   ],
+   "ja": [
+    "mochiy-pop-one",
+    "zen-maru-gothic"
+   ],
+   "why": "漫画拟声词标题 + 对白手写正文；波普漫画、戏仿短片、Silver Age 分格感。",
+   "motion": "标题逐字砸落带白边黑描，拟声词随碰撞帧弹出并抖两帧"
+  },
+  {
+   "id": "cartoon-round",
+   "tone": "friendly",
+   "display": "luckiest-guy",
+   "text": "nunito",
+   "zh": [
+    "zcool-kuaile",
+    "noto-sans-sc"
+   ],
+   "ja": [
+    "mochiy-pop-one",
+    "zen-maru-gothic"
+   ],
+   "why": "圆胖卡通标题 + 圆头正文；60 年代动画片头、吉祥物、轻松搞笑。",
+   "motion": "标题弹簧放大带挤压，字母轮流跳一下"
+  },
+  {
+   "id": "retro-poster-pop",
+   "tone": "poster",
+   "display": "bowlby-one",
+   "text": "space-grotesk",
+   "zh": [
+    "zcool-qingke",
+    "noto-sans-sc"
+   ],
+   "ja": [
+    "dela-gothic-one",
+    "m-plus-2"
+   ],
+   "why": "70 年代超粗海报字 + 怪诞正文；波普艺术、复古海报、强色块。",
+   "motion": "大字整块滑入，色块错版一帧再对齐"
+  }
+ ]
+}

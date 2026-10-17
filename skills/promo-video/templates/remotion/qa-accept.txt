@@ -1,0 +1,8 @@
+# rn qa 豁免：审片后判断为「有意为之」的 WARN，一行一个，render.sh 每次审计都会带上。
+#   检查项        豁免整项（例：level_jumps）
+#   检查项@秒     只豁免那一处（例：black_frames@0.2）
+# 「#」后面写原因，交付说明里照抄。FAIL 不能豁免。检查项名称见 rn qa --help 或 out/audit/qa.json。
+#
+# black_frames@0.2      # 开场从黑里淡入
+# level_jumps@26.5      # Snap 处的重击
+# level_jumps           # 配乐本身的重拍（音乐驱动的片子常见）

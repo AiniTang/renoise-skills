@@ -1,0 +1,105 @@
+{
+  "meta": {
+    "title": "Mira 产品发布",
+    "language": "zh",
+    "industry": "科技 / AI / SaaS",
+    "audience": "中大型企业的 IT 负责人与团队管理者",
+    "purpose": "产品发布"
+  },
+  "format": {
+    "aspect": "16:9",
+    "fps": 30,
+    "resolution": "1080p"
+  },
+  "style": "aurora",
+  "brand": {
+    "name": "Mira",
+    "disclaimer": "示例品牌与数据，仅用于演示，与任何真实企业无关"
+  },
+  "music": {
+    "file": "music/bgm.wav",
+    "bpm": 120,
+    "volume": 0.8
+  },
+  "captions": false,
+  "scenes": [
+    {
+      "type": "statement",
+      "seconds": 4,
+      "camera": "push-in",
+      "eyebrow": "Mira · 企业知识助手",
+      "text": "团队的知识，\n不该散落在 100 个文件夹里",
+      "highlight": "100 个文件夹"
+    },
+    {
+      "type": "hero3d",
+      "seconds": 4,
+      "camera": "orbit",
+      "shape": "knot",
+      "title": "一问，\n即得答案",
+      "subtitle": "读懂文档、会议与代码，一句话找到一切。"
+    },
+    {
+      "type": "features",
+      "seconds": 6,
+      "camera": "pan-left",
+      "title": "为企业而生",
+      "items": [
+        {
+          "icon": "search",
+          "title": "秒级检索",
+          "body": "跨 20+ 工具统一搜索"
+        },
+        {
+          "icon": "shield",
+          "title": "私有部署",
+          "body": "数据不出企业内网"
+        },
+        {
+          "icon": "users",
+          "title": "团队协作",
+          "body": "答案附出处，一键分享"
+        }
+      ]
+    },
+    {
+      "type": "stats",
+      "seconds": 3.5,
+      "camera": "push-in",
+      "items": [
+        {
+          "value": 70,
+          "suffix": "%",
+          "label": "检索时间缩短"
+        },
+        {
+          "value": 3,
+          "suffix": "×",
+          "label": "新人上手速度"
+        },
+        {
+          "value": 99.9,
+          "decimals": 1,
+          "suffix": "%",
+          "label": "服务可用性"
+        }
+      ]
+    },
+    {
+      "type": "showcase",
+      "seconds": 5,
+      "camera": "drift",
+      "frame": "browser",
+      "title": "一个界面，\n看清全部知识",
+      "body": "文档、会议纪要与项目数据汇在一处，实时更新。"
+    },
+    {
+      "type": "outro",
+      "seconds": 3.5,
+      "camera": "pull-out",
+      "tagline": "让每一份知识都被用上",
+      "cta": "免费试用 14 天",
+      "url": "mira.example.com"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+[
+ {
+  "name": "p1-cafe",
+  "model": "gpt-image-2/text-to-image",
+  "input": {
+   "prompt": "Bright, refined, lightly painterly 3D-to-2D commercial animation film still: believable 3D volume, designed adult character silhouettes with distinct brows, noses and jaws, slightly enlarged but grounded eyes with real lids and focus; soft simplified cel-like shading with smooth transitions, separation by value and colour temperature rather than black outlines; restrained hand-painted texture only on edges, shadows, fabric and walls, clean faces; matte skin with subtle warm-cool shifts, broad soft hair highlights; fabric with weave, seams and a few believable folds; wood, metal, glass and ceramic with distinct roughness. Bright, wide, soft directional side light, warm-white highlights, neutral shadows, layered soft contact shadows, readable darks, no orange-teal grade, no haze, no neon. Palette: warm ivory, light wood and low-saturation neutrals as the base, with pistachio green, soft moss green, coral orange, lavender, teal and a little blue distributed across different subjects. A complete contemporary world with real scale and foreground, midground and background layers, eye-level 3/4 view. Absolutely no text, letters, numbers, logos or readable UI anywhere; screens show only soft abstract rounded colour cards and gentle glow. Scene: A caf\u00e9 owner in her late fifties with short silver hair, round cheeks and a coral linen apron stands behind a light-wood counter in early morning sun, smiling as she looks at a laptop whose screen shows soft pistachio-green abstract cards; ceramic cups, a tray of pastries, potted herbs, sunlight through the front window, a quiet street outside.",
+   "aspect_ratio": "16:9",
+   "resolution": "2K"
+  }
+ },
+ {
+  "name": "p2-listen",
+  "model": "gpt-image-2/text-to-image",
+  "input": {
+   "prompt": "Bright, refined, lightly painterly 3D-to-2D commercial animation film still: believable 3D volume, designed adult character silhouettes with distinct brows, noses and jaws, slightly enlarged but grounded eyes with real lids and focus; soft simplified cel-like shading with smooth transitions, separation by value and colour temperature rather than black outlines; restrained hand-painted texture only on edges, shadows, fabric and walls, clean faces; matte skin with subtle warm-cool shifts, broad soft hair highlights; fabric with weave, seams and a few believable folds; wood, metal, glass and ceramic with distinct roughness. Bright, wide, soft directional side light, warm-white highlights, neutral shadows, layered soft contact shadows, readable darks, no orange-teal grade, no haze, no neon. Palette: warm ivory, light wood and low-saturation neutrals as the base, with pistachio green, soft moss green, coral orange, lavender, teal and a little blue distributed across different subjects. A complete contemporary world with real scale and foreground, midground and background layers, eye-level 3/4 view. Absolutely no text, letters, numbers, logos or readable UI anywhere; screens show only soft abstract rounded colour cards and gentle glow. Scene: In a bright studio, a young East Asian designer with round glasses and a moss-green sweater leans forward across a small wooden table, listening intently to an older Black woman in a lavender cardigan who is explaining something with open hands; he sketches in a notebook; pastel sticky notes on a glass wall behind them; warm, attentive, respectful mood.",
+   "aspect_ratio": "16:9",
+   "resolution": "2K"
+  }
+ },
+ {
+  "name": "p3-team",
+  "model": "gpt-image-2/text-to-image",
+  "input": {
+   "prompt": "Bright, refined, lightly painterly 3D-to-2D commercial animation film still: believable 3D volume, designed adult character silhouettes with distinct brows, noses and jaws, slightly enlarged but grounded eyes with real lids and focus; soft simplified cel-like shading with smooth transitions, separation by value and colour temperature rather than black outlines; restrained hand-painted texture only on edges, shadows, fabric and walls, clean faces; matte skin with subtle warm-cool shifts, broad soft hair highlights; fabric with weave, seams and a few believable folds; wood, metal, glass and ceramic with distinct roughness. Bright, wide, soft directional side light, warm-white highlights, neutral shadows, layered soft contact shadows, readable darks, no orange-teal grade, no haze, no neon. Palette: warm ivory, light wood and low-saturation neutrals as the base, with pistachio green, soft moss green, coral orange, lavender, teal and a little blue distributed across different subjects. A complete contemporary world with real scale and foreground, midground and background layers, eye-level 3/4 view. Absolutely no text, letters, numbers, logos or readable UI anywhere; screens show only soft abstract rounded colour cards and gentle glow. Scene: Four colleagues of different ages, ethnicities and body types, one of them using a wheelchair, gather around a large shared wall screen in an airy open office full of plants; the screen shows colourful abstract slide blocks in pistachio, lavender and coral; one woman points at it while the others laugh together; mid-morning light.",
+   "aspect_ratio": "16:9",
+   "resolution": "2K"
+  }
+ },
+ {
+  "name": "p4-student",
+  "model": "gpt-image-2/text-to-image",
+  "input": {
+   "prompt": "Bright, refined, lightly painterly 3D-to-2D commercial animation film still: believable 3D volume, designed adult character silhouettes with distinct brows, noses and jaws, slightly enlarged but grounded eyes with real lids and focus; soft simplified cel-like shading with smooth transitions, separation by value and colour temperature rather than black outlines; restrained hand-painted texture only on edges, shadows, fabric and walls, clean faces; matte skin with subtle warm-cool shifts, broad soft hair highlights; fabric with weave, seams and a few believable folds; wood, metal, glass and ceramic with distinct roughness. Bright, wide, soft directional side light, warm-white highlights, neutral shadows, layered soft contact shadows, readable darks, no orange-teal grade, no haze, no neon. Palette: warm ivory, light wood and low-saturation neutrals as the base, with pistachio green, soft moss green, coral orange, lavender, teal and a little blue distributed across different subjects. A complete contemporary world with real scale and foreground, midground and background layers, eye-level 3/4 view. Absolutely no text, letters, numbers, logos or readable UI anywhere; screens show only soft abstract rounded colour cards and gentle glow. Scene: A teenage girl with curly hair and teal headphones works on a tablet at a kitchen table in the evening, the tablet showing soft coral and pistachio abstract cards; a warm pendant lamp above, her father cooking softly out of focus in the background, cosy home lighting.",
+   "aspect_ratio": "16:9",
+   "resolution": "2K"
+  }
+ },
+ {
+  "name": "p5-craft",
+  "model": "gpt-image-2/text-to-image",
+  "input": {
+   "prompt": "Bright, refined, lightly painterly 3D-to-2D commercial animation film still: believable 3D volume, designed adult character silhouettes with distinct brows, noses and jaws, slightly enlarged but grounded eyes with real lids and focus; soft simplified cel-like shading with smooth transitions, separation by value and colour temperature rather than black outlines; restrained hand-painted texture only on edges, shadows, fabric and walls, clean faces; matte skin with subtle warm-cool shifts, broad soft hair highlights; fabric with weave, seams and a few believable folds; wood, metal, glass and ceramic with distinct roughness. Bright, wide, soft directional side light, warm-white highlights, neutral shadows, layered soft contact shadows, readable darks, no orange-teal grade, no haze, no neon. Palette: warm ivory, light wood and low-saturation neutrals as the base, with pistachio green, soft moss green, coral orange, lavender, teal and a little blue distributed across different subjects. A complete contemporary world with real scale and foreground, midground and background layers, eye-level 3/4 view. Absolutely no text, letters, numbers, logos or readable UI anywhere; screens show only soft abstract rounded colour cards and gentle glow. Scene: Close-up of a designer's hands with a stylus on a pen display, gently pulling a smooth glowing pistachio bezier curve with small square anchor points and round handles on a clean ivory canvas; a cup of tea and a sketchbook at the edge of the desk; soft daylight, shallow depth of field.",
+   "aspect_ratio": "16:9",
+   "resolution": "2K"
+  }
+ },
+ {
+  "name": "p6-orb",
+  "model": "gpt-image-2/text-to-image",
+  "input": {
+   "prompt": "Bright, refined, lightly painterly 3D-to-2D commercial animation film still: believable 3D volume, designed adult character silhouettes with distinct brows, noses and jaws, slightly enlarged but grounded eyes with real lids and focus; soft simplified cel-like shading with smooth transitions, separation by value and colour temperature rather than black outlines; restrained hand-painted texture only on edges, shadows, fabric and walls, clean faces; matte skin with subtle warm-cool shifts, broad soft hair highlights; fabric with weave, seams and a few believable folds; wood, metal, glass and ceramic with distinct roughness. Bright, wide, soft directional side light, warm-white highlights, neutral shadows, layered soft contact shadows, readable darks, no orange-teal grade, no haze, no neon. Palette: warm ivory, light wood and low-saturation neutrals as the base, with pistachio green, soft moss green, coral orange, lavender, teal and a little blue distributed across different subjects. A complete contemporary world with real scale and foreground, midground and background layers, eye-level 3/4 view. Absolutely no text, letters, numbers, logos or readable UI anywhere; screens show only soft abstract rounded colour cards and gentle glow. Scene: At dusk in a calm open office by a big window with city lights, a South Asian woman in her thirties wearing a teal blouse sits at her desk, looking up in quiet wonder at translucent pistachio glass cards that float around her like helpful teammates arranging her work; a softly glowing round pistachio-green glass orb lamp hangs exactly in the centre of the frame above the desk.",
+   "aspect_ratio": "16:9",
+   "resolution": "2K"
+  }
+ }
+]
