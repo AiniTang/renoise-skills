@@ -1,5 +1,12 @@
 # 版本说明
 
+## Windows 适配（2026-10-17）
+
+- **脚本全部改成 Python**：`setup_project.sh`、`render.sh` 换成 `setup_project.py`、`render.py`，macOS / Linux / Windows 同一套命令，不再需要 bash。便携 Node 按系统下载（Windows 是 zip 版）；npm / npx 按完整路径调用，Windows 的 `.cmd` 也能直接跑。响度改用 `render.py … --lufs -13`（仍认 `LUFS` 环境变量）。
+- **`.promo-env` 改为纯 `KEY=value`**（不再用 shell 转义），任何系统都能直接读。
+- **文本一律 UTF-8**：所有 JSON / 文本读写都显式指定编码（用户写的 storyboard 等允许带 BOM），输出到管道时也是 UTF-8；中文 Windows 默认的 GBK 不再导致读 catalog.json 报错或文案乱码。
+- **去掉只有 macOS / Unix 才有的依赖**：`fonts.py` 找 Chrome / Edge / Playwright 的 headless shell 不再用 `find`，`file://` 地址改由 `Path.as_uri()` 生成；`voiceover.py --engine say` 在 Windows 用 SAPI、在 Linux 用 espeak-ng；`pick_music.py` 向上找工程根目录在 Windows 盘符根上也能停下；文档里的 `sips` 换成 ffmpeg。
+
 ## 公开版（2026-10-17，renoise-ai/renoise-skills）
 
 - **通用 Agent Skills**：去掉所有宿主专属的写法与变量。路径用 `<skill>` 约定（SKILL.md 所在目录）；工程里的脚本从 `.promo-env`（`setup_project.sh` 写入）或 `PROMO_VIDEO_SKILL` 找 skill 目录。用 `npx skills add renoise-ai/renoise-skills` 安装，实测 Claude Code 与 Codex 都能加载。

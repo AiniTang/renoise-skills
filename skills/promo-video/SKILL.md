@@ -2,7 +2,7 @@
 name: promo-video
 description: 为产品、品牌或服务制作宣传视频：分析用户素材，判断行业与受众，推荐风格与时长，提炼脚本分镜并经用户确认后，用 Remotion 渲染 MP4：模板片（storyboard 驱动的动态排版、SVG、图片）或电影级短片（3D 金属 Logo、还原真实产品界面的打字与点击演示、3D 画廊与景深、运动模糊、真实键盘音效），并从内置开源曲库自动选曲对拍（或用用户音乐、合成兜底）；每支片都叠一层动效设计（匹配剪辑、动态字、形状变形、遮罩转场、粒子高潮）；也能做作品合集、纯动态图形作品集（动态字、形状变形、3D、粒子、遮罩节奏）和单形状 UI 动效循环片（一个形状连续变形、弹簧、光标直接操控、无缝循环）。Use when the user asks for 宣传视频、宣传片、产品发布视频、产品介绍动画、动态设计作品集、片头、promo video, product launch video, explainer video, brand video or motion graphics showreel, or a looping one-shape UI morph animation.
 license: MIT
-compatibility: Needs Node.js 18+ (Remotion renders), Python 3 with numpy, ffmpeg 7+ and the rn CLI (pip package renoise-kit). AI footage needs a Renoise connection (MCP).
+compatibility: macOS, Linux and Windows. Needs Node.js 18+ (Remotion renders; downloaded when missing), Python 3.8+ with numpy, ffmpeg 7+ with libass and the rn CLI (pip package renoise-kit). AI footage needs a Renoise connection (MCP).
 ---
 
 # 宣传视频
@@ -20,12 +20,16 @@ compatibility: Needs Node.js 18+ (Remotion renders), Python 3 with numpy, ffmpeg
 
 ## 依赖：`rn`（renoise-kit）
 
-画面和混音由 Remotion 渲染；所有**机械、易错**的环节交给 `rn`：帧精确取帧与接触表、读音乐（响度 / 拍点 / 速度）、成片编码与母带、交付检查、硬切 / 无声 / 爆音审计。`render.sh` 已经接好，手动时直接用 `rn <命令> --help` 查参数。
+画面和混音由 Remotion 渲染；所有**机械、易错**的环节交给 `rn`：帧精确取帧与接触表、读音乐（响度 / 拍点 / 速度）、成片编码与母带、交付检查、硬切 / 无声 / 爆音审计。`render.py` 已经接好，手动时直接用 `rn <命令> --help` 查参数。
 
 ```bash
-brew install ffmpeg-full && export PATH="$(brew --prefix ffmpeg-full)/bin:$PATH"   # rn 调用系统 ffmpeg（Linux：apt install ffmpeg）
-uv tool install 'renoise-kit[all]'                                                 # 提供 rn 命令
+brew install ffmpeg-full && export PATH="$(brew --prefix ffmpeg-full)/bin:$PATH"   # macOS：rn 调用系统 ffmpeg
+apt install ffmpeg                                                                 # Debian / Ubuntu
+winget install Gyan.FFmpeg                                                         # Windows（装完新开终端）
+uv tool install "renoise-kit[all]"                                                 # 提供 rn 命令
 ```
+
+macOS、Linux、Windows 通用：skill 的脚本全是 Python，不依赖 bash。下文的 `python3` 在 Windows 上换成 `python`（或 `py -3`）；路径用 `/` 或 `\` 都可以。
 
 | 要做的事 | 命令 |
 |---|---|
@@ -132,10 +136,10 @@ python3 <skill>/scripts/fonts.py specimen --pair warm-soft --pair editorial-ital
 ### 4. 建工程与样帧
 
 ```bash
-bash <skill>/scripts/setup_project.sh <项目目录>
+python3 <skill>/scripts/setup_project.py <项目目录>
 ```
 
-电影级：`storyboard.json` 只提供品牌信息，画面在 `src/Film.tsx` 里按 [references/cinematic.md](references/cinematic.md) 编写（参考 `templates/remotion/examples/youware/`），样帧用 `render.sh <项目目录> film-stills <帧号...>` 逐段抽查，预览 `film-preview`，成片 `film`（输出 `out/film.mp4` 并做响度检查）。以下 storyboard 校验与 `render.sh` 针对模板片。
+电影级：`storyboard.json` 只提供品牌信息，画面在 `src/Film.tsx` 里按 [references/cinematic.md](references/cinematic.md) 编写（参考 `templates/remotion/examples/youware/`），样帧用 `render.py <项目目录> film-stills <帧号...>` 逐段抽查，预览 `film-preview`，成片 `film`（输出 `out/film.mp4` 并做响度检查）。以下 storyboard 校验与 `render.py` 针对模板片。
 
 - 把确认后的分镜写入 `<项目目录>/storyboard.json`（字段见 storyboard.md）。
 - 素材放进 `public/`：`brand/`（Logo）、`fonts/`（`fonts.py fetch` 下载，含 `fonts.json` 与 `LICENSES.md`）、`images/`（截图）、`music/`。`storyboard.json` 里的路径相对 `public/`。
@@ -143,7 +147,7 @@ bash <skill>/scripts/setup_project.sh <项目目录>
 
 ```bash
 python3 <skill>/scripts/check_storyboard.py <项目目录>/storyboard.json
-bash <skill>/scripts/render.sh <项目目录> stills
+python3 <skill>/scripts/render.py <项目目录> stills
 ```
 
 - `ERROR` 必须修复。`WARN 阅读时长` 表示文字读不完：缩短文字或延长场景。
@@ -159,7 +163,7 @@ bash <skill>/scripts/render.sh <项目目录> stills
 ### 6. 预览
 
 ```bash
-bash <skill>/scripts/render.sh <项目目录> preview
+python3 <skill>/scripts/render.py <项目目录> preview
 ```
 
 半分辨率快速出片。把 `out/preview.mp4` 路径给用户，按反馈修改 `storyboard.json` 后重渲。
@@ -170,7 +174,7 @@ bash <skill>/scripts/render.sh <项目目录> preview
 
 ```bash
 rn sheet out/film-preview.mp4 --around <切换点秒数,...> --span 4 -o out/seam.jpg                       # 每个挂载 / 卸载 / 参数切换点前后 4 帧（秒数 = 帧号 / 30）
-rn qa out/film-preview.mp4                                                                             # 黑帧、冻帧、数字静音、电平跳变、爆音（render.sh 已自动跑）
+rn qa out/film-preview.mp4                                                                             # 黑帧、冻帧、数字静音、电平跳变、爆音（render.py 已自动跑）
 rn cuts out/film-preview.mp4 --sheet out/audit/cuts.jpg                                                # 硬切清单，每刀前后各一帧
 python3 <skill>/scripts/typo_lint.py storyboard.json                             # 或 --ts src/film/*.ts*；--fix 自动修 JSON
 python3 <skill>/scripts/font_check.py public/fonts                               # 光学字号轴、真标点字形
@@ -181,10 +185,10 @@ python3 <skill>/scripts/font_check.py public/fonts                              
 ### 7. 成片
 
 ```bash
-bash <skill>/scripts/render.sh <项目目录> final
+python3 <skill>/scripts/render.py <项目目录> final
 ```
 
-产出 `out/final.mp4`、`out/cover.png`，有 `caption` 时还有 `out/captions.srt`。**交给用户的文件一律是 `rn finish` 的输出**（`render.sh` 的 `film` / `final` 会自动做：画面单独渲染、混音另渲 WAV，再由 `rn finish --audio` 合成）。Remotion 直出的 MP4 在一些播放器和上传平台里只显示一半时长（用户反馈「发出去 38 秒，打开只有 19 秒」），根因见 [references/detail-pass.md](references/detail-pass.md)「交付编码」。自己手动渲染 4K 时：
+产出 `out/final.mp4`、`out/cover.png`，有 `caption` 时还有 `out/captions.srt`。**交给用户的文件一律是 `rn finish` 的输出**（`render.py` 的 `film` / `final` 会自动做：画面单独渲染、混音另渲 WAV，再由 `rn finish --audio` 合成）。Remotion 直出的 MP4 在一些播放器和上传平台里只显示一半时长（用户反馈「发出去 38 秒，打开只有 19 秒」），根因见 [references/detail-pass.md](references/detail-pass.md)「交付编码」。自己手动渲染 4K 时：
 
 ```bash
 npx remotion render src/index.ts Film out/film-raw-4k.mp4 --muted                # 构图本身是 3840×2160；1080p 构图加 --scale=2
@@ -199,11 +203,11 @@ rn qa out/<名字>.mp4                                                          
 ## 渲染约束
 
 - 所有动画必须由 `useCurrentFrame()` 推导。禁止 CSS transition/animation、Framer Motion 自动播放、`setTimeout`、无种子的 `Math.random()`，否则逐帧渲染会闪烁或错位。GSAP 仅可按帧 seek 使用。
-- `render.sh` 需要在命令沙箱外运行（headless Chrome 要读取 CPU 核数和 GPU）：宿主给 shell 命令加了沙箱时，按宿主的方式对这条命令放开。
-- 整片渲染（`preview`、`final`、`film-preview`、`film`）和首次 `setup_project.sh`（`npm install`）要几分钟，会超过多数宿主的单条命令超时：放到后台跑（宿主有后台运行能力就用它，没有就 `nohup … > out/render.log 2>&1 &`，之后看日志），不要高频轮询；`stills`、`film-stills` 抽几帧可前台跑，超时放宽到 10 分钟。
-- 无需全局 Node：`setup_project.sh` 会找已有 Node，找不到就下载便携版到 `~/.cache/promo-video/node`。ffmpeg 与 `rn` 要装在系统里（见「依赖」），`setup_project.sh` 缺了会提示。
+- `render.py` 需要在命令沙箱外运行（headless Chrome 要读取 CPU 核数和 GPU）：宿主给 shell 命令加了沙箱时，按宿主的方式对这条命令放开。
+- 整片渲染（`preview`、`final`、`film-preview`、`film`）和首次 `setup_project.py`（`npm install`）要几分钟，会超过多数宿主的单条命令超时：放到后台跑（宿主有后台运行能力就用它，没有就用系统自带的后台方式并把输出写到 `out/render.log`：macOS / Linux `nohup … > out/render.log 2>&1 &`，Windows PowerShell `Start-Process python -ArgumentList '…' -RedirectStandardOutput out/render.log -NoNewWindow`，之后看日志），不要高频轮询；`stills`、`film-stills` 抽几帧可前台跑，超时放宽到 10 分钟。
+- 无需全局 Node：`setup_project.py` 会找已有 Node，找不到就下载便携版到 `~/.cache/promo-video/node`。ffmpeg 与 `rn` 要装在系统里（见「依赖」），`setup_project.py` 缺了会提示。
 - `hero3d` 渲染最慢，一支片保持 1–2 个。
-- 常用工具：`rn finish`（交付编码：fixed_frame_rate_flag=1、BT.709 TV 范围、moov 前置、−14 LUFS 与编码后 true peak ≤ −1 dBTP、`--audio` 换成 WAV 混音、`--height 1080` 出小版本）；`rn qa`（交付检查 + 黑帧 / 冻帧 / 数字静音 / 电平跳变 / 爆音，`render.sh` 自动跑）；`rn cuts --sheet`（硬切清单）；`rn sheet`（精确取帧拼图，视频或静帧文件夹，选镜和审片都用它，不要用 `ffmpeg -r 1`）；`rn listen`（BPM、拍点、响度）；`typo_lint.py`（屏幕文字的直撇号、三个点、`--`、全角标点、悬挂分隔符、孤字）；`font_check.py`（字体文件的轴、特性、真标点字形，缺 opsz 会警告）；`fonts.py`（字体目录 / 配对 / 提案图 / 下载 / 子集化 / 商业字体平替，见 typography.md）；`audio_features.py`（配乐逐帧特征，`AudioReactive.tsx` 读它的格式）；`pick_music.py`（选曲对拍）；`narrate_mimo.py`（旁白：MiMo 预设音色或克隆客户本人几秒录音，输出逐字时间 timings.json 驱动画面，`--qa` 回读校验）。
+- 常用工具：`rn finish`（交付编码：fixed_frame_rate_flag=1、BT.709 TV 范围、moov 前置、−14 LUFS 与编码后 true peak ≤ −1 dBTP、`--audio` 换成 WAV 混音、`--height 1080` 出小版本）；`rn qa`（交付检查 + 黑帧 / 冻帧 / 数字静音 / 电平跳变 / 爆音，`render.py` 自动跑）；`rn cuts --sheet`（硬切清单）；`rn sheet`（精确取帧拼图，视频或静帧文件夹，选镜和审片都用它，不要用 `ffmpeg -r 1`）；`rn listen`（BPM、拍点、响度）；`typo_lint.py`（屏幕文字的直撇号、三个点、`--`、全角标点、悬挂分隔符、孤字）；`font_check.py`（字体文件的轴、特性、真标点字形，缺 opsz 会警告）；`fonts.py`（字体目录 / 配对 / 提案图 / 下载 / 子集化 / 商业字体平替，见 typography.md）；`audio_features.py`（配乐逐帧特征，`AudioReactive.tsx` 读它的格式）；`pick_music.py`（选曲对拍）；`narrate_mimo.py`（旁白：MiMo 预设音色或克隆客户本人几秒录音，输出逐字时间 timings.json 驱动画面，`--qa` 回读校验）。
 - shell 是 zsh：`for t in $LIST` 不会按空格拆分，把列表直接写在 `for t in 1 2 3` 里；heredoc 里有反引号或 `${}` 时用 `<<'EOF'`，否则会被 shell 展开。
 
 ## 扩展

@@ -61,7 +61,7 @@ import { SpecimenCanvas, SpecimenHud, BounceGraph, StrokeDraw, CubeStage, Volume
 | `GlyphAnatomy` | 字形解剖：度量线（x 高 / 基线 / 降部 + 真实数值）、轮廓描出、锚点（方）与控制点（圆）+ 手柄、填充、放大镜标出一个点的真实坐标和「1 UNIT = x PX」；数据用 `scripts/glyph_outline.py` 从字体导出 | `metrics`、`outline`、`points`、`fill`、`loupe`、`loupeAt` |
 | `StrokeDraw` / `penAt` | 按顺序画路径 + 发光笔尖，`erase` 倒着收回；`MARK_PATHS` 是 YouWare 标志四条环形笔画中心线（从官方 SVG 描出），`VIBE_PATH` 是单线手写 vibe | `p`、`erase`、`width`、`glow` |
 
-样帧：工程根目录的 `stills.mjs` 一次打包、一个浏览器渲一串帧（`render.sh film-stills` 已改用它，每帧 < 1s）。
+样帧：工程根目录的 `stills.mjs` 一次打包、一个浏览器渲一串帧（`render.py film-stills` 已改用它，每帧 < 1s）。
 
 ## 路由（已写进 style-router.md）
 

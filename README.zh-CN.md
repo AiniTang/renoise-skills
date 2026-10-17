@@ -25,12 +25,15 @@ npx skills add renoise-ai/renoise-skills -s promo-video -g -y              # 装
 
 ## promo-video 的运行依赖
 
-- **Node.js 18+**：Remotion 负责渲染画面和混音。找不到 Node 时，`setup_project.sh` 会下载一个便携版。
+macOS、Linux、Windows 都能用：skill 的脚本都是 Python，不需要 bash。在 Windows 上，skill 里写 `python3` 的地方用 `python`（或 `py -3`）。
+
+- **Node.js 18+**：Remotion 负责渲染画面和混音。找不到 Node 时，`setup_project.py` 会下载一个便携版。
 - **ffmpeg 7+**（需要带 libass）：
   - macOS：`brew install ffmpeg-full && export PATH="$(brew --prefix ffmpeg-full)/bin:$PATH"`
   - Debian / Ubuntu：`apt install ffmpeg`
-- **[`rn`](https://github.com/renoise-ai/renoise-kit)**：负责每次渲染之后的编码收尾、交付检查和审计。用 `uv tool install 'renoise-kit[all]'` 或 `pipx install 'renoise-kit[all]'` 安装。
-- **Python 3 和 numpy**：skill 自带的脚本要用。
+  - Windows：`winget install Gyan.FFmpeg`（full 版），装完新开一个终端
+- **[`rn`](https://github.com/renoise-ai/renoise-kit)**：负责每次渲染之后的编码收尾、交付检查和审计。用 `uv tool install "renoise-kit[all]"` 或 `pipx install "renoise-kit[all]"` 安装。
+- **Python 3.8+ 和 numpy**：skill 自带的脚本要用。
 - **可选：生成 AI 素材**。生成关键帧和图生视频需要接入 [Renoise](https://renoise.ai)，各 agent 的接入方式见 [renoise-plugins-official](https://github.com/renoise-ai/renoise-plugins-official)。
 
 音乐文件不随仓库分发。skill 里的曲库目录记录了每首 Mixkit 曲子的下载地址和校验值，`pick_music.py` 第一次用到某首时再下载；字体也是同样的处理方式。详见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。

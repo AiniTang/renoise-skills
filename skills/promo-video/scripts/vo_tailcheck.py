@@ -5,7 +5,7 @@ import json, re, subprocess, sys, tempfile
 from pathlib import Path
 import numpy as np
 W = Path.home() / ".cache/history-epic/whisper/ggml-medium-q5_0.bin"
-adir, spec = Path(sys.argv[1]), json.load(open(sys.argv[2]))
+adir, spec = Path(sys.argv[1]), json.load(open(sys.argv[2], encoding="utf-8"))
 bad = 0
 for b in spec["beats"]:
     text = re.sub(r"\[\[\w+\]\]", "", b["narration"])

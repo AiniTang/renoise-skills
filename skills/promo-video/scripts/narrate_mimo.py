@@ -33,6 +33,10 @@ import tempfile
 import time
 from pathlib import Path
 
+if sys.platform == "win32":  # a pipe gets the ANSI code page, which cannot hold CJK copy or emoji
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 CUE_RE = re.compile(r"\[\[([a-z][a-z0-9_-]*)\]\]")
 PUNCT = set("，。！？；：、,.!?;:（）()「」『』“”\"'《》…—- 　")
 # 对齐用的 whisper 模型：small 比 medium 快一倍多，对齐率只低一两个点；对不齐的拍再用 medium 补
@@ -53,7 +57,7 @@ def env():
     key, base = os.environ.get("MIMO_API_KEY"), os.environ.get("MIMO_BASE_URL")
     f = Path.home() / ".config/ai-teardown/mimo.env"
     if (not key or not base) and f.exists():
-        for line in f.read_text().splitlines():
+        for line in f.read_text(encoding="utf-8").splitlines():
             k, _, v = line.partition("=")
             if k == "MIMO_API_KEY" and not key:
                 key = v.strip()
@@ -80,7 +84,7 @@ def call(key, base, body, tries=10):
             _LAST[0] = time.time()
         r = subprocess.run(["curl", "-sS", "--max-time", "240", "-X", "POST", f"{base}/chat/completions",
                             "-H", f"Authorization: Bearer {key}", "-H", "Content-Type: application/json",
-                            "--data-binary", "@-"], input=json.dumps(body, ensure_ascii=False), capture_output=True, text=True)
+                            "--data-binary", "@-"], input=json.dumps(body, ensure_ascii=False), capture_output=True, text=True, encoding="utf-8", errors="replace")
         try:
             d = json.loads(r.stdout)
             if "choices" in d:
@@ -115,7 +119,7 @@ def apply_lexicon(text, lexicon):
 
 
 def probe(path):
-    r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(path)], capture_output=True, text=True, check=True)
+    r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(path)], capture_output=True, text=True, encoding="utf-8", errors="replace", check=True)
     return float(r.stdout.strip())
 
 
@@ -271,7 +275,7 @@ def main():
     # 第一步（并行）：合成。音色、语气、文字都没变的拍直接复用上次的录音
     def synth(j):
         t0 = time.time()
-        reuse = j["wav"].exists() and ("--reuse" in sys.argv or (j["meta"].exists() and j["meta"].read_text() == j["digest"]))
+        reuse = j["wav"].exists() and ("--reuse" in sys.argv or (j["meta"].exists() and j["meta"].read_text(encoding="utf-8") == j["digest"]))
         if not reuse:
             d = call(key, base, j["body"])
             raw = j["wav"].with_suffix(".raw.wav")
@@ -281,7 +285,7 @@ def main():
                             "silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.05,areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.08,areverse",
                             "-ar", "48000", "-ac", "1", str(j["wav"])], check=True)
             raw.unlink()
-            j["meta"].write_text(j["digest"])
+            j["meta"].write_text(j["digest"], encoding="utf-8")
         subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(j["wav"]), "-b:a", "160k", str(j["mp3"])], check=True)
         j["dur"], j["reused"], j["synth_s"] = probe(j["wav"]), reuse, time.time() - t0
 

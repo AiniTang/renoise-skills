@@ -12,6 +12,7 @@ Prints the timings the reel needs (base length, ending start) as JSON.
 import argparse
 import json
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -23,16 +24,15 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def skill_dir(project: str) -> str:
-    """The promo-video skill folder: $PROMO_VIDEO_SKILL, else what setup_project.sh wrote into the project's .promo-env."""
-    import shlex
+    """The promo-video skill folder: $PROMO_VIDEO_SKILL, else what setup_project.py wrote into the project's .promo-env."""
     if os.environ.get("PROMO_VIDEO_SKILL"):
         return os.environ["PROMO_VIDEO_SKILL"]
     env = os.path.join(project, ".promo-env")
     if os.path.exists(env):
-        for line in open(env):
+        for line in open(env, encoding="utf-8"):
             if line.startswith("PROMO_VIDEO_SKILL="):
-                return shlex.split(line.split("=", 1)[1])[0]
-    raise SystemExit("promo-video skill not found: run <skill>/scripts/setup_project.sh for this project, or export PROMO_VIDEO_SKILL=<skill dir>")
+                return line.split("=", 1)[1].strip()
+    raise SystemExit("promo-video skill not found: run python3 <skill>/scripts/setup_project.py for this project, or set PROMO_VIDEO_SKILL=<skill dir>")
 
 
 sys.path.insert(0, os.path.join(skill_dir(ROOT), "scripts"))
@@ -42,7 +42,7 @@ SR = 48000
 
 
 def ffmpeg(args):
-    subprocess.run(["npx", "remotion", "ffmpeg", "-y", "-v", "error", *args], check=True, cwd=ROOT)
+    subprocess.run([shutil.which("npx.cmd" if os.name == "nt" else "npx") or "npx", "remotion", "ffmpeg", "-y", "-v", "error", *args], check=True, cwd=ROOT)
 
 
 def load(path):

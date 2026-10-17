@@ -15,6 +15,10 @@ Needs fontTools (+ brotli for woff2):  pip install fonttools brotli
 import os
 import sys
 
+if sys.platform == "win32":  # a pipe gets the ANSI code page, which cannot hold CJK copy or emoji
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 try:
     from fontTools.ttLib import TTFont
 except ImportError:

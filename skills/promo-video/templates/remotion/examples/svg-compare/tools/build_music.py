@@ -9,16 +9,15 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def skill_dir(project: str) -> str:
-    """The promo-video skill folder: $PROMO_VIDEO_SKILL, else what setup_project.sh wrote into the project's .promo-env."""
-    import shlex
+    """The promo-video skill folder: $PROMO_VIDEO_SKILL, else what setup_project.py wrote into the project's .promo-env."""
     if os.environ.get("PROMO_VIDEO_SKILL"):
         return os.environ["PROMO_VIDEO_SKILL"]
     env = os.path.join(project, ".promo-env")
     if os.path.exists(env):
-        for line in open(env):
+        for line in open(env, encoding="utf-8"):
             if line.startswith("PROMO_VIDEO_SKILL="):
-                return shlex.split(line.split("=", 1)[1])[0]
-    raise SystemExit("promo-video skill not found: run <skill>/scripts/setup_project.sh for this project, or export PROMO_VIDEO_SKILL=<skill dir>")
+                return line.split("=", 1)[1].strip()
+    raise SystemExit("promo-video skill not found: run python3 <skill>/scripts/setup_project.py for this project, or set PROMO_VIDEO_SKILL=<skill dir>")
 
 
 SKILL = skill_dir(ROOT)
@@ -29,7 +28,7 @@ import build_audio as ba  # noqa: E402
 
 ba.ROOT = ROOT
 SR = 48000
-SRC = fetch(next(t for t in json.load(open(CATALOG_FILE)) if t["file"] == "mixkit-839-tears-of-joy.mp3"))
+SRC = fetch(next(t for t in json.load(open(CATALOG_FILE, encoding="utf-8")) if t["file"] == "mixkit-839-tears-of-joy.mp3"))
 FILM_S = 12.0
 BPM_FILM = 124.05  # timeline.ts
 
@@ -56,6 +55,6 @@ out = out[: int(FILM_S * SR) + SR // 10]
 fade = int(SR * 2 / 30)
 out[:fade] *= np.linspace(0, 1, fade)[:, None]
 ba.save(os.path.join(ROOT, "public/music/bgm.wav"), out, peak=1.0)
-open(os.path.join(ROOT, "public/music/credit.txt"), "w").write("Tears of Joy — Mixkit (track 839), Mixkit Stock Music Free License: web/ads OK, not broadcast.\nhttps://mixkit.co/license/#musicFree\n")
+open(os.path.join(ROOT, "public/music/credit.txt"), "w", encoding="utf-8").write("Tears of Joy — Mixkit (track 839), Mixkit Stock Music Free License: web/ads OK, not broadcast.\nhttps://mixkit.co/license/#musicFree\n")
 end_db = 20 * np.log10(np.sqrt((out[int((FILM_S - 0.3) * SR):int(FILM_S * SR)].mean(1) ** 2).mean()) + 1e-9)
 print(json.dumps({"bpm_measured": round(bpm, 3), "downbeat": round(down, 3), "final_chord_bar": last_full, "final_chord_s": round(hit, 3), "splice_film_s": round(splice_film, 3), "hit_film_s": round(hit_film, 3), "tail_from_song_s": round(tail_start, 3), "last_300ms_db": round(float(end_db), 1)}))

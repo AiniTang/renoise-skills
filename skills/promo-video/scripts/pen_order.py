@@ -209,7 +209,7 @@ def main():
         k, box = g.split("=")
         cfg["groups"][k] = tuple(int(v) for v in box.split(","))
     outp = Path(a.out)
-    res = json.load(open(outp)) if outp.exists() else {}
+    res = json.load(open(outp, encoding="utf-8")) if outp.exists() else {}
     if True:
         im = cv2.imread(str(art), cv2.IMREAD_UNCHANGED)
         h, w = im.shape[:2]
@@ -307,7 +307,7 @@ def main():
             pts = np.array([[float(v) for v in p.split()] for p in s["d"][2:].split(" L ")])
             cv2.polylines(vis, [pts.astype(np.int32)], False, col, 2)
         cv2.imwrite(str(outp.with_name(f"pen-{name}.png")), vis)
-    json.dump(res, open(outp, "w"))
+    json.dump(res, open(outp, "w", encoding="utf-8"))
 
 
 main()

@@ -93,7 +93,7 @@ def main():
         sm[i] = np.where(sp[i] > p, p + (sp[i] - p) * 0.7, p + (sp[i] - p) * 0.22)
     res["spec"] = np.clip(sm, 0, 1).round(2).tolist()
     dst = a.out or os.path.join(os.path.dirname(a.wav), "features.json")
-    with open(dst, "w") as f:
+    with open(dst, "w", encoding="utf-8") as f:
         json.dump(res, f, separators=(",", ":"))
     print(f"wrote {dst}: {frames} frames @ {a.fps}fps, {len(kept)} onsets (first: {kept[:8]})")
 

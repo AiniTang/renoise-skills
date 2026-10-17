@@ -1,6 +1,6 @@
 # SFX kit
 
-Copied into every new project as `public/sfx/` by `setup_project.sh`. Every file is free for commercial use without attribution (CC0 or generated). All are 48 kHz stereo WAV. Schedule a cue on the frame the action happens (the contact frame): most hits peak within 7 ms of the start, and `SoundCues` shifts the few that build up first (`swish`, `whoosh`, `cut`, `paper-place`, `riser`, `key-8`) by their measured peak (`SFX_PEAK` in `sfx.tsx`). Re-measure with numpy (`argmax(abs(x)) / sr`) when adding a sound.
+Copied into every new project as `public/sfx/` by `setup_project.py`. Every file is free for commercial use without attribution (CC0 or generated). All are 48 kHz stereo WAV. Schedule a cue on the frame the action happens (the contact frame): most hits peak within 7 ms of the start, and `SoundCues` shifts the few that build up first (`swish`, `whoosh`, `cut`, `paper-place`, `riser`, `key-8`) by their measured peak (`SFX_PEAK` in `sfx.tsx`). Re-measure with numpy (`argmax(abs(x)) / sr`) when adding a sound.
 
 `preview.wav` plays the whole kit in the order below (start time in the first column) for auditioning.
 

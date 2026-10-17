@@ -13,7 +13,11 @@ Licences (see references/typography.md): OFL / Apache fonts may be subset. Fonts
 for video, ads and broadcast, but must NOT be subset or format-converted and must NOT be handed to third parties:
 they are fetched per machine and copied untouched. Fonts in the catalogue's "manual" list are never auto-downloaded.
 """
-import argparse, html, io, json, os, re, shutil, subprocess, sys, tempfile, time, urllib.parse, urllib.request, zipfile
+import argparse, html, io, json, os, pathlib, re, shutil, subprocess, sys, tempfile, time, urllib.parse, urllib.request, zipfile
+
+if sys.platform == "win32":  # a pipe gets the ANSI code page, which cannot hold CJK copy or emoji
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 SKILL = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CATALOG = os.path.join(SKILL, "assets", "fonts", "catalog.json")
@@ -22,7 +26,7 @@ UA = {"User-Agent": "Mozilla/5.0 (promo-video fonts.py)"}
 
 
 def cat():
-    return json.load(open(CATALOG))
+    return json.load(open(CATALOG, encoding="utf-8"))
 
 
 def by_id():
@@ -49,7 +53,7 @@ def fetch_one(f):
     d = os.path.join(CACHE, f["id"])
     done = os.path.join(d, ".done")
     if os.path.exists(done):
-        return json.load(open(done))
+        return json.load(open(done, encoding="utf-8"))
     os.makedirs(d, exist_ok=True)
     s = f["source"]
     out = []
@@ -94,7 +98,7 @@ def fetch_one(f):
             out.append(p)
     if not out:
         raise RuntimeError(f"no font files found for {f['id']}")
-    json.dump(out, open(done, "w"))
+    json.dump(out, open(done, "w", encoding="utf-8"))
     return out
 
 
@@ -114,7 +118,7 @@ def meta(path):
 def cmd_fetch(a):
     fonts = by_id()
     man_path = os.path.join(a.to, "public", "fonts", "fonts.json") if a.to else None
-    manifest = json.load(open(man_path)) if man_path and os.path.exists(man_path) else []
+    manifest = json.load(open(man_path, encoding="utf-8")) if man_path and os.path.exists(man_path) else []
     for fid in a.ids:
         f = fonts.get(fid)
         if not f:
@@ -134,13 +138,13 @@ def cmd_fetch(a):
             m = meta(p)
             manifest.append({"id": fid, "family": f["family"], "file": f"fonts/{fid}/{os.path.basename(p)}", **m, "license": f["license"], "subset_ok": f["subset_ok"], "scripts": f["scripts"]})
     if man_path:
-        json.dump(manifest, open(man_path, "w"), ensure_ascii=False, indent=1)
+        json.dump(manifest, open(man_path, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
         lic = ["# Fonts in this project", "", "| font | licence | notes |", "|---|---|---|"]
         for fid in sorted({m["id"] for m in manifest}):
             f = fonts.get(fid, {})
             note = "free for video/ads/broadcast; do not subset, convert or pass the files to third parties" if f.get("license", "").startswith("ITF") else "open licence"
             lic.append(f"| {f.get('family', fid)} | {f.get('license', '?')} | {note} |")
-        open(os.path.join(a.to, "public", "fonts", "LICENSES.md"), "w").write("\n".join(lic) + "\n")
+        open(os.path.join(a.to, "public", "fonts", "LICENSES.md"), "w", encoding="utf-8").write("\n".join(lic) + "\n")
         print(f"manifest: {man_path} ({len(manifest)} faces)")
 
 
@@ -148,7 +152,7 @@ def cmd_subset(a):
     from fontTools import subset as fts
 
     man_path = os.path.join(a.project, "public", "fonts", "fonts.json")
-    manifest = json.load(open(man_path))
+    manifest = json.load(open(man_path, encoding="utf-8"))
     text = open(a.text_file, encoding="utf-8").read() if a.text_file else (a.text or "")
     chars = set(text) | set(" !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~") | set("，。！？、：；“”‘’（）《》〈〉【】…—·「」『』・ー")
     for m in manifest:
@@ -174,7 +178,7 @@ def cmd_subset(a):
         m.setdefault("subset_of", m["file"])
         m["file"] = os.path.relpath(out, os.path.join(a.project, "public"))
         print(f"{m['id']}: {os.path.getsize(src) // 1024} KB → {os.path.getsize(out) // 1024} KB ({len(chars)} chars)")
-    json.dump(manifest, open(man_path, "w"), ensure_ascii=False, indent=1)
+    json.dump(manifest, open(man_path, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
 
 def cmd_list(a):
@@ -220,14 +224,31 @@ def cmd_similar(a):
 
 # ── specimen: a font proposal sheet with the film's real copy, rendered by headless Chrome ──
 def chrome():
-    for c in [os.environ.get("PROMO_CHROME"), "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", shutil.which("google-chrome"), shutil.which("chromium")]:
-        if c and os.path.exists(c):
+    """Chrome, Chromium or Edge (all take --headless --screenshot), else a headless shell Remotion or Playwright downloaded."""
+    home = os.path.expanduser("~")
+    env = lambda k: os.environ.get(k) or ""  # noqa: E731
+    installed = [
+        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", "/Applications/Chromium.app/Contents/MacOS/Chromium",
+        "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge",
+        *(os.path.join(base, *rel) for base in (env("ProgramFiles"), env("ProgramFiles(x86)"), env("LOCALAPPDATA")) if base
+          for rel in (("Google", "Chrome", "Application", "chrome.exe"), ("Microsoft", "Edge", "Application", "msedge.exe"))),
+        *(shutil.which(n) or "" for n in ("google-chrome", "google-chrome-stable", "chromium", "chromium-browser", "chrome", "msedge")),
+    ]
+    for c in [env("PROMO_CHROME"), *installed]:
+        if c and os.path.isfile(c):
             return c
-    for root in [os.path.expanduser("~/Documents"), os.path.expanduser("~/Downloads"), os.path.expanduser("~/Desktop")]:
-        r = subprocess.run(["find", root, "-maxdepth", "6", "-name", "chrome-headless-shell", "-type", "f"], capture_output=True, text=True)
-        if r.stdout.strip():
-            return r.stdout.split("\n")[0]
-    sys.exit("no Chrome found (set PROMO_CHROME)")
+    names = ("chrome-headless-shell", "chrome-headless-shell.exe", "headless_shell", "headless_shell.exe")
+    caches = [os.path.join(home, d) for d in ("Documents", "Downloads", "Desktop", "Projects", "projects")] + [
+        os.path.join(home, ".cache", "ms-playwright"), os.path.join(home, "Library", "Caches", "ms-playwright"),
+        os.path.join(env("LOCALAPPDATA"), "ms-playwright") if env("LOCALAPPDATA") else ""]
+    for root in filter(os.path.isdir, caches):
+        for d, dirs, files in os.walk(root):
+            if d[len(root):].count(os.sep) >= 6:
+                dirs[:] = []
+            hit = next((f for f in files if f in names), None)
+            if hit:
+                return os.path.join(d, hit)
+    sys.exit("no Chrome found (set PROMO_CHROME to Chrome, Chromium or Edge)")
 
 
 DEFAULT_VAR = {
@@ -248,7 +269,7 @@ def face_css(f, files):
     for p in files:
         m = meta(p)
         st = f"font-stretch:{m['stretch']};" if m["stretch"] else ""
-        css.append(f"@font-face{{font-family:'F-{f['id']}';src:url('file://{urllib.parse.quote(p)}');font-weight:{m['weight']};font-style:{m['style']};{st}}}")
+        css.append(f"@font-face{{font-family:'F-{f['id']}';src:url('{pathlib.Path(p).resolve().as_uri()}');font-weight:{m['weight']};font-style:{m['style']};{st}}}")
     return "\n".join(css)
 
 
@@ -346,10 +367,10 @@ h1{{font-size:{a.size}px;line-height:1.02;letter-spacing:-0.02em;font-optical-si
 </style></head><body>{''.join(panels)}</body></html>"""
     tmp = tempfile.mkdtemp()
     hp = os.path.join(tmp, "specimen.html")
-    open(hp, "w").write(page)
+    open(hp, "w", encoding="utf-8").write(page)
     out = os.path.abspath(a.out)
     total = H * len(sets)
-    subprocess.run([chrome(), "--headless=new", "--disable-gpu", "--hide-scrollbars", "--allow-file-access-from-files", "--force-device-scale-factor=1", "--virtual-time-budget=8000", f"--window-size=1920,{total}", f"--screenshot={out}", "file://" + hp], check=True, capture_output=True)
+    subprocess.run([chrome(), "--headless=new", "--disable-gpu", "--hide-scrollbars", "--allow-file-access-from-files", "--force-device-scale-factor=1", "--virtual-time-budget=8000", f"--window-size=1920,{total}", f"--screenshot={out}", pathlib.Path(hp).as_uri()], check=True, capture_output=True)
     shutil.copy(hp, os.path.splitext(out)[0] + ".html")
     print(out)
 

@@ -23,7 +23,7 @@
    rn sheet out/film-preview.mp4 --around 26.4,35.4 --span 4 --diff -o out/seam-diff.jpg
    ```
 
-3. **画面与声音的自动审计**（`render.sh` 的每种成片模式都会自动跑，结果在 `out/audit/`；也可单独跑）：
+3. **画面与声音的自动审计**（`render.py` 的每种成片模式都会自动跑，结果在 `out/audit/`；也可单独跑）：
 
    ```bash
    rn qa out/film.mp4 --json out/audit/qa.json              # 格式、响度、true peak、黑帧、冻帧、数字静音、电平跳变、爆音、固定帧率
@@ -47,7 +47,7 @@
    python3 <skill>/scripts/font_check.py public/fonts               # 轴、特性、真标点字形；缺 opsz 会警告
    ```
 
-5. **抽 4K 帧看字**：每行字完全显现的那一帧（`render.sh <项目> film-stills <帧号...>`，自动拼成 `out/stills-sheet.jpg`；也可 `rn sheet <静帧文件夹>`），检查换行、孤字、与 3D 物体的碰撞（相机漂移、画面偏移都会把物体滑到文字下面）。`rn text out/film.mp4` 读出每行字的出现时间和位置框，可核对文字有没有被截断、出现时长够不够读。
+5. **抽 4K 帧看字**：每行字完全显现的那一帧（`render.py <项目> film-stills <帧号...>`，自动拼成 `out/stills-sheet.jpg`；也可 `rn sheet <静帧文件夹>`），检查换行、孤字、与 3D 物体的碰撞（相机漂移、画面偏移都会把物体滑到文字下面）。`rn text out/film.mp4` 读出每行字的出现时间和位置框，可核对文字有没有被截断、出现时长够不够读。
 6. **交付说明里写出**：这支片有哪些有意的硬切 / 静音 / 极细字，让用户知道它们是设计过的。
 
 ## 连续性配方：明→暗的转折（可直接套用）
@@ -72,14 +72,14 @@
 
 起因（2026-09-29，某医疗器械品牌片）：用户「发出去是 38 秒，实际打开只有 19 秒」。容器（mvhd / tkhd / elst / stts）完全正确、macOS 也读 37.5 秒，问题在 H.264 码流和封装：
 
-| 问题（Remotion 直出） | 后果 | `rn finish` 的处理（`render.sh` 自动做） |
+| 问题（Remotion 直出） | 后果 | `rn finish` 的处理（`render.py` 自动做） |
 |---|---|---|
 | SPS VUI `fixed_frame_rate_flag=0`，`time_scale=60 / num_units_in_tick=1` | 按 VUI tick 给每帧计时的播放器 / 平台得到 60 fps → 时长减半（1125 / 60 = 18.75 秒） | 重新编码，x264 `force-cfr` → `fixed_frame_rate_flag=1`；`rn qa` 的 `fixed_frame_rate` 项检查 |
 | `yuvj420p` 全范围，矩阵标 BT.601，原色 / 传递函数未标 | 不认范围标记的播放器颜色发灰或过饱和 | 按源矩阵真正转换到 BT.709 TV 范围（不只是打标签），三项标记在码流和容器里都写上 |
 | moov 在文件末尾 | 网页 / 聊天软件边下边播时读不到索引 | 一律 `+faststart`；`rn qa` 的 `faststart` 项检查 |
 | 音轨带 AAC 编码延迟且未补偿（elst media_time 0） | 声音整体晚 43.7 ms，卡点晚 1.3 帧 | 成片：画面 `--muted` 渲染，混音另渲 WAV，`rn finish --audio out/mix.wav`；预览：`--audio-offset -0.0437` |
 | 响度不统一、AAC 编码后峰值抬升 | 平台二次压缩、削波 | −14 LUFS，**编码后**测 true peak ≤ −1 dBTP，超了自动降限幅重编音频 |
-| 只有 4K | 手机 / 微信常被转码或拒收 | `rn finish 4k.mp4 -o 1080p.mp4 --height 1080 --lufs keep`（`render.sh` 对 4K 成片自动出） |
+| 只有 4K | 手机 / 微信常被转码或拒收 | `rn finish 4k.mp4 -o 1080p.mp4 --height 1080 --lufs keep`（`render.py` 对 4K 成片自动出） |
 
 ```bash
 npx remotion render src/index.ts Film out/film-raw-4k.mp4 --muted                # 构图本身是 3840×2160；1080p 构图加 --scale=2
