@@ -1,5 +1,13 @@
 # 版本说明
 
+## 公开版（2026-10-17，renoise-ai/renoise-skills）
+
+- **通用 Agent Skills**：去掉所有宿主专属的写法与变量。路径用 `<skill>` 约定（SKILL.md 所在目录）；工程里的脚本从 `.promo-env`（`setup_project.sh` 写入）或 `PROMO_VIDEO_SKILL` 找 skill 目录。用 `npx skills add renoise-ai/renoise-skills` 安装，实测 Claude Code 与 Codex 都能加载。
+- **曲库按需下载**：曲子不再随仓库分发（Mixkit 授权不允许单独再分发），`catalog.json` 记下载地址与 sha256，`pick_music.py` 首次使用时下载并校验。
+- **AI 素材改用 Renoise 生成**：去掉个人账号绑定的 Codex / HiAPI 脚本与文档，`ai-footage.md` 改为 Renoise 的模型路由、估价确认与任务流程。
+- **去掉客户信息**：客户与第三方品牌的示例片不随公开版发布；口碑记录与踩坑记录保留经验，客户名改为行业描述，本机路径全部去掉。
+- frontmatter 增加 `license` 与 `compatibility`（运行依赖）。
+
 ## rn 版（2026-10-17）
 
 画面和混音仍由 Remotion 渲染；所有机械、易错的环节改由 [renoise-kit](https://github.com/renoise-ai/renoise-kit) 的 `rn` 命令完成，skill 本身只保留流程、判断和内容（风格包、组件、曲库、字体、文案检查、旁白、生图）。

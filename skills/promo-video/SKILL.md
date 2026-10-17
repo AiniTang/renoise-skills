@@ -27,8 +27,6 @@ brew install ffmpeg-full && export PATH="$(brew --prefix ffmpeg-full)/bin:$PATH"
 uv tool install 'renoise-kit[all]'                                                 # 提供 rn 命令
 ```
 
-renoise-kit 发布到 PyPI 之前，从仓库装：`uv tool install 'renoise-kit[all] @ git+https://github.com/renoise-ai/renoise-kit'`（私有仓库，用本机的 git 凭据）。
-
 | 要做的事 | 命令 |
 |---|---|
 | 看素材 / 预览 / 静帧文件夹 | `rn sheet <视频或文件夹> [--fps 4 \| --around 帧时间,.. --span 4 --diff]` |

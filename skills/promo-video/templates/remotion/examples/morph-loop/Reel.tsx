@@ -110,7 +110,7 @@ const TWEET = "一句话就可以做出这样的宣传片～今天真是被 Opus
 const TWEET_T0 = K(13, 0.25);
 const TWEET_CPS = 34;
 const REPOS = [
-  { n: "AetherViz", s: 1373, d: "3D 互动教学可视化" },
+  { n: "PrismView", s: 1373, d: "3D 互动教学可视化" },
   { n: "MacCheck", s: 628, d: "本地 Mac 验机宝" },
   { n: "OpenClaw", s: 408, d: "Live2D 语音助手" },
   { n: "RF-DETR", s: 204, d: "浏览器实时检测" },
@@ -119,13 +119,13 @@ const REPOS = [
 ];
 const TABS = ["AI 工具", "提示词", "Skills", "设计编程"];
 const CMD: { t: string; s: string; icon: LucideIcon }[] = [
-  { t: "Berryxia.AI", s: "@berryxia · X", icon: AtSign },
-  { t: "berryxia/AetherViz", s: "GitHub · 1,373★", icon: Star },
+  { t: "Lumenlab.AI", s: "@lumenlab · X", icon: AtSign },
+  { t: "lumenlab/PrismView", s: "GitHub · 1,373★", icon: Star },
   { t: "Browse prompts", s: "提示词库", icon: Sparkles },
   { t: "Build a Skill", s: "Claude Code", icon: Wand2 },
   { t: "Bookmark thread", s: "收藏", icon: Bookmark },
 ];
-const QUERY: [number, string][] = [[K(41), ""], [K(42), "b"], [K(43), "be"], [K(43, 0.12), "ber"], [K(43, 0.24), "berr"], [K(44), "berry"], [K(44, 0.1), "berryx"], [K(44, 0.2), "berryxi"], [K(44, 0.3), "berryxia"]];
+const QUERY: [number, string][] = [[K(41), ""], [K(42), "l"], [K(43), "lu"], [K(43, 0.12), "lum"], [K(43, 0.24), "lume"], [K(44), "lumen"], [K(44, 0.1), "lumenl"], [K(44, 0.2), "lumenla"], [K(44, 0.3), "lumenlab"]];
 const queryAt = (t: number) => [...QUERY].reverse().find(([tt]) => t >= tt)?.[1] ?? "";
 
 /* ── scene ── */
@@ -177,7 +177,7 @@ export const Reel: React.FC = () => {
               <div style={{ position: "absolute", left: w / 2, top: h / 2 - lift }}>
                 {/* 1 · button */}
                 <Layer t={t} tin={-1} tout={K(4)}>
-                  <At x={0} y={0} style={txt(40, 600, WHITE)}>Follow @berryxia</At>
+                  <At x={0} y={0} style={txt(40, 600, WHITE)}>Follow @lumenlab</At>
                 </Layer>
                 {/* 2 · loader */}
                 <Layer t={t} tin={K(4, 0.05)} tout={K(7)}>
@@ -200,9 +200,9 @@ export const Reel: React.FC = () => {
                   </div>
                   <div style={{ position: "absolute", left: -226, top: -46, ...swap(t, K(11), K(13)) }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 10, ...txt(40, 600, WHITE) }}>
-                      Berryxia.AI <BadgeCheck size={34} strokeWidth={2} color={TEAL} />
+                      Lumenlab.AI <BadgeCheck size={34} strokeWidth={2} color={TEAL} />
                     </div>
-                    <div style={{ ...txt(26, 400, "rgba(255,255,255,0.55)"), marginTop: 4 }}>@berryxia</div>
+                    <div style={{ ...txt(26, 400, "rgba(255,255,255,0.55)"), marginTop: 4 }}>@lumenlab</div>
                   </div>
                   <div style={{ position: "absolute", right: -330, top: -50, textAlign: "right", ...swap(t, K(12), K(13)) }}>
                     <div style={{ ...txt(56, 700, WHITE), fontVariantNumeric: "tabular-nums" }}>{(4.8 * step(t - K(12), CURSOR)).toFixed(1)}万</div>
@@ -216,9 +216,9 @@ export const Reel: React.FC = () => {
                   </div>
                   <div style={{ position: "absolute", left: -320, top: -236 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 8, ...txt(30, 600, INK) }}>
-                      Berryxia.AI <BadgeCheck size={26} strokeWidth={2} color={TEAL} />
+                      Lumenlab.AI <BadgeCheck size={26} strokeWidth={2} color={TEAL} />
                     </div>
-                    <div style={txt(22, 400, GRAY)}>@berryxia · 9月25日</div>
+                    <div style={txt(22, 400, GRAY)}>@lumenlab · 9月25日</div>
                   </div>
                   <div style={{ position: "absolute", left: -410, top: -130, width: 820, ...txt(38, 500, INK), lineHeight: 1.45, whiteSpace: "normal" }}>
                     {Array.from(TWEET).slice(0, Math.max(0, Math.floor((t - TWEET_T0) * TWEET_CPS))).join("")}
@@ -321,14 +321,14 @@ export const Reel: React.FC = () => {
                     <Check size={36} strokeWidth={2.6} color={WHITE} />
                   </div>
                   <div style={{ position: "absolute", left: -244, top: -44, whiteSpace: "nowrap" }}>
-                    <div style={txt(34, 600, WHITE)}>已关注 @berryxia</div>
+                    <div style={txt(34, 600, WHITE)}>已关注 @lumenlab</div>
                     <div style={{ ...txt(24, 400, "rgba(255,255,255,0.6)"), marginTop: 4, ...swap(t, K(46), K(53)) }}>一起把 AI 变成生产力</div>
                   </div>
-                  <At x={345} y={0} anchor="right" style={{ ...txt(22, 600, TEAL), ...swap(t, K(49), K(53)) }}>x.com/berryxia</At>
+                  <At x={345} y={0} anchor="right" style={{ ...txt(22, 600, TEAL), ...swap(t, K(49), K(53)) }}>x.com/lumenlab</At>
                 </Layer>
                 {/* 13 · back to the button */}
                 <Layer t={t} tin={K(53, 0.1)} tout={99}>
-                  <At x={0} y={0} style={txt(40, 600, WHITE)}>Follow @berryxia</At>
+                  <At x={0} y={0} style={txt(40, 600, WHITE)}>Follow @lumenlab</At>
                 </Layer>
               </div>
             </div>
