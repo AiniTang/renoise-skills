@@ -70,7 +70,7 @@ def main():
         "d": svg.getCommands(),
         "contours": contours,
     }
-    with open(a.out, "w") as f:
+    with open(a.out, "w", encoding="utf-8") as f:
         json.dump(data, f)
     pts = sum(len(c) for c in contours)
     print(f"{a.out}: '{a.char}' {data['font']} wght {a.wght:g} · {len(contours)} contours · {pts} points · upm {data['upm']}")

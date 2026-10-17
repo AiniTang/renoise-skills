@@ -21,6 +21,10 @@ import json
 import re
 import sys
 
+if sys.platform == "win32":  # a pipe gets the ANSI code page, which cannot hold CJK copy or emoji
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 CJK = r"[㐀-鿿　-〿＀-￯]"
 SKIP_KEYS = {"src", "url", "path", "id", "type", "style", "font", "family", "icon", "color", "bg", "background", "from", "to", "anim", "variant", "ease", "file", "image", "logo", "music", "voice", "lang", "mode", "layout", "align", "kind", "name"}
 
@@ -129,7 +133,7 @@ def main():
     n = 0
     for path in a.files:
         if a.ts or path.endswith((".ts", ".tsx")):
-            src = open(path, encoding="utf-8").read()
+            src = open(path, encoding="utf-8-sig").read()
             for line, s in ts_strings(src):
                 if not looks_like_prose_ts(s) or " " not in s.strip():
                     continue
@@ -139,7 +143,7 @@ def main():
                     n += 1
                     print(f"{path}:{line}: [{rule}] {msg}  ← {s[:70]!r}")
         else:
-            data = json.load(open(path, encoding="utf-8"))
+            data = json.load(open(path, encoding="utf-8-sig"))
             for p, s in walk_json(data):
                 for rule, msg, fixed in check(s):
                     if rule in skip:

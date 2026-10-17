@@ -8,7 +8,7 @@ import re, sys, pathlib, shutil
 src = pathlib.Path(sys.argv[1]); dst = pathlib.Path(sys.argv[2]); dst.mkdir(parents=True, exist_ok=True)
 names = []
 for f in sorted((src / "icons").glob("*.tsx")):
-    s = f.read_text()
+    s = f.read_text(encoding="utf-8")
     s = s.replace('"use client";\n', "")
     s = re.sub(r'from "motion/react"', 'from "../motion-shim"', s)
     s = s.replace('from "@/lib/utils"', 'from "../cn"')
@@ -18,11 +18,11 @@ for f in sorted((src / "icons").glob("*.tsx")):
     m = re.search(r"export \{ (?:\w+ as )?(\w+Icon) \}", s) or re.search(r"export const (\w+Icon) = forwardRef", s)
     if not m:
         print("skip (no export):", f.name); continue
-    (dst / f.name).write_text("// @ts-nocheck\n" + s)
+    (dst / f.name).write_text("// @ts-nocheck\n" + s, encoding="utf-8")
     names.append((f.stem, m.group(1)))
 lines = ["// 自动生成：vendor_lucide_animated.py。图标来自 lucide-animated (MIT)，见 LICENSE", ""]
 lines += [f'import {{ {c} }} from "./{n}";' for n, c in names]
 lines += ["", "export const ICONS = {"] + [f'  "{n}": {c},' for n, c in names] + ["} as const;", "export type IconName = keyof typeof ICONS;", "export const ICON_NAMES = Object.keys(ICONS) as IconName[];", ""]
-(dst / "index.ts").write_text("\n".join(lines))
+(dst / "index.ts").write_text("\n".join(lines), encoding="utf-8")
 shutil.copy(src / "LICENSE", dst / "LICENSE")
 print(len(names), "icons ->", dst)

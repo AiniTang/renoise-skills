@@ -1,0 +1,45 @@
+name: Scripts
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# The skill's scripts on the three systems an agent may run them on: set up a project, check its storyboard, render stills.
+jobs:
+  promo-video:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    env:
+      SKILL: skills/promo-video
+      PROJECT: ${{ github.workspace }}/../demo
+      PYTHONUTF8: '0'  # keep Windows' own default encoding, so a missing encoding="utf-8" fails here
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: astral-sh/setup-uv@v6
+      - name: ffmpeg
+        run: |
+          case "$RUNNER_OS" in
+            Linux) sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg ;;
+            macOS) brew install ffmpeg ;;
+            Windows) choco install ffmpeg-full -y --no-progress ;;
+          esac
+      - run: pip install numpy fonttools
+      - run: |
+          uv tool install "renoise-kit[all] @ git+https://github.com/renoise-ai/renoise-kit@main"
+          uv tool dir --bin >> "$GITHUB_PATH"
+      - run: python -m compileall -q "$SKILL/scripts"
+      - run: python "$SKILL/scripts/typo_lint.py" "$SKILL/templates/remotion/storyboard.json"
+      - run: python "$SKILL/scripts/setup_project.py" "$PROJECT"
+      - run: python "$SKILL/scripts/synth_bgm.py" "$PROJECT/public/music/bgm.wav" --seconds 30 --bpm 120 --mood tech
+      - run: python "$SKILL/scripts/check_storyboard.py" "$PROJECT/storyboard.json"
+      - run: python "$SKILL/scripts/render.py" "$PROJECT" stills
+      - run: python -c "import os, sys; assert os.path.getsize(sys.argv[1]) > 0" "$PROJECT/out/stills-sheet.jpg"

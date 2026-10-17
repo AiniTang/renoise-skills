@@ -24,6 +24,10 @@ import wave
 
 import numpy as np
 
+if sys.platform == "win32":  # a pipe gets the ANSI code page, which cannot hold CJK copy or emoji
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 LIB = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "assets", "music")
 CATALOG_FILE = os.path.join(LIB, "catalog.json")
 USAGE = os.path.expanduser("~/.cache/promo-video/music-usage.json")
@@ -53,17 +57,18 @@ def fetch(track):
 
 def ffmpeg(args, cwd):
     exe = shutil.which("ffmpeg")
-    cmd = [exe] if exe else ["npx", "remotion", "ffmpeg"]
+    cmd = [exe] if exe else [shutil.which("npx.cmd" if os.name == "nt" else "npx") or "npx", "remotion", "ffmpeg"]  # full path: runs the .cmd without a shell
     subprocess.run([*cmd, "-y", "-v", "error", *args], check=True, cwd=None if exe else cwd)
 
 
 def project_root(path):
     d = os.path.dirname(os.path.abspath(path))
-    while d != "/":
+    while True:
         if os.path.exists(os.path.join(d, "package.json")):
             return d
+        if os.path.dirname(d) == d:  # the filesystem root: "/" or "C:\\"
+            return os.getcwd()
         d = os.path.dirname(d)
-    return os.getcwd()
 
 
 def precise_grid(src, start, dur, bpm_hint, root, fixed=False):
@@ -93,7 +98,7 @@ def precise_grid(src, start, dur, bpm_hint, root, fixed=False):
 
 def load_usage():
     try:
-        return json.load(open(USAGE))
+        return json.load(open(USAGE, encoding="utf-8"))
     except (OSError, ValueError):
         return {}
 
@@ -111,7 +116,7 @@ def main():
     ap.add_argument("--bpm", type=float, help="force the tempo (e.g. a round 120 when phase stays stable); only the downbeat is searched")
     a = ap.parse_args()
 
-    catalog = json.load(open(os.path.join(LIB, "catalog.json")))
+    catalog = json.load(open(os.path.join(LIB, "catalog.json"), encoding="utf-8"))
     usage = load_usage()
     pool = [t for t in catalog if (not a.mood or t["mood"] == a.mood) and (not a.style or any(a.style in s for s in t["styles"]))]
 
@@ -174,10 +179,10 @@ def main():
         w.writeframes(y.tobytes())
 
     credit = f"{track['title']} — {track['artist']}\nSource: {track['source']}\nLicense: {track['license']}\n{track['license_url']}\n"
-    open(os.path.join(os.path.dirname(os.path.abspath(a.out)), "credit.txt"), "w").write(credit)
+    open(os.path.join(os.path.dirname(os.path.abspath(a.out)), "credit.txt"), "w", encoding="utf-8").write(credit)
     usage[track["file"]] = time.time()
     os.makedirs(os.path.dirname(USAGE), exist_ok=True)
-    json.dump(usage, open(USAGE, "w"), indent=1)
+    json.dump(usage, open(USAGE, "w", encoding="utf-8"), indent=1)
     hit = f", main section lands at {a.hit_at:.2f}s" if a.hit_at is not None else ""
     print(f"wrote {a.out}: {track['title']} ({track['artist']}), {n / sr:.1f}s from {start:.2f}s{hit}")
     print(f"bpm {bpm} (catalog {track['bpm']}{', may be double/half' if track['bpm_approx'] else ''})  beat = {30 * 60 / bpm:.3f} frames @30fps  — use this BPM for the timeline")

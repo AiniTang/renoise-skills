@@ -86,7 +86,7 @@ python3 <skill>/scripts/fonts.py specimen \
 | Bodoni Moda / Playfair | opsz 6–96 | 0.46 / 0.51 | Didone，时装杂志感 | 与 Anthropic 气质不符 |
 | EB Garamond / Spectral / Crimson | 无 | ~0.40–0.45 | 书籍感 | 正文可以，大字偏软 |
 
-x 高对比实验：把多个候选字体放在同一 x 高下、深 / 奶两种底上一次出图（`render.sh <项目> film-stills` 会拼成 `out/stills-sheet.jpg` 便于对比）。
+x 高对比实验：把多个候选字体放在同一 x 高下、深 / 奶两种底上一次出图（`render.py <项目> film-stills` 会拼成 `out/stills-sheet.jpg` 便于对比）。
 
 ## 5. 最大的坑：字体文件必须带 opsz 轴
 

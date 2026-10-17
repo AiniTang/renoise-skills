@@ -9,7 +9,7 @@
   width={1920} height={1080} fps={30} durationInFrames={FILM_FRAMES} />
 ```
 
-渲染（沙箱外、整片后台跑，见 SKILL.md「渲染约束」）：`render.sh <项目目录> film-stills 50 400 …` 抽帧，`film-preview` 半分辨率预览，`film` 出成片 `out/film.mp4`。
+渲染（沙箱外、整片后台跑，见 SKILL.md「渲染约束」）：`render.py <项目目录> film-stills 50 400 …` 抽帧，`film-preview` 半分辨率预览，`film` 出成片 `out/film.mp4`。
 
 ## 风格
 
@@ -132,7 +132,7 @@
 
 ## 个人品牌与像素头像
 
-个人介绍片用 `VoxelIntro/VoxelOutro` 把头像做成 3D 体素：头像缩到约 56×56（`sips -z 56 56`），逐像素读色，去掉背景色后存成 `{w, h, voxels: [[x, y, "#rrggbb"], ...]}`（y 向上），约 1500 个方块。像素风或插画头像效果最好；真人照片先转成像素风再用。简历里的手机号、邮箱等私人信息不上屏。
+个人介绍片用 `VoxelIntro/VoxelOutro` 把头像做成 3D 体素：头像缩到约 56×56（`ffmpeg -i avatar.png -vf scale=56:56 small.png`），逐像素读色，去掉背景色后存成 `{w, h, voxels: [[x, y, "#rrggbb"], ...]}`（y 向上），约 1500 个方块。像素风或插画头像效果最好；真人照片先转成像素风再用。简历里的手机号、邮箱等私人信息不上屏。
 
 ## 报告与文档模拟
 
@@ -159,7 +159,7 @@
 
 ```bash
 python3 <skill>/scripts/voiceover.py vo/lines.json public/vo --engine mimo --voice Milo   # 小米 MiMo TTS
-python3 <skill>/scripts/voiceover.py vo/lines.json public/vo --engine say --voice Daniel --rate 140  # 本机试音
+python3 <skill>/scripts/voiceover.py vo/lines.json public/vo --engine say --rate 140   # 本机系统语音试音：macOS say / Windows SAPI / Linux espeak-ng
 ```
 
 - `lines.json`：`{"style": "音色与语气描述", "lines": [{"id", "text"}]}`。每句一个 wav，并写出 `timing.json`（每句时长），自动去掉首尾静音、峰值归一到 −3 dBFS。
@@ -183,7 +183,7 @@ python3 <skill>/scripts/voiceover.py vo/lines.json public/vo --engine say --voic
 
 ## 音效设计
 
-音效让画面「有手感」，与配乐一起做。`setup_project.sh` 会把 `assets/sfx/` 复制到 `public/sfx/`，目录与用途见 `assets/sfx/README.md`（全部可免费商用，`preview.wav` 可整套试听）。Film 里用 `<SoundCues cues={[{ at, name, volume }]} />` 排布：
+音效让画面「有手感」，与配乐一起做。`setup_project.py` 会把 `assets/sfx/` 复制到 `public/sfx/`，目录与用途见 `assets/sfx/README.md`（全部可免费商用，`preview.wav` 可整套试听）。Film 里用 `<SoundCues cues={[{ at, name, volume }]} />` 排布：
 
 - 打字：`keyCues(text, times, offset)` 为每个字随机选 `key-1..8`，空格用 `key-space`，并限制为每 2 帧最多一次（约 15 键/秒）：画面打字通常比真人快，逐字发声会糊成连续的嗡嗡声。
 - 操作：鼠标点击 `click`，选项/标签 `tap`，元素出现 `pop`，打勾 `done`，最终成功 `ding`（整片最多一次）。
@@ -191,10 +191,10 @@ python3 <skill>/scripts/voiceover.py vo/lines.json public/vo --engine say --voic
 - 镜头：快速转场 `whoosh`，轻柔移动 `swish-1..3`，开场/收尾落点 `impact`，收尾前 1.2 秒 `riser`。
 - 纸质与文档：翻页 `page-1..3`，纸片落下 `paper-place-1..2`，剪开 `cut`。
 - AI 工作中：`processing` 垫底，音量 ≤ 0.15。
-- 音量参考：按键 0.5、点击 0.9、tap/pop 0.5、whoosh 0.3–0.8、impact 0.3–0.9；音效密集时 BGM 降到 0.3。成片后看 `rn qa` 的响度、true peak 和爆音（`render.sh` 自动跑）。
+- 音量参考：按键 0.5、点击 0.9、tap/pop 0.5、whoosh 0.3–0.8、impact 0.3–0.9；音效密集时 BGM 降到 0.3。成片后看 `rn qa` 的响度、true peak 和爆音（`render.py` 自动跑）。
 - 整体偏小声时不要重渲：`rn finish out/film.mp4 -o out/film-loud.mp4 --copy-video --lufs -12`（只重做音轨：按 LUFS 补增益、限幅，并在 AAC 编码后复测 true peak ≤ −1 dBTP）。
 - 新增音效只用 CC0 / 公有领域来源（如 [Kenney](https://kenney.nl/assets)、OpenGameArt 标注 CC0 的素材），处理成 48 kHz WAV、裁掉开头空白，并登记到 README。
 
 ## 样帧检查
 
-每段取 2–3 帧（动作中段 + 定格）打开查看：文字是否被 Logo/卡片遮挡、长标签是否溢出、3D 卡片是否侧面朝镜头、截图是否过曝、景深是否把主体也糊掉。每个切换点另看前后各 4 帧（`rn sheet out/film-preview.mp4 --around <秒,...> --span 4`）。修完再渲整片，预览给用户之前看 `rn qa` / `rn cuts` 的结果（`render.sh` 自动跑）并跑 `typo_lint.py`（detail-pass.md）。
+每段取 2–3 帧（动作中段 + 定格）打开查看：文字是否被 Logo/卡片遮挡、长标签是否溢出、3D 卡片是否侧面朝镜头、截图是否过曝、景深是否把主体也糊掉。每个切换点另看前后各 4 帧（`rn sheet out/film-preview.mp4 --around <秒,...> --span 4`）。修完再渲整片，预览给用户之前看 `rn qa` / `rn cuts` 的结果（`render.py` 自动跑）并跑 `typo_lint.py`（detail-pass.md）。

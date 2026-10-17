@@ -10,6 +10,10 @@
 """
 import json, pathlib, sys, urllib.request, ssl, subprocess
 
+if sys.platform == "win32":  # a pipe gets the ANSI code page, which cannot hold CJK copy or emoji
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 API = "https://googlefonts.github.io/noto-emoji-animation/data/api.json"
 LOTTIE = "https://fonts.gstatic.com/s/e/notoemoji/latest/{cp}/lottie.json"
 SVG = "https://raw.githubusercontent.com/googlefonts/noto-emoji/main/2D/svg/emoji_u{cp}.svg"
@@ -27,7 +31,7 @@ def api():
     if not CACHE.exists():
         CACHE.parent.mkdir(parents=True, exist_ok=True)
         CACHE.write_bytes(get(API))
-    return json.loads(CACHE.read_text())
+    return json.loads(CACHE.read_text(encoding="utf-8"))
 
 def split_emoji(s):
     """把字符串拆成 emoji（按 ZWJ / 变体选择符 / 肤色 / 国旗粘连）。"""
@@ -64,7 +68,7 @@ def main():
         return
     out = proj / "public/emoji"; out.mkdir(parents=True, exist_ok=True)
     mf_path = out / "manifest.json"
-    mf = json.loads(mf_path.read_text()) if mf_path.exists() else {}
+    mf = json.loads(mf_path.read_text(encoding="utf-8")) if mf_path.exists() else {}
     for e in [x for a in args for x in split_emoji(a)]:
         cp = cp_of(e)  # 静态 SVG 文件名去掉 FE0F；动态版的 codepoint 保留 FE0F（如 2764_fe0f）
         acp = next((c for c in (cp_of(e, True), cp) if c in icons), None)
@@ -77,7 +81,7 @@ def main():
                 mf[e] = {"cp": cp, "kind": "svg"}; print(f"{e} {cp} 无动态版 → 静态 SVG")
             except Exception:
                 print(f"{e} {cp} ✗ Noto 里找不到")
-    mf_path.write_text(json.dumps(mf, ensure_ascii=False, indent=1))
+    mf_path.write_text(json.dumps(mf, ensure_ascii=False, indent=1), encoding="utf-8")
 
 if __name__ == "__main__":
     main()

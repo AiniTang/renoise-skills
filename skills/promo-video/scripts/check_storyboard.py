@@ -15,6 +15,10 @@ import os
 import re
 import sys
 
+if sys.platform == "win32":  # a pipe gets the ANSI code page, which cannot hold CJK copy or emoji
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 SCENE_TYPES = {"statement", "hero3d", "features", "stats", "showcase", "outro"}
 ICONS = {
     "spark", "bolt", "shield", "chart", "globe", "chat", "clock", "heart", "cube", "check",
@@ -82,7 +86,7 @@ def main():
     ap.add_argument("--frames", action="store_true")
     ap.add_argument("--srt")
     a = ap.parse_args()
-    sb = json.load(open(a.storyboard, encoding="utf-8"))
+    sb = json.load(open(a.storyboard, encoding="utf-8-sig"))
     errors, warns = [], []
 
     for key in ("meta", "format", "style", "brand", "scenes"):

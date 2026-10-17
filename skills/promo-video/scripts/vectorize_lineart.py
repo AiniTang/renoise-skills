@@ -18,7 +18,7 @@ ap.add_argument("art", nargs="+")
 ap.add_argument("--out", required=True)
 args = ap.parse_args()
 outp = Path(args.out)
-res = json.load(open(outp)) if outp.exists() else {}
+res = json.load(open(outp, encoding="utf-8")) if outp.exists() else {}
 for path in args.art:
     src = Path(path)
     name = src.stem
@@ -41,4 +41,4 @@ for path in args.art:
     d = "".join(parts)
     res[name] = {"w": w, "h": h, "d": d, "color": color}
     print(f"{name}: {w}x{h} color {color} contours {len(parts)} path {len(d) // 1024} KB")
-json.dump(res, open(outp, "w"))
+json.dump(res, open(outp, "w", encoding="utf-8"))

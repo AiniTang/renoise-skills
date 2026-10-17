@@ -40,7 +40,7 @@ WebFetch 官网首页，提炼一句话价值主张、功能分组、受众案�
 - 字体提取出来只是起点：按 typography.md 进入「字体提案」。官网是商业字体（Söhne、Canela、GT 系列、方正 / 汉仪、苹方）时不要用系统里的副本，`python3 scripts/fonts.py similar "<字体名>"` 找开源平替；官网字体本身平庸时，用它当第 4 组对照，再按调性给 3 组更有设计感的配对。
 - 中文字体动辄 10–25 MB，每个渲染标签页都要加载，会拖慢出片。写完文案后收集 `src/` 里用到的字，用 fonttools 做子集：`python3 -m fontTools.subset Font.ttf --text-file=chars.txt --flavor=woff2 --layout-features='*' --output-file=Font.woff2`（需 `pip install --user fonttools brotli`），通常只剩 100–300 KB；改文案加了新字就重新做一次。Google Fonts 的完整文件可从 GitHub `google/fonts` 仓库下载。
 - 产品图：收集页面中 `img/source/video` 的 `src`、`srcset`，通常是官网的高清宣传图（界面截图、插画、角色头像）。它们比截屏清晰，优先使用。
-- 用 `curl -L -o` 下载；宿主的命令沙箱拦了网络时，按宿主的方式对这条命令放开（见 SKILL.md「渲染约束」）。webp 在本机用 `sips -s format png in.webp --out out.png` 转换（Remotion 自带的 ffmpeg 不含 webp 解码器；Chrome 渲染时可直接用 webp）。
+- 用 `curl -L -o` 下载；宿主的命令沙箱拦了网络时，按宿主的方式对这条命令放开（见 SKILL.md「渲染约束」）。webp 用系统 ffmpeg 转换：`ffmpeg -i in.webp out.png`（Remotion 自带的 ffmpeg 不含 webp 解码器；Chrome 渲染时可直接用 webp）。
 
 ## 4. 官网的视频与交互演示
 

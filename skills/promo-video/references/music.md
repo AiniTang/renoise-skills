@@ -68,6 +68,6 @@ mood 有 `tech`、`upbeat`、`calm`、`cinematic`、`eastern`（五声音阶拨�
 
 - 剪辑点对齐到曲子的节拍；主段落落在 Logo 或第一个大转场上。
 - 音乐淡入约 0.4 秒、淡出 1.2–1.5 秒；音效密集处 BGM 音量 0.3–0.5，其余 0.8 左右。
-- 母带由 `render.sh` 里的 `rn finish` 统一做：−14 LUFS，**编码后**测 true peak ≤ −1 dBTP（AAC 会把峰值抬高 1–2 dB，超了自动降限幅重编音频）。要更响或更轻用 `LUFS=-13 render.sh …`；成片已出、只改响度时不重渲画面：`rn finish out/film.mp4 -o out/film-loud.mp4 --copy-video --lufs -12`。
+- 母带由 `render.py` 里的 `rn finish` 统一做：−14 LUFS，**编码后**测 true peak ≤ −1 dBTP（AAC 会把峰值抬高 1–2 dB，超了自动降限幅重编音频）。要更响或更轻用 `render.py … --lufs -13`；成片已出、只改响度时不重渲画面：`rn finish out/film.mp4 -o out/film-loud.mp4 --copy-video --lufs -12`。
 - 有旁白时 BGM 压到约 0.22，旁白间隙回到 0.4。
-- **转折处不落数字静音**：重排曲子时，硬停处不要直接把采样归零（会被听成故障）。做法：末尾 1.4 秒低通扫频 + 淡出，最后半秒送进暗房混响（`fft_conv`，RT ≈ 3.4 秒）做尾音，合成的低频床从尾音里 1.8 秒渐入，第一下心跳落在画面转折帧。不要取下一小节续尾（下一小节的第一拍常是满幅重击）。成片后看 `rn qa` 的 `dead_air` 是 PASS（`render.sh` 自动跑）。
+- **转折处不落数字静音**：重排曲子时，硬停处不要直接把采样归零（会被听成故障）。做法：末尾 1.4 秒低通扫频 + 淡出，最后半秒送进暗房混响（`fft_conv`，RT ≈ 3.4 秒）做尾音，合成的低频床从尾音里 1.8 秒渐入，第一下心跳落在画面转折帧。不要取下一小节续尾（下一小节的第一拍常是满幅重击）。成片后看 `rn qa` 的 `dead_air` 是 PASS（`render.py` 自动跑）。

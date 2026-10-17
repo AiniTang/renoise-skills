@@ -29,14 +29,18 @@ To install by hand, copy `skills/promo-video/` into your agent's skills folder:
 
 ## What promo-video needs
 
-- **Node.js 18+**: Remotion draws the picture and the mix. `setup_project.sh` downloads a portable Node when none is
+It runs on macOS, Linux and Windows: the skill's scripts are Python, with no bash needed. On Windows, call `python`
+(or `py -3`) where the skill says `python3`.
+
+- **Node.js 18+**: Remotion draws the picture and the mix. `setup_project.py` downloads a portable Node when none is
   found.
 - **ffmpeg 7+** with libass:
   - macOS: `brew install ffmpeg-full && export PATH="$(brew --prefix ffmpeg-full)/bin:$PATH"`
   - Debian/Ubuntu: `apt install ffmpeg`
+  - Windows: `winget install Gyan.FFmpeg` (the full build), then open a new terminal
 - **[`rn`](https://github.com/renoise-ai/renoise-kit)**: finishes, checks and audits every render.
-  Install it with `uv tool install 'renoise-kit[all]'` or `pipx install 'renoise-kit[all]'`.
-- **Python 3 with numpy**, for the skill's own scripts.
+  Install it with `uv tool install "renoise-kit[all]"` or `pipx install "renoise-kit[all]"`.
+- **Python 3.8+ with numpy**, for the skill's own scripts.
 - **Optional, AI footage**: a [Renoise](https://renoise.ai) connection for keyframes and image-to-video. See
   [renoise-plugins-official](https://github.com/renoise-ai/renoise-plugins-official) for how each agent connects.
 
