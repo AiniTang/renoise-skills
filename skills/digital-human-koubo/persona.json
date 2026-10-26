@@ -1,0 +1,32 @@
+{
+ "note": "主播形象不随 skill 分发：每个工程在 brief.json 的 hosts 里登记自己的主播（references/new-avatar.md）。这里放的是实测过的提示词、动作、语速和切段规则。",
+ "model": {
+  "name": "grok-video-1.5",
+  "max_seconds": 15,
+  "full_shot_resolution": "720p",
+  "pip_shot_resolution": "480p",
+  "note": "价格和上限以 list_models / estimate_cost 为准；换模型先过 model-routing"
+ },
+ "speed_cps": 5.4,
+ "acts": {
+  "full": "warm eye contact, expressive face, natural hand gestures",
+  "pip": "calm explaining tone, small nods, occasionally glancing down as if reading a screen, small pointing gestures",
+  "vlog": "relaxed lifestyle vlogger sharing a favorite tool, natural small head tilts and nods, one hand comes up briefly in a casual gesture",
+  "depth": "medium shot with generous headroom and plain background visible on both sides of the head and shoulders (for text-behind-subject graphics), calm confident delivery"
+ },
+ "prompt_templates": {
+  "selfie": "The {who} in {ref} talks straight into the phone's front camera, same selfie framing, lighting and outfit as the reference, like a friendly vlogger {purpose}: {act}. Handheld selfie feel with only a very slight natural sway. Speaks {language}, clearly lip-synced, in a {voice}:\n“{line}”\nSound: only the voice and quiet room tone, no music, no subtitles, no on-screen text.",
+  "studio": "The {who} in {ref} talks straight to the camera, same framing, backdrop, outfit and soft lighting as the reference, like a friendly presenter {purpose}: {act}. Locked-off camera, no zoom. Speaks {language}, clearly lip-synced, in a {voice}:\n“{line}”\nSound: only the voice and quiet room tone, no music, no subtitles, no captions, no on-screen text of any kind."
+ },
+ "animal_note": "动物主播在 who 里写清物种（orange cat / Shiba Inu），并在 purpose 后加：its mouth clearly opens and closes in sync with the words",
+ "disclosure": "内容由 AI 数字人演绎",
+ "languages_tested": {
+  "en": "100%",
+  "ja": "100%",
+  "ko": "94%",
+  "fr": "100%",
+  "es": "100%",
+  "ar": "99%",
+  "note": "Grok Video 1.5 回听准确率（2026-10 实测）；台词提前翻好再写进提示词"
+ }
+}

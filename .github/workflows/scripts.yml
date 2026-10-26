@@ -43,3 +43,60 @@ jobs:
       - run: python "$SKILL/scripts/check_storyboard.py" "$PROJECT/storyboard.json"
       - run: python "$SKILL/scripts/render.py" "$PROJECT" stills
       - run: python -c "import os, sys; assert os.path.getsize(sys.argv[1]) > 0" "$PROJECT/out/stills-sheet.jpg"
+
+  digital-human-koubo:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    env:
+      SKILL: skills/digital-human-koubo
+      PROJECT: ${{ github.workspace }}/../koubo
+      PYTHONUTF8: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: ffmpeg
+        run: |
+          case "$RUNNER_OS" in
+            Linux) sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg espeak-ng ;;
+            macOS) brew install ffmpeg ;;
+            Windows) choco install ffmpeg-full -y --no-progress ;;
+          esac
+      - run: pip install numpy pillow faster-whisper
+      - run: python -m compileall -q "$SKILL/scripts"
+      - name: build_tasks
+        run: |
+          mkdir -p "$PROJECT/gen" && cd "$PROJECT"
+          printf '%s' '[{"id":"s1","shot":"full","t":"Hello, today I will show you how to make a talking video from one photo.","lang":"English","lang_code":"en"},{"id":"s2","shot":"pip","t":"First, open Renoise and upload your photo.","lang":"English","lang_code":"en","host":"b"}]' > script.json
+          printf '%s' '{"hosts":{"a":{"ref":"material:1","who":"woman","framing":"selfie","ratio":"9:16"},"b":{"ref":"task:2","who":"man","framing":"studio","ratio":"16:9"}}}' > brief.json
+          python "$GITHUB_WORKSPACE/$SKILL/scripts/build_tasks.py" script.json tasks.json
+          python -c "import json; t = json.load(open('tasks.json')); assert [x['resolution'] for x in t] == ['720p', '480p'] and t[1]['references'][0]['ref'] == 'task:2'"
+      - name: assemble and align (listen back with faster-whisper)
+        if: runner.os == 'Linux'
+        env:
+          WHISPER_MODEL: tiny
+        run: |
+          cd "$PROJECT"
+          for i in 1 2; do
+            python -c "import json, sys; print(json.load(open('script.json'))[int(sys.argv[1])]['t'])" $((i - 1)) > line.txt
+            espeak-ng -f line.txt -w s$i.wav
+            ffmpeg -loglevel error -y -f lavfi -i color=c=gray:s=720x1280:r=30 -i s$i.wav -af apad=pad_dur=1 -shortest -c:v libx264 -c:a aac gen/s$i.mp4
+          done
+          printf '%s' '{"s1":"gen/s1.mp4","s2":"gen/s2.mp4"}' > clips.json
+          python "$GITHUB_WORKSPACE/$SKILL/scripts/assemble.py" script.json clips.json --out out.mp4 --lang en
+          python "$GITHUB_WORKSPACE/$SKILL/scripts/align.py" script.json --out edit/src/tl.json
+          python -c "import json; d = json.load(open('edit/src/tl.json')); assert d['total'] > 3 and len(d['segs']) == 2"
+      - run: python "$SKILL/scripts/check_edit.py" "$SKILL/templates/huazi-916/src"
+      - run: python "$SKILL/scripts/new_edit.py" huazi-916 "$PROJECT/edit-b"
+      - run: python "$SKILL/scripts/check_edit.py" "$PROJECT/edit-b/src"
+      - run: test -f "$PROJECT/edit-b/public/sfx/pop.wav" && test -f "$PROJECT/edit-b/public/emoji/manifest.json"

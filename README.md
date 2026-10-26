@@ -9,6 +9,7 @@ templates. The same skill works in Claude Code, Codex, Cursor, Gemini CLI and an
 | Skill | What it makes |
 |---|---|
 | [`promo-video`](skills/promo-video/SKILL.md) | Product, brand and launch films rendered with Remotion: the template mode is driven by a storyboard, the cinematic mode adds 3D, real product UI demos, motion design and beat-matched music. It also makes showreels and one-shape UI loops. A detail pass and delivery checks run before anything goes to the client. |
+| [`digital-human-koubo`](skills/digital-human-koubo/SKILL.md) | Talking-head videos with a digital presenter: the user's own photo or an AI-generated host speaks a script cut into 15-second takes generated on Renoise (quoted and confirmed first), checked by ear with faster-whisper, aligned word by word and edited with Remotion in one of four styles (vertical caption-heavy, launch explainer, step-by-step tutorial, multi-host multilingual) with 47 packaging components. Adapted from [andyhuo520/digital-human-koubo](https://github.com/andyhuo520/digital-human-koubo) (MIT). |
 
 ## Install
 
@@ -46,6 +47,17 @@ It runs on macOS, Linux and Windows: the skill's scripts are Python, with no bas
 
 Music is not shipped. The skill's catalogue lists Mixkit tracks with their URL and checksum, and `pick_music.py`
 downloads a track on first use. Fonts are fetched the same way. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+## What digital-human-koubo needs
+
+A shell: the Renoise sandbox (everything below is preinstalled there) or macOS, Linux or Windows. Its scripts are
+Python; `scripts/doctor.py` checks what is missing.
+
+- **A Renoise connection** (MCP) to generate the presenter takes.
+- **Node.js 18+** for Remotion, and **ffmpeg**.
+- **Python 3.8+** with `numpy`, `pillow`, `faster-whisper`, and `rembg` (only for text-behind-the-presenter shots).
+
+No presenter images or voices ship with the skill: each project registers its own host in `brief.json`.
 
 ## Layout
 
