@@ -14,6 +14,8 @@
 import subprocess, sys
 from pathlib import Path
 import numpy as np
+if sys.platform == "win32":  # a pipe gets the ANSI code page, which cannot hold CJK text
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 SR = 48000
 CENTERS = [100, 125, 160, 200, 250, 315, 400, 500, 630, 800, 1000, 1250, 1600, 2000, 2500, 3150, 4000, 5000, 6300, 8000, 10000, 12500]
 CHAIN = ("highpass=f=80,lowpass=f=15000,deesser=i=0.6:m=0.6:f=0.55,equalizer=f=6600:t=q:w=1.3:g=-3,equalizer=f=3600:t=q:w=1.1:g=-1.2,"

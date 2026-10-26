@@ -1,5 +1,7 @@
 """多连接分片下载：每个文件切 N 段并行，单段失败自动续传重试；全部完成后解码校验"""
 import subprocess, sys, os, concurrent.futures as cf
+if sys.platform == "win32":  # a pipe gets the ANSI code page, which cannot hold CJK text
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 N = 6
 def size(url):
     out = subprocess.run(['curl', '-sSI', '--http1.1', '--max-time', '30', url], capture_output=True, text=True).stdout

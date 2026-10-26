@@ -12,6 +12,8 @@ Requires: numpy, ffmpeg (for the mp3).
 import subprocess, sys, tempfile, wave
 from pathlib import Path
 import numpy as np
+if sys.platform == "win32":  # a pipe gets the ANSI code page, which cannot hold CJK text
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 SR = 48000
 rng = np.random.default_rng(42)
