@@ -3,6 +3,8 @@
 用法：python3 check_edit.py <工程>/src   （目录里要有 tl.json 和 edit.json）"""
 import json, re, sys
 from pathlib import Path
+if sys.platform == "win32":  # a pipe gets the ANSI code page, which cannot hold CJK text
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 d = Path(sys.argv[1] if len(sys.argv) > 1 else 'src')
 tl = json.load(open(d / 'tl.json', encoding='utf-8')); ed = json.load(open(d / 'edit.json', encoding='utf-8')); S = tl['segs']
 bad = []

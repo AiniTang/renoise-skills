@@ -80,7 +80,7 @@ jobs:
           printf '%s' '[{"id":"s1","shot":"full","t":"Hello, today I will show you how to make a talking video from one photo.","lang":"English","lang_code":"en"},{"id":"s2","shot":"pip","t":"First, open Renoise and upload your photo.","lang":"English","lang_code":"en","host":"b"}]' > script.json
           printf '%s' '{"hosts":{"a":{"ref":"material:1","who":"woman","framing":"selfie","ratio":"9:16"},"b":{"ref":"task:2","who":"man","framing":"studio","ratio":"16:9"}}}' > brief.json
           python "$GITHUB_WORKSPACE/$SKILL/scripts/build_tasks.py" script.json tasks.json
-          python -c "import json; t = json.load(open('tasks.json')); assert [x['resolution'] for x in t] == ['720p', '480p'] and t[1]['references'][0]['ref'] == 'task:2'"
+          python -c "import json; t = json.load(open('tasks.json', encoding='utf-8')); assert [x['resolution'] for x in t] == ['720p', '480p'] and t[1]['references'][0]['ref'] == 'task:2'"
       - name: assemble and align (listen back with faster-whisper)
         if: runner.os == 'Linux'
         env:
@@ -88,14 +88,14 @@ jobs:
         run: |
           cd "$PROJECT"
           for i in 1 2; do
-            python -c "import json, sys; print(json.load(open('script.json'))[int(sys.argv[1])]['t'])" $((i - 1)) > line.txt
+            python -c "import json, sys; print(json.load(open('script.json', encoding='utf-8'))[int(sys.argv[1])]['t'])" $((i - 1)) > line.txt
             espeak-ng -f line.txt -w s$i.wav
             ffmpeg -loglevel error -y -f lavfi -i color=c=gray:s=720x1280:r=30 -i s$i.wav -af apad=pad_dur=1 -shortest -c:v libx264 -c:a aac gen/s$i.mp4
           done
           printf '%s' '{"s1":"gen/s1.mp4","s2":"gen/s2.mp4"}' > clips.json
           python "$GITHUB_WORKSPACE/$SKILL/scripts/assemble.py" script.json clips.json --out out.mp4 --lang en
           python "$GITHUB_WORKSPACE/$SKILL/scripts/align.py" script.json --out edit/src/tl.json
-          python -c "import json; d = json.load(open('edit/src/tl.json')); assert d['total'] > 3 and len(d['segs']) == 2"
+          python -c "import json; d = json.load(open('edit/src/tl.json', encoding='utf-8')); assert d['total'] > 3 and len(d['segs']) == 2"
       - run: python "$SKILL/scripts/check_edit.py" "$SKILL/templates/huazi-916/src"
       - run: python "$SKILL/scripts/new_edit.py" huazi-916 "$PROJECT/edit-b"
       - run: python "$SKILL/scripts/check_edit.py" "$PROJECT/edit-b/src"
