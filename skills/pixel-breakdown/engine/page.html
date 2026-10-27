@@ -1,0 +1,18 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Pixel Breakdown</title>
+<style>
+html,body{margin:0;background:#000;overflow:hidden}
+#c,#ui,#top{position:absolute;left:0;top:0;width:1920px;height:1080px}
+#ui{z-index:2;overflow:hidden;display:none;font-family:-apple-system,"Helvetica Neue","Noto Sans","Noto Sans CJK SC","Noto Sans CJK JP",sans-serif;color:#29261b;-webkit-font-smoothing:antialiased}
+#top{z-index:3}
+#cover{position:absolute;left:0;top:0;z-index:4;display:none}
+</style></head>
+<body>
+<canvas id="c" width="1920" height="1080"></canvas><div id="ui"></div><canvas id="top" width="1920" height="1080"></canvas><canvas id="cover" width="1080" height="1440"></canvas>
+<script src="font.js"></script>
+<script src="timeline.js"></script>
+<script src="episode.js"></script>
+<script src="engine.js"></script>
+<script src="ui.js"></script>
+<script src="cover.js"></script>
+</body></html>

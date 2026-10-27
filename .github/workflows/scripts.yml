@@ -100,3 +100,63 @@ jobs:
       - run: python "$SKILL/scripts/new_edit.py" huazi-916 "$PROJECT/edit-b"
       - run: python "$SKILL/scripts/check_edit.py" "$PROJECT/edit-b/src"
       - run: test -f "$PROJECT/edit-b/public/sfx/pop.wav" && test -f "$PROJECT/edit-b/public/emoji/manifest.json"
+
+  pixel-breakdown:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    env:
+      SKILL: skills/pixel-breakdown
+      PROJECT: ${{ github.workspace }}/../pixel
+      PYTHONUTF8: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: ffmpeg
+        run: |
+          case "$RUNNER_OS" in
+            Linux) sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg espeak-ng ;;
+            macOS) brew install ffmpeg ;;
+            Windows) choco install ffmpeg-full -y --no-progress ;;
+          esac
+      - run: pip install numpy scipy pillow playwright
+      - run: python -m playwright install chromium $([ "$RUNNER_OS" = Linux ] && echo --with-deps)
+      - run: python -m compileall -q "$SKILL/scripts" "$SKILL/engine"
+      - run: python "$SKILL/scripts/doctor.py" --no-asr
+      - name: demo project (setup, font download, synthetic clips, voice and alignment)
+        run: python "$SKILL/scripts/demo.py" "$PROJECT"
+      - name: timeline, stills, sound, cover
+        run: |
+          cd "$PROJECT"
+          python layout.py audio/vo_demo.wav audio/vo_demo_align.json
+          python font.py fonts/fusion-pixel-12px-proportional-latin.bdf
+          python render.py stills 0.5,3,6,9,12,14
+          python render.py cues
+          python mix.py
+          python render.py cover cover.png
+          test -s qa/st/sheet.jpg && test -s cover.png && test -s cover_grid.png && test -s audio/mix.wav
+      - name: frames, final encode, QA
+        run: |
+          cd "$PROJECT"
+          python render.py frames --workers 2
+          python "$GITHUB_WORKSPACE/$SKILL/scripts/media.py" final frames audio/mix.wav out/demo.mp4
+          python "$GITHUB_WORKSPACE/$SKILL/scripts/media.py" qa out/demo.mp4 --expect 18.5
+          python "$GITHUB_WORKSPACE/$SKILL/scripts/media.py" cuts media/source.mp4
+          python -c "import json; d = json.load(open('qa/cuts_source/cuts.json', encoding='utf-8')); assert any(abs(c - 4) < 0.1 for c in d['cuts']), d['cuts']"
+      - name: align a spoken take (faster-whisper)
+        if: runner.os == 'Linux'
+        run: |
+          pip install faster-whisper
+          cd "$PROJECT"
+          python -c "import json; ep = json.loads(open('episode.js', encoding='utf-8').read().split('=', 1)[1].strip().rstrip(';')); open('lines.txt', 'w', encoding='utf-8').write('\n\n'.join(ep['script']))"
+          espeak-ng -s 155 -f lines.txt -w audio/tts.wav
+          python "$GITHUB_WORKSPACE/$SKILL/scripts/media.py" wav audio/tts.wav audio/vo_tts.wav
+          python align.py audio/vo_tts.wav --model tiny
+          python layout.py audio/vo_tts.wav audio/vo_tts_align.json
