@@ -63,6 +63,8 @@ def main():
         (project / d).mkdir(parents=True, exist_ok=True)
 
     for src in sorted((SKILL / "engine").iterdir()):
+        if not src.is_file() or src.name.startswith("."):  # __pycache__/, .DS_Store
+            continue
         dst = project / src.name
         if not dst.exists() or a.update:
             shutil.copyfile(src, dst)
