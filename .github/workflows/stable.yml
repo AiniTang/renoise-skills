@@ -1,0 +1,32 @@
+name: Stable
+on:
+  workflow_run:
+    workflows: [Scripts]
+    types: [completed]
+    branches: [main]
+
+# renoise-plugins-official points its skills at the stable branch, so moving it here is what ships a change.
+# Only a main commit whose Scripts run passed gets there, and stable only moves forward.
+permissions:
+  contents: write
+
+concurrency: stable
+
+jobs:
+  advance:
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push'
+    runs-on: ubuntu-latest
+    env:
+      SHA: ${{ github.event.workflow_run.head_sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Fast-forward stable
+        run: |
+          set -euo pipefail
+          if git rev-parse -q --verify origin/stable >/dev/null && git merge-base --is-ancestor "$SHA" origin/stable; then
+            echo "stable already contains $SHA"
+            exit 0
+          fi
+          git push origin "$SHA:refs/heads/stable"
