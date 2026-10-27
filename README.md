@@ -10,6 +10,7 @@ templates. The same skill works in Claude Code, Codex, Cursor, Gemini CLI and an
 |---|---|
 | [`promo-video`](skills/promo-video/SKILL.md) | Product, brand and launch films rendered with Remotion: the template mode is driven by a storyboard, the cinematic mode adds 3D, real product UI demos, motion design and beat-matched music. It also makes showreels and one-shape UI loops. A detail pass and delivery checks run before anything goes to the client. |
 | [`digital-human-koubo`](skills/digital-human-koubo/SKILL.md) | Talking-head videos with a digital presenter: the user's own photo or an AI-generated host speaks a script cut into 15-second takes generated on Renoise (quoted and confirmed first), checked by ear with faster-whisper, aligned word by word and edited with Remotion in one of four styles (vertical caption-heavy, launch explainer, step-by-step tutorial, multi-host multilingual) with 47 packaging components. Adapted from [andyhuo520/digital-human-koubo](https://github.com/andyhuo520/digital-human-koubo) (MIT). |
+| [`pixel-breakdown`](skills/pixel-breakdown/SKILL.md) | Pixel-art breakdown episodes (16:9, 60–90 s) of a viral clip and its AI remake: the two side by side in sync, a pixel diagram of measured cuts and transitions, a simulated agent chat with a quote card and live progress, the result and an outro. Voice takes and music are generated on Renoise (quoted and confirmed first), aligned word by word with faster-whisper; every frame is drawn by a deterministic canvas engine in headless Chromium, with chiptune sound design and a 3:4 cover. |
 
 ## Install
 
@@ -58,6 +59,19 @@ Python; `scripts/doctor.py` checks what is missing.
 - **Python 3.8+** with `numpy`, `pillow`, `faster-whisper`, and `rembg` (only for text-behind-the-presenter shots).
 
 No presenter images or voices ship with the skill: each project registers its own host in `brief.json`.
+
+## What pixel-breakdown needs
+
+A shell: the Renoise sandbox (everything below is preinstalled there) or macOS, Linux or Windows. Its scripts are Python;
+`scripts/doctor.py` checks what is missing and `scripts/demo.py` renders a credit-free demo episode.
+
+- **A Renoise connection** (MCP) for the voice takes, the music bed and an optional host portrait.
+- **ffmpeg** for probing, re-encoding and the final encode.
+- **Python 3.8+** with `numpy`, `scipy`, `pillow`, `playwright` (plus its Chromium: `python -m playwright install chromium`)
+  and `faster-whisper`.
+
+No footage, host, voice or brand ships with the skill: each episode uses the user's own. The pixel font (Fusion Pixel, SIL OFL
+1.1) is downloaded on first use and checked against its sha256.
 
 ## Layout
 

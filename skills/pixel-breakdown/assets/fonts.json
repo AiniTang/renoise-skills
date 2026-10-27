@@ -1,0 +1,18 @@
+{
+  "name": "Fusion Pixel Font 12px proportional (BDF)",
+  "url": "https://github.com/TakWolf/fusion-pixel-font/releases/download/2026.10.16/fusion-pixel-font-12px-proportional-bdf-v2026.10.16.zip",
+  "bytes": 37222420,
+  "sha256": "5776e30a4da69a42a2658bebefd110107966dcbf2c167a0c73044b0f6dc8d785",
+  "license": "SIL Open Font License 1.1. setup_project.py copies OFL.txt and LICENSES/ from the archive next to the font.",
+  "files": {
+    "default": "fusion-pixel-12px-proportional-latin.bdf",
+    "zh-cn": "fusion-pixel-12px-proportional-zh_hans.bdf",
+    "zh-hans": "fusion-pixel-12px-proportional-zh_hans.bdf",
+    "zh-tw": "fusion-pixel-12px-proportional-zh_tw.bdf",
+    "zh-hant": "fusion-pixel-12px-proportional-zh_tw.bdf",
+    "zh-hk": "fusion-pixel-12px-proportional-zh_hk.bdf",
+    "ja": "fusion-pixel-12px-proportional-ja.bdf",
+    "ko": "fusion-pixel-12px-proportional-ko.bdf"
+  },
+  "coverage": "Every file covers Latin, Cyrillic, Greek, CJK, kana and hangul; the language files differ in CJK glyph style. Thai and other scripts it lacks are drawn by the engine from a system font at 12 px."
+}

@@ -16,6 +16,7 @@ Content in this repository that comes from others, and what is deliberately **no
 - **Music.** `assets/music/catalog.json` lists Mixkit tracks with their download URL and sha256; `scripts/pick_music.py` downloads a track from Mixkit on first use into `~/.cache/promo-video/music/` and checks it. The Mixkit Stock Music Free License allows use in videos but not standalone redistribution, so no audio file is committed here. It does not cover broadcast TV/radio or games.
 - **Fonts.** `assets/fonts/catalog.json` is a catalogue; `scripts/fonts.py fetch` downloads each font from its publisher and keeps its licence beside it in the project.
 - **Noto emoji** are fetched by `scripts/fetch_noto_emoji.py` into each project: animated ones from [Noto Emoji Animation](https://googlefonts.github.io/noto-emoji-animation/), which asks for a credit line ("Animated emoji: Google Noto") in the film's credits or notes; static fallbacks are Apache-2.0.
+- **Fusion Pixel Font** (`pixel-breakdown`). `assets/fonts.json` gives the release URL, size and sha256 of the 12 px proportional BDF archive by [TakWolf/fusion-pixel-font](https://github.com/TakWolf/fusion-pixel-font); `scripts/setup_project.py` downloads it on first use into `~/.cache/pixel-breakdown/`, checks it, and copies the BDF for the episode's language together with `OFL.txt` and the `LICENSES/` folder of the upstream pixel fonts into the project. SIL Open Font License 1.1.
 
 ## lucide-animated
 
