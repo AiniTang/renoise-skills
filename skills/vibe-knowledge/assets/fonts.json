@@ -1,0 +1,16 @@
+{
+ "_how": "scripts/fonts.py 按这份清单下载字体到 ~/.cache/vibe-knowledge/fonts/，核对 sha256 后拷进工作区的 cine/fonts/，协议原文一并拷过去。全部是 SIL Open Font License 1.1。",
+ "fonts": [
+  {"file": "Geist-VF.ttf", "family": "Geist", "url": "https://raw.githubusercontent.com/vercel/geist-font/b5d164a0c066c2c9bfcd5ab65dd8244551f0ac06/packages/next/dist/fonts/geist-sans/Geist-Variable.ttf", "bytes": 169056, "sha256": "73894e0448cae90a92b6c2f8732b7bb9acb7b94c418bff559dad4a18e1de9659", "license": "OFL-geist.txt"},
+  {"file": "GeistMono-VF.ttf", "family": "GeistMono", "url": "https://raw.githubusercontent.com/vercel/geist-font/b5d164a0c066c2c9bfcd5ab65dd8244551f0ac06/packages/next/dist/fonts/geist-mono/GeistMono-Variable.ttf", "bytes": 171968, "sha256": "87c2aff9723544a9adaea19d92e42a33705c9723624801b6e0224c2206a6af0d", "license": "OFL-geist.txt"},
+  {"file": "NotoSansSC-VF.ttf", "family": "NotoSC", "url": "https://raw.githubusercontent.com/google/fonts/ddf386ba1b9fbc6b2c818f1ddcd9148f54ced94b/ofl/notosanssc/NotoSansSC%5Bwght%5D.ttf", "bytes": 17772300, "sha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da", "license": "OFL-notosanssc.txt"},
+  {"file": "NotoSerifSC-VF.ttf", "family": "NotoSerifSC", "url": "https://raw.githubusercontent.com/google/fonts/ddf386ba1b9fbc6b2c818f1ddcd9148f54ced94b/ofl/notoserifsc/NotoSerifSC%5Bwght%5D.ttf", "bytes": 25125512, "sha256": "050080d9255a86808f2945bffac582b31ef32bc36411ce29563b4961670c66f9", "license": "OFL-notoserifsc.txt", "optional": true},
+  {"file": "LXGWWenKai-Regular.ttf", "family": "LXGWWenKai", "url": "https://github.com/lxgw/LxgwWenKai/releases/download/v1.520/LXGWWenKai-Regular.ttf", "bytes": 24744500, "sha256": "8d6ba638ac9553413354cfaab97637c1cd778444e259441ea1e5f8fb2c697fba", "license": "OFL-lxgw.txt", "optional": true}
+ ],
+ "licenses": [
+  {"file": "OFL-geist.txt", "url": "https://raw.githubusercontent.com/vercel/geist-font/b5d164a0c066c2c9bfcd5ab65dd8244551f0ac06/OFL.txt", "sha256": "c683bfbcc7e087f5d37a54ef628f10387c451a83ddc459b151403a164ac46c90"},
+  {"file": "OFL-notosanssc.txt", "url": "https://raw.githubusercontent.com/google/fonts/ddf386ba1b9fbc6b2c818f1ddcd9148f54ced94b/ofl/notosanssc/OFL.txt", "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9"},
+  {"file": "OFL-notoserifsc.txt", "url": "https://raw.githubusercontent.com/google/fonts/ddf386ba1b9fbc6b2c818f1ddcd9148f54ced94b/ofl/notoserifsc/OFL.txt", "sha256": "5e0da210fb04058a8c0087985d2d456b931c2579811a49655721d3cf0c36b6d6"},
+  {"file": "OFL-lxgw.txt", "url": "https://raw.githubusercontent.com/lxgw/LxgwWenKai/v1.520/OFL.txt", "sha256": "5c0f0d98a8b71a401063c9a9e814e608fef6824fefab0c2ab73fe0955a5551b1"}
+ ]
+}

@@ -1,0 +1,9 @@
+{
+ "_template": "演示期（scripts/demo.py 用）：两拍、约 10 秒，不花积分，用来检查引擎、渲染和质检是否装好。",
+ "voice": {"engine": "renoise", "ref": "", "speaker": "", "style": "", "lang": "zh"},
+ "lexicon": {},
+ "beats": [
+  {"id": "B01", "narration": "一根木头，[[ten]]赏十金，没人动。"},
+  {"id": "B02", "narration": "加到[[fifty]]五十金，终于有人扛了。"}
+ ]
+}

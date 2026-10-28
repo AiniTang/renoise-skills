@@ -160,3 +160,58 @@ jobs:
           python "$GITHUB_WORKSPACE/$SKILL/scripts/media.py" wav audio/tts.wav audio/vo_tts.wav
           python align.py audio/vo_tts.wav --model tiny
           python layout.py audio/vo_tts.wav audio/vo_tts_align.json
+
+  vibe-knowledge:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    env:
+      SKILL: skills/vibe-knowledge
+      VK_WS: ${{ github.workspace }}/../vk
+      PYTHONUTF8: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: ffmpeg
+        run: |
+          case "$RUNNER_OS" in
+            Linux) sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg espeak-ng ;;
+            macOS) brew install ffmpeg ;;
+            Windows) choco install ffmpeg-full -y --no-progress ;;
+          esac
+      - run: pip install numpy scipy pillow playwright rapidocr_onnxruntime
+      - run: python -m playwright install chromium $([ "$RUNNER_OS" = Linux ] && echo --with-deps)
+      - run: python -m compileall -q "$SKILL/scripts" "$SKILL/engine/tools" "$SKILL/engine/audio/tools"
+      - run: python "$SKILL/scripts/doctor.py" --no-asr
+      - name: demo episode (workspace, fonts, placeholder voice)
+        run: python "$SKILL/scripts/demo.py" --no-optional-fonts
+      - name: stills, full render, QA
+        run: |
+          python "$SKILL/scripts/render.py" stills demo "$VK_WS/sheet.png" 1 B01.ten+0.4 B02.fifty+0.6
+          python "$SKILL/scripts/render.py" film demo --title demo
+          python "$SKILL/scripts/qa.py" "$VK_WS/lessons/demo/build/lessondemo.mp4" | tee qa.txt
+          test -s "$VK_WS/sheet.png" && test -s "$VK_WS/out/demo_demo.mp4" && test -s "$VK_WS/out/demo_demo.jpg"
+          grep -q "有默认 BGM" qa.txt
+          python -c "import json, sys; d = json.load(open(sys.argv[1], encoding='utf-8')); assert d['has_bgm'] and d['auto']" "$VK_WS/lessons/demo/build/bgm.json"
+      - run: python "$SKILL/scripts/new_film.py" 01 --template B --title test --no-optional-fonts
+      - run: python "$SKILL/scripts/duration.py" --scores 1,1,2,1,1 --template B
+      - run: python "$SKILL/scripts/recommend.py" "商鞅立木为什么能让人相信新法"
+      - name: voice take aligned with faster-whisper
+        if: runner.os == 'Linux'
+        env:
+          WHISPER_MODEL: tiny
+        run: |
+          pip install faster-whisper
+          printf '%s' '一根木头，赏十金，没人动。加到五十金，终于有人扛了。' > line.txt
+          espeak-ng -v cmn -s 150 -f line.txt -w take.wav
+          python "$SKILL/scripts/demo.py" --no-optional-fonts --take take.wav
+          python "$SKILL/scripts/check_timings.py" demo
+          python -c "import json, sys; t = json.load(open(sys.argv[1], encoding='utf-8')); b = t['beats']; assert t['total'] > 3 and b['B01']['start'] < b['B01']['cues']['ten'] < b['B02']['start'] < b['B02']['cues']['fifty']" "$VK_WS/lessons/demo/build/timings.json"
+          python "$SKILL/scripts/render.py" stills demo "$VK_WS/sheet2.png" B02.fifty
