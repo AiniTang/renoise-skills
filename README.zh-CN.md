@@ -9,6 +9,7 @@
 | [`promo-video`](skills/promo-video/SKILL.md) | 用 Remotion 渲染产品片、品牌片和发布片。模板片由分镜驱动；电影级片子加上 3D、真实产品界面演示、动效设计和卡拍配乐。也能做作品合集和单形状 UI 动效循环片。交给客户前，会先过一遍细节审片和交付检查。 |
 | [`digital-human-koubo`](skills/digital-human-koubo/SKILL.md) | 数字人口播：用户本人照片或 AI 生成的主播，稿子按 15 秒切段在 Renoise 生成（先报价、确认后才生成），faster-whisper 逐段回听、逐字对齐，再用 Remotion 按四种风格（竖屏花字口播 / 发布解读 / 保姆级教程 / 多主播多语言）和 47 个包装组件出片。改编自 [andyhuo520/digital-human-koubo](https://github.com/andyhuo520/digital-human-koubo)（MIT）。 |
 | [`pixel-breakdown`](skills/pixel-breakdown/SKILL.md) | 像素风拆解视频（16:9，60–90 秒），讲一条爆款原片和它的 AI 复刻：两片同步对比、实测硬切和转场的像素图解、带报价卡和实时进度的模拟 agent 对话、成片和结尾。配音和配乐在 Renoise 生成（先报价、确认后才生成），faster-whisper 逐字对齐；每一帧由确定性的画布引擎在无头 Chromium 里绘制，配芯片音效，另出 3:4 封面。 |
+| [`vibe-knowledge`](skills/vibe-knowledge/SKILL.md) | 精品知识短片（45 秒～5 分钟，16:9），屏幕上每句话都有出处：从爆款知识视频反推的 6 种脚本母版、事实清单、Renoise 配音（先报价、确认后才生成）+ faster-whisper 逐字对齐，再用代码成片引擎在无头 Chromium 里逐帧画出 44 套风格（8 个家族：手写 SVG 分层插画、粒子、数据组件、默认 BGM、代码音效）。增强档只在代码做不好的镜头用 Renoise 配图、动态镜头和音效。OCR 回读屏幕文字对照事实清单质检。 |
 
 ## 安装
 
@@ -59,6 +60,18 @@ skill 不带任何主播形象和声音：每个工程在 `brief.json` 里登记
 - **Python 3.8+**，装 `numpy`、`scipy`、`pillow`、`playwright`（以及它的 Chromium：`python -m playwright install chromium`）和 `faster-whisper`。
 
 skill 不带任何素材、主持人、声音和品牌：每一期都用用户自己的。像素字体（Fusion Pixel，SIL OFL 1.1）第一次用到时下载，并核对 sha256。
+
+## vibe-knowledge 的运行依赖
+
+一个能跑命令的 shell：Renoise sandbox，或 macOS、Linux、Windows。脚本都是 Python；`scripts/doctor.py` 检查缺什么，`scripts/demo.py`
+做一条不花积分的 10 秒演示期。
+
+- **Renoise 连接**（MCP）：配音；增强档的配图、动态镜头和音效。
+- **ffmpeg**：探测、混音、成片编码。
+- **Python 3.8+**，装 `numpy`、`scipy`、`pillow`、`playwright`（再装它的 Chromium：`python -m playwright install chromium`）和
+  `faster-whisper`。可选：`rapidocr_onnxruntime`（回读屏幕文字核对事实）、`rembg`（生图拆层）。
+
+引擎字体（SIL OFL 1.1）第一次用时下载并核对 sha256；earshot 代码音效库（MIT）按需装进独立环境。默认 BGM 随 skill 提供。不带任何音色、主播或素材。
 
 ## 目录结构
 

@@ -1,0 +1,75 @@
+#!/usr/bin/env python3
+"""首次使用介绍：生成本地「风格图鉴」网页并标记已介绍。
+用法：python3 welcome.py            # 没介绍过才生成（~/.cache/vibe-knowledge/welcomed 不存在时）
+      python3 welcome.py --force    # 不管有没有介绍过，都重新生成（风格库更新后用）
+      python3 welcome.py --open     # 生成后用默认浏览器打开（本机用；sandbox 里不用）
+输出：<工作区>/gallery/index.html（风格图拷到同目录，相对路径引用，整个文件夹可以直接发给别人）。"""
+import html, json, re, shutil, sys, webbrowser
+from pathlib import Path
+
+from vk import CACHE, SKILL as SK, workspace
+
+CAT = json.loads((SK / "styles/catalog.json").read_text(encoding="utf-8"))
+MARK = CACHE / "welcomed"
+OUT = workspace() / "gallery"
+
+
+def field(md, name):
+    m = re.search(rf"\|\s*{name}\s*\|\s*(.+?)\s*\|", md)
+    return m.group(1) if m else ""
+
+
+def main():
+    if MARK.exists() and "--force" not in sys.argv:
+        print(f"已介绍过（{MARK}）；要重新生成用 --force"); return
+    (OUT / "img").mkdir(parents=True, exist_ok=True)
+    cards, fams = {}, CAT.get("families") or sorted({x.get("fam", x["cat"]) for x in CAT["styles"]})
+    for s in CAT["styles"]:
+        md = (SK / "styles" / s["key"] / "STYLE.md").read_text(encoding="utf-8")
+        shutil.copy(SK / "styles" / s["key"] / "still.jpg", OUT / "img" / f"{s['key']}.jpg")
+        tpl = "、".join(f"{t} {CAT['templates'][t].split('（')[0]}" for t in s["templates"])
+        tier = '<span class="tier">增强档 · 需生图</span>' if s.get("tier") == "增强" else ""
+        cards.setdefault(s.get("fam", s["cat"]), []).append(f"""<article class="card"><img src="img/{s['key']}.jpg" alt="{html.escape(s['name'])} 风格图" loading="lazy">
+<div class="meta"><div class="no">{s['no']:02d} · {html.escape(s.get('fam', s['cat']))} {tier}</div><h3>{html.escape(s['name'])} <span>{html.escape(s['en'])}</span></h3>
+<p class="one">{html.escape(s['one'])}</p><dl><dt>适合</dt><dd>{html.escape(s['fit'])}</dd><dt>搭配母版</dt><dd>{html.escape(tpl)}</dd>
+<dt>标志镜头</dt><dd>{html.escape(field(md, '标志镜头'))}</dd><dt>样片源码</dt><dd>{html.escape(s.get('sample', ''))}</dd></dl></div></article>""")
+    tpls = "".join(f"<li><b>{k}</b> {html.escape(v)}</li>" for k, v in CAT["templates"].items())
+    page = f"""<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>风格图鉴 · 知识短片</title><style>
+:root{{--bg:#0d0c0b;--card:#17151a;--ink:#f2efe8;--dim:#a39d94;--line:rgba(255,255,255,.1);--acc:#e2b45a}}
+@media (prefers-color-scheme: light){{:root:not([data-theme="dark"]){{--bg:#f6f3ee;--card:#fff;--ink:#1d1b18;--dim:#6f6a62;--line:rgba(0,0,0,.1);--acc:#b0802a}}}}
+*{{box-sizing:border-box}}body{{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 -apple-system,"PingFang SC","Noto Sans SC",sans-serif}}
+main{{max-width:1180px;margin:0 auto;padding:48px 16px 80px}}h1{{font-size:clamp(32px,6vw,56px);margin:0 0 8px;letter-spacing:2px}}
+.lead{{color:var(--dim);max-width:760px}}h2{{margin:56px 0 16px;font-size:26px}}
+.vids{{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr));gap:16px}}video{{width:100%;border-radius:12px;background:#000}}
+figcaption{{color:var(--dim);font-size:14px;margin-top:6px}}
+.grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:18px}}
+.card{{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}}.card img{{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}}
+.meta{{padding:16px 18px 20px}}.no{{color:var(--acc);font-size:13px;letter-spacing:2px}}h3{{margin:4px 0 6px;font-size:22px}}h3 span{{color:var(--dim);font-size:13px;letter-spacing:2px;font-weight:500}}
+.one{{margin:0 0 10px}}dl{{display:grid;grid-template-columns:72px 1fr;gap:4px 10px;margin:0;font-size:14px}}dt{{color:var(--dim)}}dd{{margin:0}}
+.how{{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}}.box{{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}}
+.box h4{{margin:0 0 8px;font-size:17px}}.tier{{display:inline-block;margin-left:6px;padding:0 8px;border-radius:10px;background:var(--acc);color:var(--bg);font-size:11px;letter-spacing:1px}}h2 small{{color:var(--dim);font-size:15px;font-weight:500;margin-left:8px}}code{{background:rgba(127,127,127,.15);padding:1px 6px;border-radius:5px}}ul{{padding-left:20px;margin:0}}
+</style></head><body><main>
+<h1>风格图鉴</h1><p class="lead">一期知识短片 = <b>母版</b>（怎么讲）× <b>风格</b>（长什么样）× <b>档位</b>（0 积分代码画面，或用 Renoise 增强写实镜头）。下面 {len(CAT['styles'])} 套风格分成 {len(fams)} 个家族，都用同一段开场（商鞅立木）实际渲染过；说一个选题，会按选题推荐其中 3 套。</p>
+{''.join(f'<h2>{html.escape(f)}<small>{len(cards.get(f, []))} 套</small></h2><div class="grid">' + ''.join(cards.get(f, [])) + '</div>' for f in fams if cards.get(f))}
+<h2>怎么开口</h2><div class="how">
+<div class="box"><h4>只给选题</h4><p>「做一期乌江亭长」——推荐 3 套风格（推荐第一的排第一，附理由和风格图），你挑一套。</p></div>
+<div class="box"><h4>点名风格</h4><p>「用水墨纸本做一期王安石变法」——直接按这套风格开工。</p></div>
+<div class="box"><h4>改成自己的风格</h4><p>「把古风改成我的品牌色」或「从空白做一个黑板粉笔风」——一题一问定方案，出并排风格图和 15–30 秒 demo，你点头才存成「我的风格」。</p></div>
+</div>
+<h2>两档</h2><div class="how">
+<div class="box"><h4>基础档 · 0 积分</h4><p>标「增强档」以外的风格都能做。代码画面（手写矢量插画 + 动效）、默认 BGM、earshot 代码音效；只有配音在 Renoise 生成。</p></div>
+<div class="box"><h4>增强档 · 按镜头挑</h4><p>只把写实场景和最需要被记住的 1–3 个时刻交给 Renoise（配图 / 动态镜头 / 音效）。分轻、标准、旗舰三档，每次先报价、你确认才生成。</p></div>
+</div>
+<h2>6 种母版</h2><div class="box"><ul>{tpls}</ul></div>
+<h2>每期流程</h2><div class="box"><p>① 选题 + 母版 + 风格 + 档位 → ② 事实清单（每条对原文）→ ③ 旁白稿 + 独立审稿 → ④ 分镜 / 报价 → ⑤ 开场试听定音色语速 → ⑥ 配音、画面、渲染 → ⑦ 质检（文字回读核对事实、响度）→ ⑧ 发布包（标题、话题、两张封面）。</p></div>
+</main></body></html>"""
+    (OUT / "index.html").write_text(page, encoding="utf-8")
+    MARK.parent.mkdir(parents=True, exist_ok=True); MARK.write_text("1", encoding="utf-8")
+    print(f"→ {OUT / 'index.html'}（{sum(len(v) for v in cards.values())} 套风格 / {len(cards)} 个家族）")
+    if "--open" in sys.argv:
+        webbrowser.open((OUT / "index.html").as_uri())
+
+
+if __name__ == "__main__":
+    main()
