@@ -1,0 +1,205 @@
+{
+ "fonts": [
+  {
+   "file": "Anton-Regular.ttf",
+   "bytes": 170812,
+   "sha256": "a4ba3a92350ebb031da0cb47630ac49eb265082ca1bc0450442f4a83ab947cab",
+   "url": "https://raw.githubusercontent.com/google/fonts/9862abc066c9b83bf84c3e8ed1fc2d8d48f9bbf0/ofl/anton/Anton-Regular.ttf",
+   "license": "Anton.txt"
+  },
+  {
+   "file": "BebasNeue-Regular.ttf",
+   "bytes": 61400,
+   "sha256": "08e4623805102d819f58601e46e345648846075e363b2ceb23313c2d1c83ec73",
+   "url": "https://raw.githubusercontent.com/google/fonts/9862abc066c9b83bf84c3e8ed1fc2d8d48f9bbf0/ofl/bebasneue/BebasNeue-Regular.ttf",
+   "license": "BebasNeue.txt"
+  },
+  {
+   "file": "BodoniModa-Black.ttf",
+   "bytes": 82280,
+   "sha256": "ce8eb168dc99268303509566f0628426d402c677ac06f205da851fb914395f24",
+   "url": "https://raw.githubusercontent.com/indestructible-type/Bodoni/30ce6cdc354ef179a3b72ba0f0e71826e599348c/fonts/ttf/BodoniModa-Black.ttf",
+   "license": "BodoniModa.txt"
+  },
+  {
+   "file": "BodoniModa-BoldItalic.ttf",
+   "bytes": 87568,
+   "sha256": "bad8e40ec0d0c429b3df3adcdca7b46fc196ae28e97cd9d0acef56851d69b330",
+   "url": "https://raw.githubusercontent.com/indestructible-type/Bodoni/30ce6cdc354ef179a3b72ba0f0e71826e599348c/fonts/ttf/BodoniModa-BoldItalic.ttf",
+   "license": "BodoniModa.txt"
+  },
+  {
+   "file": "CormorantGaramond-MediumItalic.ttf",
+   "bytes": 707464,
+   "sha256": "cd32b8503bbd972f67a26ca39ba52ef3926706eb6725975fa7ebf9d105f461c0",
+   "url": "https://raw.githubusercontent.com/CatharsisFonts/Cormorant/016784836d2ad47bc4c62b7f504a0a5875d85aeb/fonts/ttf/CormorantGaramond-MediumItalic.ttf",
+   "license": "CormorantGaramond.txt"
+  },
+  {
+   "file": "CormorantGaramond-SemiBold.ttf",
+   "bytes": 1051232,
+   "sha256": "de1b7923fbc20ce742f6498d085ad0b64dc3625efbd8bdb2f01dc70e1e7a6edd",
+   "url": "https://raw.githubusercontent.com/CatharsisFonts/Cormorant/016784836d2ad47bc4c62b7f504a0a5875d85aeb/fonts/ttf/CormorantGaramond-SemiBold.ttf",
+   "license": "CormorantGaramond.txt"
+  },
+  {
+   "file": "DMSerifDisplay-Italic.ttf",
+   "bytes": 71208,
+   "sha256": "df74c0ac387baeaeb0fe4f2324e1668e6a3ed8c09cd9796fe162c71753e19e45",
+   "url": "https://raw.githubusercontent.com/google/fonts/9862abc066c9b83bf84c3e8ed1fc2d8d48f9bbf0/ofl/dmserifdisplay/DMSerifDisplay-Italic.ttf",
+   "license": "DMSerifDisplay.txt"
+  },
+  {
+   "file": "DMSerifDisplay-Regular.ttf",
+   "bytes": 76580,
+   "sha256": "8cc3643535edf039aa5d95440a8542735e9197e4f4b8d9303e980fefbf5ab616",
+   "url": "https://raw.githubusercontent.com/google/fonts/9862abc066c9b83bf84c3e8ed1fc2d8d48f9bbf0/ofl/dmserifdisplay/DMSerifDisplay-Regular.ttf",
+   "license": "DMSerifDisplay.txt"
+  },
+  {
+   "file": "DouyinSansBold.ttf",
+   "bytes": 1919404,
+   "sha256": "fbecfacdfac33982774e301073a8d357a09c698cd3134bb6ddec0f5bfc268fa1",
+   "url": "https://raw.githubusercontent.com/bytedance/fonts/327565b61501d7a6d4902ed6ce417a7bd2ae54e6/DouyinSans/DouyinSansBold.ttf",
+   "license": "DouyinSans.txt"
+  },
+  {
+   "file": "GreatVibes-Regular.ttf",
+   "bytes": 457588,
+   "sha256": "8d509802186f1b51572531ecf313e8098f9a5bfdfaca93f0c9b34467f9982d15",
+   "url": "https://raw.githubusercontent.com/google/fonts/9862abc066c9b83bf84c3e8ed1fc2d8d48f9bbf0/ofl/greatvibes/GreatVibes-Regular.ttf",
+   "license": "GreatVibes.txt"
+  },
+  {
+   "file": "InstrumentSerif-Italic.ttf",
+   "bytes": 71592,
+   "sha256": "08939b8bdf534afec24ae0ef5e03f948940cd9a8fe08e7fecbad040e62327385",
+   "url": "https://raw.githubusercontent.com/google/fonts/9862abc066c9b83bf84c3e8ed1fc2d8d48f9bbf0/ofl/instrumentserif/InstrumentSerif-Italic.ttf",
+   "license": "InstrumentSerif.txt"
+  },
+  {
+   "file": "InstrumentSerif-Regular.ttf",
+   "bytes": 70012,
+   "sha256": "498efd461f6ddfcb7a111bf9a565709d2085d48201d501ead960d93e84ffbb88",
+   "url": "https://raw.githubusercontent.com/google/fonts/9862abc066c9b83bf84c3e8ed1fc2d8d48f9bbf0/ofl/instrumentserif/InstrumentSerif-Regular.ttf",
+   "license": "InstrumentSerif.txt"
+  },
+  {
+   "file": "MaShanZheng-Regular.ttf",
+   "bytes": 5857936,
+   "sha256": "6d2546bb189c732a8ca29af9e22457b152387d158aa459e4ac2ce1e51788b7fb",
+   "url": "https://raw.githubusercontent.com/google/fonts/9862abc066c9b83bf84c3e8ed1fc2d8d48f9bbf0/ofl/mashanzheng/MaShanZheng-Regular.ttf",
+   "license": "MaShanZheng.txt"
+  },
+  {
+   "file": "Montserrat-ExtraBold.ttf",
+   "bytes": 455468,
+   "sha256": "d3ac6a843d3ba6d5cafd44cf39e437055c8aed7e261010f595f57d3c7b3e2c1b",
+   "url": "https://raw.githubusercontent.com/JulietaUla/Montserrat/555facfb2a18c72c3c0380f0d9c0f060453a9058/fonts/ttf/Montserrat-ExtraBold.ttf",
+   "license": "Montserrat.txt"
+  },
+  {
+   "file": "Montserrat-SemiBold.ttf",
+   "bytes": 454716,
+   "sha256": "b4e1563393d73fdff491a869441245aef31add2ec03d9c97a6dae4de07c52fd0",
+   "url": "https://raw.githubusercontent.com/JulietaUla/Montserrat/555facfb2a18c72c3c0380f0d9c0f060453a9058/fonts/ttf/Montserrat-SemiBold.ttf",
+   "license": "Montserrat.txt"
+  },
+  {
+   "file": "MrsSaintDelafield-Regular.ttf",
+   "bytes": 49140,
+   "sha256": "67a7abc298ce9d368b2c00fcbff52ec54be948889b8a59032ae80ca3322e5b34",
+   "url": "https://raw.githubusercontent.com/google/fonts/9862abc066c9b83bf84c3e8ed1fc2d8d48f9bbf0/ofl/mrssaintdelafield/MrsSaintDelafield-Regular.ttf",
+   "license": "MrsSaintDelafield.txt"
+  },
+  {
+   "file": "Oswald-Bold.ttf",
+   "bytes": 108496,
+   "sha256": "eb7d46f856dd57f18a8c03d033c57802692bf127f01dbd95ba8984338e6b5135",
+   "url": "https://raw.githubusercontent.com/googlefonts/OswaldFont/89795261ac9eeb9aa8cd99f43982c4e4b0e53261/fonts/ttf/Oswald-Bold.ttf",
+   "license": "Oswald.txt"
+  },
+  {
+   "file": "Oswald-SemiBold.ttf",
+   "bytes": 109120,
+   "sha256": "8c5e61737c100d0a1ca87a9a1608afc53246b8a77f8d73c56b03406adc2d9282",
+   "url": "https://raw.githubusercontent.com/googlefonts/OswaldFont/89795261ac9eeb9aa8cd99f43982c4e4b0e53261/fonts/ttf/Oswald-SemiBold.ttf",
+   "license": "Oswald.txt"
+  },
+  {
+   "file": "SmileySans-Oblique.ttf",
+   "bytes": 2629764,
+   "sha256": "b447d7e781f08bc95c4c9f23ba71ed2b8ebb639aa7184485c71c4ca5afcd25c4",
+   "url": "https://github.com/atelier-anchor/smiley-sans/releases/download/v2.0.1/smiley-sans-v2.0.1.zip",
+   "member": "SmileySans-Oblique.ttf",
+   "archive_sha256": "299c0be6c960ae37361762eca76f7d0cd516615435bb96c0d4b98a1e70178a07",
+   "license": "SmileySans.txt"
+  },
+  {
+   "file": "SourceHanSansCN-Bold.otf",
+   "bytes": 8569308,
+   "sha256": "62383707c086a32f3afd5e293f34c7eff64c7fea31f579fdc6cbe34d920519a6",
+   "url": "https://github.com/adobe-fonts/source-han-sans/releases/download/2.005R/19_SourceHanSansCN.zip",
+   "member": "SubsetOTF/CN/SourceHanSansCN-Bold.otf",
+   "archive_sha256": "3a769d1b082ebd813cdb4c06ea57d29b340bce548edcc8e61976b78ca28e6236",
+   "license": "SourceHanSans.txt"
+  },
+  {
+   "file": "SourceHanSansCN-Heavy.otf",
+   "bytes": 8808068,
+   "sha256": "88c749b0a54a0800124ded6544e399302ed224aa49992ea364b88769f825c54c",
+   "url": "https://github.com/adobe-fonts/source-han-sans/releases/download/2.005R/19_SourceHanSansCN.zip",
+   "member": "SubsetOTF/CN/SourceHanSansCN-Heavy.otf",
+   "archive_sha256": "3a769d1b082ebd813cdb4c06ea57d29b340bce548edcc8e61976b78ca28e6236",
+   "license": "SourceHanSans.txt"
+  },
+  {
+   "file": "SourceHanSansCN-Medium.otf",
+   "bytes": 8406556,
+   "sha256": "a94e558a2fe972bee4f46bce0843abff37063fd68c33f1e7d9058f6f09432b01",
+   "url": "https://github.com/adobe-fonts/source-han-sans/releases/download/2.005R/19_SourceHanSansCN.zip",
+   "member": "SubsetOTF/CN/SourceHanSansCN-Medium.otf",
+   "archive_sha256": "3a769d1b082ebd813cdb4c06ea57d29b340bce548edcc8e61976b78ca28e6236",
+   "license": "SourceHanSans.txt"
+  },
+  {
+   "file": "SourceHanSerifCN-Bold.otf",
+   "bytes": 12094680,
+   "sha256": "4ee555ae58b3d22f6a95c2c494f2c36b7cccfc1d2224635f6461a03756f0e3c1",
+   "url": "https://github.com/adobe-fonts/source-han-serif/releases/download/2.003R/14_SourceHanSerifCN.zip",
+   "member": "SubsetOTF/CN/SourceHanSerifCN-Bold.otf",
+   "archive_sha256": "aa3f9134809de83bb2add0bd965e61421772ce2fd8628fe98516b77c93e1d819",
+   "license": "SourceHanSerif.txt"
+  },
+  {
+   "file": "SourceHanSerifCN-Heavy.otf",
+   "bytes": 11862952,
+   "sha256": "053e911fdb1a55d4d8512a1f11203f1fb9a7291e34bc260474b8c80358c69fa6",
+   "url": "https://github.com/adobe-fonts/source-han-serif/releases/download/2.003R/14_SourceHanSerifCN.zip",
+   "member": "SubsetOTF/CN/SourceHanSerifCN-Heavy.otf",
+   "archive_sha256": "aa3f9134809de83bb2add0bd965e61421772ce2fd8628fe98516b77c93e1d819",
+   "license": "SourceHanSerif.txt"
+  },
+  {
+   "file": "ZCOOLKuaiLe-Regular.ttf",
+   "bytes": 1514968,
+   "sha256": "812a6fc1fe54b6d73a419245c32dfeba8aa33104d5be90d1cf6af082007cb71d",
+   "url": "https://raw.githubusercontent.com/google/fonts/9862abc066c9b83bf84c3e8ed1fc2d8d48f9bbf0/ofl/zcoolkuaile/ZCOOLKuaiLe-Regular.ttf",
+   "license": "ZCOOLKuaiLe.txt"
+  },
+  {
+   "file": "ZCOOLQingKeHuangYou-Regular.ttf",
+   "bytes": 8328684,
+   "sha256": "54f0c0df4308cd74cd0f2fd3494ae054dbc4a1fd6fa7d71f4807eb4cdd8b4136",
+   "url": "https://raw.githubusercontent.com/google/fonts/9862abc066c9b83bf84c3e8ed1fc2d8d48f9bbf0/ofl/zcoolqingkehuangyou/ZCOOLQingKeHuangYou-Regular.ttf",
+   "license": "ZCOOLQingKeHuangYou.txt"
+  },
+  {
+   "file": "ZhiMangXing-Regular.ttf",
+   "bytes": 4063532,
+   "sha256": "644e0cae9b40f0b10ab729a01bd32032e3973bac22be3dccae01bf6ae7fde969",
+   "url": "https://raw.githubusercontent.com/google/fonts/9862abc066c9b83bf84c3e8ed1fc2d8d48f9bbf0/ofl/zhimangxing/ZhiMangXing-Regular.ttf",
+   "license": "ZhiMangXing.txt"
+  }
+ ]
+}

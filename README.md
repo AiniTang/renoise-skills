@@ -12,6 +12,7 @@ templates. The same skill works in Claude Code, Codex, Cursor, Gemini CLI and an
 | [`digital-human-koubo`](skills/digital-human-koubo/SKILL.md) | Talking-head videos with a digital presenter: the user's own photo or an AI-generated host speaks a script cut into 15-second takes generated on Renoise (quoted and confirmed first), checked by ear with faster-whisper, aligned word by word and edited with Remotion in one of four styles (vertical caption-heavy, launch explainer, step-by-step tutorial, multi-host multilingual) with 47 packaging components. Adapted from [andyhuo520/digital-human-koubo](https://github.com/andyhuo520/digital-human-koubo) (MIT). |
 | [`pixel-breakdown`](skills/pixel-breakdown/SKILL.md) | Pixel-art breakdown episodes (16:9, 60–90 s) of a viral clip and its AI remake: the two side by side in sync, a pixel diagram of measured cuts and transitions, a simulated agent chat with a quote card and live progress, the result and an outro. Voice takes and music are generated on Renoise (quoted and confirmed first), aligned word by word with faster-whisper; every frame is drawn by a deterministic canvas engine in headless Chromium, with chiptune sound design and a 3:4 cover. |
 | [`vibe-knowledge`](skills/vibe-knowledge/SKILL.md) | Narrated knowledge shorts (45 s – 5 min, 16:9) where every claim on screen has a source: six script templates reverse-engineered from viral explainers, a fact sheet, a voiceover generated on Renoise (quoted and confirmed first) and aligned word by word with faster-whisper, then 44 visual styles in eight families drawn frame by frame by a code engine in headless Chromium (hand-written SVG layers, particles, data widgets, a default music bed and code-generated sound effects). An enhanced tier adds Renoise stills, image-to-video shots and sound effects only where code falls short. OCR read-back checks the text against the fact sheet. |
+| [`talking-head-editor`](skills/talking-head-editor/SKILL.md) | Talking-head editing: turns footage of someone speaking to camera (or a Renoise digital-human take) into a finished portrait or landscape video, or a JianYing (CapCut China) draft. It checks the footage, transcribes it, cuts retakes and breaths, plans every line, finds or makes B-roll, then packages it with 212 techniques picked automatically by content (big type, info cards, cut-outs, PIP, transitions), event-timed code sound effects and royalty-free music, and blurs sensitive information. Two looks: premium (default) and variety-show. Generated B-roll and digital-human takes are quoted and confirmed first. |
 
 ## Install
 
@@ -87,6 +88,21 @@ A shell: the Renoise sandbox or macOS, Linux or Windows. Its scripts are Python;
 
 The engine's fonts (SIL OFL 1.1) are downloaded on first use and checked against their sha256; the earshot sound bank (MIT) is installed
 on request into its own environment. The default music bed ships with the skill. No voice, presenter or footage ships with it.
+
+## What talking-head-editor needs
+
+A shell: the Renoise sandbox or macOS, Linux or Windows. Its scripts are Python; `scripts/doctor.py` checks what is missing and
+`evals/smoke.py` renders a credit-free 8-second test edit from synthetic footage.
+
+- **ffmpeg** with libass (burns in subtitles).
+- **Python 3.10+** with `pillow`, `numpy`, `opencv-python-headless` and `faster-whisper` (`pip install -r requirements.txt`). Optional:
+  `jieba` (better subtitle line breaks), `pyJianYingDraft` (JianYing drafts), `pypinyin` (pinyin captions), `uv` (installs the cut-out,
+  OCR and beat-analysis dependencies on demand).
+- **Optional: a Renoise connection** (MCP) for generated B-roll and digital-human takes, or to run the whole edit in the Renoise sandbox.
+
+Its 27 fonts (SIL OFL 1.1) are downloaded from their publishers on first use and checked against their sha256; the earshot sound bank
+(MIT) is installed on request into its own environment (`python scripts/setup_earshot.py install`); music and Mixkit sound effects are
+downloaded when picked. No footage, presenter or voice ships with it.
 
 ## Layout
 
