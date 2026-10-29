@@ -192,6 +192,10 @@ jobs:
       - run: python "$SKILL/scripts/doctor.py" --no-asr
       - name: demo episode (workspace, fonts, placeholder voice)
         run: python "$SKILL/scripts/demo.py" --no-optional-fonts
+      - name: voice plan without a reference goes to TTS with a short prompt
+        run: |
+          python "$SKILL/scripts/voice.py" plan demo
+          python -c "import json, sys; t = json.load(open(sys.argv[1], encoding='utf-8'))[0]; assert t['model'] == 'gemini-3.8-flash-tts' and 'reference_audio' not in t and t['prompt'].count(chr(10)) < 8" "$VK_WS/lessons/demo/build/voice_plan.json"
       - name: stills, full render, QA
         run: |
           python "$SKILL/scripts/render.py" stills demo "$VK_WS/sheet.png" 1 B01.ten+0.4 B02.fifty+0.6
