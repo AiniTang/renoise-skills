@@ -192,10 +192,10 @@ jobs:
       - run: python "$SKILL/scripts/doctor.py" --no-asr
       - name: demo episode (workspace, fonts, placeholder voice)
         run: python "$SKILL/scripts/demo.py" --no-optional-fonts
-      - name: voice plan without a reference goes to TTS with a short prompt
+      - name: voice plan without a reference goes to TTS with only the lines
         run: |
           python "$SKILL/scripts/voice.py" plan demo
-          python -c "import json, sys; t = json.load(open(sys.argv[1], encoding='utf-8'))[0]; assert t['model'] == 'gemini-3.8-flash-tts' and 'reference_audio' not in t and t['prompt'].count(chr(10)) < 8" "$VK_WS/lessons/demo/build/voice_plan.json"
+          python -c "import json, sys, pathlib; sys.path.insert(0, sys.argv[1]); from voice import load; L = pathlib.Path(sys.argv[2]); say = {b['id']: b['say'] for b in load(L)[3]}; plan = json.load(open(L / 'build/voice_plan.json', encoding='utf-8')); assert all(t['model'] == 'gemini-3.8-flash-tts' and 'reference_audio' not in t and t['prompt'] == (chr(10) * 2).join(say[b] for b in t['beats']) for t in plan), plan" "$SKILL/scripts" "$VK_WS/lessons/demo"
       - name: stills, full render, QA
         run: |
           python "$SKILL/scripts/render.py" stills demo "$VK_WS/sheet.png" 1 B01.ten+0.4 B02.fifty+0.6
