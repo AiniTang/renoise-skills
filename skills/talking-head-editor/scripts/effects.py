@@ -1237,6 +1237,16 @@ def morph(l, W, H, FPS, aroll, out, preview=False):
 
 
 # ---------------------------------------------------------------- 插入影视梗片段
+def _silent(src, t_in, d):
+    """片段这一段是不是没声音（带了一条静音音轨）：静音送进 loudnorm 会算出无效值，编码直接失败。"""
+    r = subprocess.run(['ffmpeg', '-v', 'info', '-ss', f'{t_in:.3f}', '-t', f'{d:.3f}', '-i', str(src), '-vn', '-af', 'volumedetect',
+                        '-f', 'null', '-'], capture_output=True, text=True)
+    for line in r.stderr.splitlines():
+        if 'max_volume:' in line:
+            return float(line.split('max_volume:')[1].split('dB')[0]) < -60
+    return True
+
+
 def splice_inserts(path, tl, W, H, FPS, preview=False):
     """成片渲完后，在 t 秒处硬切插入用户给的片段（横版居中黑底，不带字幕和头像，用片段自己的声音），再硬切回口播。
     inserts: [{t, src, in, dur, text}]；dur 默认取片段长度和 1.5 秒里短的那个，text 是叠在片段上的荧光绿花字（反应镜头用）。片子会变长 dur 秒。"""
@@ -1266,7 +1276,7 @@ def splice_inserts(path, tl, W, H, FPS, preview=False):
             pj = inputs.count('-i') - 1
             fc.append(f"[m{k}r][{pj}:v]overlay=(W-w)/2:H*{x.get('y', 0.66)}-h/2:shortest=1,format=yuv420p[m{k}]")
             pngs.append(png)
-        if info['has_audio']:
+        if info['has_audio'] and not _silent(x['src'], x.get('in', 0), d):
             fc.append(f"[{j}:a]aformat=channel_layouts=stereo:sample_rates=48000,loudnorm=I=-17:TP=-2,apad,atrim=duration={d:.3f},asetpts=PTS-STARTPTS[ma{k}]")
         else:
             fc.append(f"anullsrc=r=48000:cl=stereo,atrim=duration={d:.3f}[ma{k}]")

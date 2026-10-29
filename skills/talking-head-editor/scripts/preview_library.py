@@ -131,11 +131,15 @@ def main():
         dur = extra.pop('dur', CLIP)
         own = '_aroll' in extra
         src, t_in, k = extra.pop('_aroll', a.aroll), extra.pop('_aroll_in', 0 if own else a.start), extra.pop('_speed', 1.0)
+        if src not in source_sizes:
+            source_sizes[src] = probe(src)
+        room = source_sizes[src]['duration']
+        if t_in + dur * k > room:   # 素材不够长：起点往前挪，还不够就缩短这一段
+            t_in = max(0.0, room - dur * k)
+            dur = min(dur, (room - t_in) / k)
         af = f'atempo={k},' if k != 1 else ''
         cut_vf = f"{f'setpts=PTS/{k},' if k != 1 else ''}scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},setsar=1,fps={FPS}"
         if is_landscape(W, H):
-            if src not in source_sizes:
-                source_sizes[src] = probe(src)
             size = source_sizes[src]
             if not is_landscape(size['w'], size['h']):
                 # 声音示例会换回竖屏原片，横屏补虚化侧边，不能把脸裁掉。
@@ -195,7 +199,9 @@ def main():
                  '-c:a', 'aac', '-ar', '48000', '-ac', '2', str(lab)])
         else:
             run(['ffmpeg', '-y', '-i', str(raw), '-vf', vf, '-c:v', 'libx264', '-crf', '18', '-c:a', 'aac', '-ar', '48000', '-ac', '2', str(lab)])
-        parts.append((lab, dur))
+        frames = run(['ffprobe', '-v', 'error', '-select_streams', 'v', '-count_packets', '-show_entries', 'stream=nb_read_packets',
+                      '-of', 'csv=p=0', str(lab)]).stdout.strip()
+        parts.append((lab, int(frames) / FPS))   # 按实际帧数记段长：插入镜头这类手法会把样片拉长，按 dur 算会抽错格
     lst = work / 'list.txt'
     lst.write_text(''.join(f"file '{x}'\n" for x, _ in parts), encoding='utf-8')
     run(['ffmpeg', '-y', '-f', 'concat', '-safe', '0', '-i', str(lst), '-c', 'copy', str(out)])
@@ -206,7 +212,8 @@ def main():
         starts.append(t + min(2.6, d * 0.72))
         t += d
     sel = '+'.join(f"eq(n\\,{round(x * 30)})" for x in starts)   # 按帧号抽：按时间窗抽会漏帧或一处抽到两帧
-    run(['ffmpeg', '-y', '-i', str(out), '-vf', f"select='{sel}',scale=270:-2,"
+    # 图片素材的段是全色域、口播段是有限色域，拼起来后参数中途会变；不让滤镜重建，否则已攒进 tile 的前几格会丢
+    run(['ffmpeg', '-y', '-reinit_filter', '0', '-i', str(out), '-vf', f"select='{sel}',scale=270:-2,"
          f"tile={cols}x{(len(parts) + cols - 1) // cols}:padding=6", '-frames:v', '1', '-vsync', 'vfr', str(sheet)])
     if a.keep:
         print('每段样片的目录：', work)
