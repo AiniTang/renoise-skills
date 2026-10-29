@@ -11,7 +11,7 @@
    - `lexicon`：专名读音（「AI」→「A I」），只在回读真读错了时加。
 2. **切 take**：`python3 scripts/voice.py plan <期号>`。按拍切成几条 take（每条 ≤100 秒，切在拍与拍之间），写 `build/voice_plan.json`，打印每条的提示词、预估时长和时长上限（多留 25%，念完剩下的是静音，对齐时会裁掉）。
 3. **试听**：先只生成第一条 take 的前两三拍（或整条第一条，做 2 版）给用户听，定音色和语速；语速不对就调 `style` 或 `--cps` 重出。
-4. **报价、确认、生成**：模型先 `load_skill model-routing` 选（支持参考音频克隆音色的语音模型，当前是 `seed-audio-1.0`；限制以 list_models 为准）。每条 take 一个任务：提示词用 plan 打印的原文，有 `ref` 时作为 reference_audio。全部列进报价（提示词、模型、参照、数量、estimate_cost 总价、余额），用户在对话里明确同意才 create_tasks；wait_tasks → download_results。
+4. **报价、确认、生成**：模型用 `seed-audio-1.0`（限制以 list_models 为准）：plan 写的提示词是它的写法，按 speaker 描述设计音色、用说明控制语速停顿，也能吃 `ref` 克隆。model-routing 把纯念稿交给 TTS 模型，但那类模型只有预设音色、提示词里的说明可能被念出来，这里不换。每条 take 一个任务：提示词用 plan 打印的原文，有 `ref` 时作为 reference_audio。全部列进报价（提示词、模型、参照、数量、estimate_cost 总价、余额），用户在对话里明确同意才 create_tasks；wait_tasks → download_results。
 5. **对齐**：`python3 scripts/voice.py align <期号> <take1> [<take2> …]`（按 plan 的顺序）。faster-whisper 逐块转写 → 按字和旁白对齐 → 切出每拍 → `build/audio/<拍>.wav`、`build/narration.wav`、`build/timings.json`。打印每拍的语速、对齐率和听写稿。
 6. **挑 take / 重配**：
    - 读听写稿对原文：漏字、多字、重复、读错专名、念了提示词 → 这条重新生成（新报价）。
