@@ -1172,7 +1172,10 @@ def main():
     (work / 'graph.txt').write_text(';\n'.join(fc), encoding='utf-8')
     Path(a.out).parent.mkdir(parents=True, exist_ok=True)
     venc = ['-c:v', 'libx264', '-preset', 'ultrafast' if a.preview else 'medium', '-crf', '30' if a.preview else '18']
-    cmd = ['ffmpeg', '-v', 'error', '-y', *inputs, '-filter_complex_script', str(work / 'graph.txt'), '-map', '[vout]', '-map', '[aout]',
+    # ffmpeg 7 换成 -/filter_complex 读文件，9 删掉了 -filter_complex_script；没版本号的 git 构建当新版
+    v = re.search(r'version n?(\d+)\.', sh(['ffmpeg', '-version']).stdout)
+    graph = ['-filter_complex_script' if v and int(v.group(1)) < 7 else '-/filter_complex', str(work / 'graph.txt')]
+    cmd = ['ffmpeg', '-v', 'error', '-y', *inputs, *graph, '-map', '[vout]', '-map', '[aout]',
            *venc, '-r', str(FPS), '-c:a', 'aac', '-b:a', '192k', '-t', f'{DUR:.3f}', '-movflags', '+faststart', a.out, *stems]
     sh(cmd)
     effects.splice_inserts(a.out, tl, W, H, FPS, a.preview)   # 插入影视梗片段：成片在插入点硬切进去，片子变长
