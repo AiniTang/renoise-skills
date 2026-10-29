@@ -72,6 +72,9 @@ def est_seconds(text, lang, cps):
 
 
 # ── plan：Renoise 提示词 ──
+# 没有音色参照走 TTS：预设音色，提示词只能是一句语气 + 原文，别的说明可能被念出来。有参照走 Seed Audio 克隆，用下面的长提示词。
+TTS_MODEL, CLONE_MODEL = "gemini-3.8-flash-tts", "seed-audio-1.0"
+TTS_PROMPT = "Say in {lang_name} as {speaker}, {style}, at a brisk conversational pace with very short pauses:\n\n{script}"
 PROMPT = """This is a short-video knowledge voiceover, not a reading, not an announcement, not a dubbing script.
 The speaker: {speaker}
 Delivery: {style}
@@ -104,17 +107,22 @@ def plan(L):
     for i, tk in enumerate(takes, 1):
         need = sum(est_seconds(b["say"], lang, cps) + 0.5 for b in tk)
         cap = int(need * 1.25 + 3)
-        prompt = PROMPT.format(speaker=v.get("speaker") or "a lively Mandarin-speaking science creator in their late twenties",
-                               style=v.get("style") or "fast, tight, curious, with a sense of suspense", cps=cps, pron=pron, cap=cap,
-                               lang_name={"zh": "Mandarin Chinese", "en": "English"}.get(lang, lang),
-                               script="\n\n".join(b["say"] for b in tk))
-        out.append({"take": i, "beats": [b["id"] for b in tk], "est_seconds": round(need, 1), "cap_seconds": cap,
-                    "reference_audio": v.get("ref") or None, "prompt": prompt})
+        fields = dict(speaker=v.get("speaker") or "a lively Mandarin-speaking science creator in their late twenties",
+                      style=v.get("style") or "fast, tight, curious, with a sense of suspense",
+                      lang_name={"zh": "Mandarin Chinese", "en": "English"}.get(lang, lang),
+                      script="\n\n".join(b["say"] for b in tk))
+        t = {"take": i, "beats": [b["id"] for b in tk], "est_seconds": round(need, 1)}
+        if v.get("ref"):
+            t.update(model=CLONE_MODEL, cap_seconds=cap, reference_audio=v["ref"], prompt=PROMPT.format(cps=cps, pron=pron, cap=cap, **fields))
+        else:
+            t.update(model=TTS_MODEL, voice=v.get("tts_voice") or None, prompt=TTS_PROMPT.format(**fields))
+        out.append(t)
     (L / "build").mkdir(exist_ok=True)
     (L / "build/voice_plan.json").write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
     for t in out:
-        print(f"── take {t['take']}：{t['beats'][0]}–{t['beats'][-1]}（{len(t['beats'])} 拍），约 {t['est_seconds']}s，上限写 {t['cap_seconds']}s"
-              + (f"，音色参照 {t['reference_audio']}" if t["reference_audio"] else "，没有音色参照（按 speaker 描述配）"))
+        print(f"── take {t['take']}：{t['beats'][0]}–{t['beats'][-1]}（{len(t['beats'])} 拍），约 {t['est_seconds']}s，{t['model']}"
+              + (f"，上限写 {t['cap_seconds']}s，音色参照 {t['reference_audio']}" if t.get("reference_audio")
+                 else f"，音色 {t['voice']}" if t["voice"] else "，还没定音色：试听时按 speaker 从 list_models 的音色里挑，写进 voice.tts_voice"))
         print(t["prompt"] + "\n")
     print(f"→ {L / 'build/voice_plan.json'}（{len(out)} 条 take；下载后按顺序交给 voice.py align）")
 
