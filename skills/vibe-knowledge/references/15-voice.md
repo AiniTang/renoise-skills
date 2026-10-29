@@ -5,14 +5,14 @@
 ## 默认：Renoise 语音模型
 
 1. **音色**：narration.json 的 `voice`：
-   - `speaker`：说话人（年龄、气质、口吻），写进提示词；没有音色参照时也按它挑预设音色。
+   - `speaker`：说话人（年龄、气质、口吻）。有 `ref` 时写进提示词；没有 `ref` 时只用来挑预设音色，不进提示词。
    - `tts_voice`：没有 `ref` 时用的预设音色（名字以 list_models 为准），试听时定。
    - `ref`：音色参照，只用用户本人或明确授权的声音。用户给录音时：12–20 秒干净朗读（安静房间、离嘴 20 厘米），用 request_upload / upload_files 传成 Renoise 素材，写 `material:<id>`。不模仿任何真实博主、名人的声音。
-   - `style`：语气（科技博主快节奏、悬念感、不要播音腔……），会写进提示词。
+   - `style`：语气（科技博主快节奏、悬念感、不要播音腔……）。有 `ref` 时写进提示词；没有 `ref` 时和 `speaker` 一起用来挑音色。
    - `lexicon`：专名读音（「AI」→「A I」），只在回读真读错了时加。
 2. **切 take**：`python3 scripts/voice.py plan <期号>`。按拍切成几条 take（每条 ≤100 秒，切在拍与拍之间），写 `build/voice_plan.json`，打印每条的模型、提示词和预估时长；带 `ref` 的 take 还有时长上限（多留 25%，念完剩下的是静音，对齐时会裁掉）。
-3. **试听**：先只生成第一条 take 的前两三拍（或整条第一条，做 2 版）给用户听，定音色和语速；语速不对就调 `style` 或 `--cps` 重出。
-4. **报价、确认、生成**：模型由 plan 定（限制以 list_models 为准）：没有 `ref` 用 `gemini-3.8-flash-tts`，`voice` 填 `tts_voice`，提示词只有一句语气加原文，别往里加说明（会被念出来）；有 `ref` 用 `seed-audio-1.0`，`ref` 作为 reference_audio。每条 take 一个任务，提示词用 plan 写的原文。全部列进报价（提示词、模型、参照、数量、estimate_cost 总价、余额），用户在对话里明确同意才 create_tasks；wait_tasks → download_results。
+3. **试听**：先只生成第一条 take 的前两三拍（或整条第一条，做 2 版）给用户听，定音色和语速。TTS 的语气不对就换 `tts_voice` 重出，语速留到收尾用 `speed.py` 调；带 `ref` 的克隆语速不对就调 `style` 或 `--cps` 重出。
+4. **报价、确认、生成**：模型由 plan 定（限制以 list_models 为准）：没有 `ref` 用 `gemini-3.8-flash-tts`，`voice` 填 `tts_voice`，提示词只有原文，不加任何语气或说明（中英文、括号写法都会被一起念出来）；有 `ref` 用 `seed-audio-1.0`，`ref` 作为 reference_audio。每条 take 一个任务，提示词用 plan 写的原文。全部列进报价（提示词、模型、参照、数量、estimate_cost 总价、余额），用户在对话里明确同意才 create_tasks；wait_tasks → download_results。
 5. **对齐**：`python3 scripts/voice.py align <期号> <take1> [<take2> …]`（按 plan 的顺序）。faster-whisper 逐块转写 → 按字和旁白对齐 → 切出每拍 → `build/audio/<拍>.wav`、`build/narration.wav`、`build/timings.json`。打印每拍的语速、对齐率和听写稿。
 6. **挑 take / 重配**：
    - 读听写稿对原文：漏字、多字、重复、读错专名、念了提示词 → 这条重新生成（新报价）。
