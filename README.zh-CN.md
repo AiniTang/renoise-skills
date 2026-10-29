@@ -10,6 +10,7 @@
 | [`digital-human-koubo`](skills/digital-human-koubo/SKILL.md) | 数字人口播：用户本人照片或 AI 生成的主播，稿子按 15 秒切段在 Renoise 生成（先报价、确认后才生成），faster-whisper 逐段回听、逐字对齐，再用 Remotion 按四种风格（竖屏花字口播 / 发布解读 / 保姆级教程 / 多主播多语言）和 47 个包装组件出片。改编自 [andyhuo520/digital-human-koubo](https://github.com/andyhuo520/digital-human-koubo)（MIT）。 |
 | [`pixel-breakdown`](skills/pixel-breakdown/SKILL.md) | 像素风拆解视频（16:9，60–90 秒），讲一条爆款原片和它的 AI 复刻：两片同步对比、实测硬切和转场的像素图解、带报价卡和实时进度的模拟 agent 对话、成片和结尾。配音和配乐在 Renoise 生成（先报价、确认后才生成），faster-whisper 逐字对齐；每一帧由确定性的画布引擎在无头 Chromium 里绘制，配芯片音效，另出 3:4 封面。 |
 | [`vibe-knowledge`](skills/vibe-knowledge/SKILL.md) | 精品知识短片（45 秒～5 分钟，16:9），屏幕上每句话都有出处：从爆款知识视频反推的 6 种脚本母版、事实清单、Renoise 配音（先报价、确认后才生成）+ faster-whisper 逐字对齐，再用代码成片引擎在无头 Chromium 里逐帧画出 44 套风格（8 个家族：手写 SVG 分层插画、粒子、数据组件、默认 BGM、代码音效）。增强档只在代码做不好的镜头用 Renoise 配图、动态镜头和音效。OCR 回读屏幕文字对照事实清单质检。 |
+| [`talking-head-editor`](skills/talking-head-editor/SKILL.md) | 口播剪辑：把对着镜头说话的素材（真人拍的，或在 Renoise 生成的数字人口播）剪成竖屏或横屏成片，也能出剪映草稿。素材检查、转写、去重录和气口、逐句剪辑方案、找或做 B-roll，再从 212 个包装手法里按内容自动搭配（大字、信息卡片、抠像、画中画、转场），配上对准画面的代码音效和免版权配乐，敏感信息打码。高级感（默认）和综艺感两种风格。生成 B-roll 和数字人口播先报价、确认后才生成。 |
 
 ## 安装
 
@@ -72,6 +73,16 @@ skill 不带任何素材、主持人、声音和品牌：每一期都用用户�
   `faster-whisper`。可选：`rapidocr_onnxruntime`（回读屏幕文字核对事实）、`rembg`（生图拆层）。
 
 引擎字体（SIL OFL 1.1）第一次用时下载并核对 sha256；earshot 代码音效库（MIT）按需装进独立环境。默认 BGM 随 skill 提供。不带任何音色、主播或素材。
+
+## talking-head-editor 的运行依赖
+
+需要一个 shell：Renoise sandbox，或 macOS、Linux、Windows。脚本都是 Python，`scripts/doctor.py` 会列出缺什么，`evals/smoke.py` 能用合成素材不花钱渲染一条 8 秒的测试成片。
+
+- **ffmpeg**（需要带 libass，压字幕要用）。
+- **Python 3.10+**，装 `pillow`、`numpy`、`opencv-python-headless`、`faster-whisper`（`pip install -r requirements.txt`）。可选：`jieba`（字幕断句更准）、`pyJianYingDraft`（出剪映草稿）、`pypinyin`（拼音标注）、`uv`（抠像、文字识别、配乐节拍分析的依赖按需临时装）。
+- **可选：接入 Renoise**（MCP），用来生成 B-roll 和数字人口播，或者把整个剪辑放到 Renoise sandbox 里跑。
+
+27 款字体（SIL OFL 1.1）第一次用到时从发布方下载，并核对 sha256；earshot 代码音效库（MIT）按需装进独立环境（`python scripts/setup_earshot.py install`）；配乐和 Mixkit 音效选中时再下载。skill 不带任何素材、主播和声音。
 
 ## 目录结构
 
