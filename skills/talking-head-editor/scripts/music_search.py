@@ -22,6 +22,9 @@ import re
 import urllib.parse
 import urllib.request
 from pathlib import Path
+if sys.platform == "win32":  # a pipe gets the ANSI code page, which cannot hold CJK text
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+import sys
 
 UA = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) talking-head-editor'}
 

@@ -22,6 +22,8 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
 from fonts import font
+if sys.platform == "win32":  # a pipe gets the ANSI code page, which cannot hold CJK text
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))

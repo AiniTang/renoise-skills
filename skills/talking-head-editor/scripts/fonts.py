@@ -13,6 +13,8 @@ import time
 import urllib.request
 import zipfile
 from pathlib import Path
+if sys.platform == "win32":  # a pipe gets the ANSI code page, which cannot hold CJK text
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 ASSETS = Path(__file__).resolve().parent.parent / 'assets' / 'fonts'
 CATALOG = ASSETS / 'fonts.json'

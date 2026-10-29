@@ -7,11 +7,14 @@
 """
 import argparse
 import json
+import sys
 
 import librosa
 import numpy as np
 
 from audioload import load_audio
+if sys.platform == "win32":  # a pipe gets the ANSI code page, which cannot hold CJK text
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 
 

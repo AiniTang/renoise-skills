@@ -7,6 +7,8 @@ import subprocess
 import sys
 import venv
 from pathlib import Path
+if sys.platform == "win32":  # a pipe gets the ANSI code page, which cannot hold CJK text
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 REPO = 'https://github.com/Leonxlnx/earshot'
 COMMIT = '591fa3e028032e6dce56620a20e932e35667e8d8'

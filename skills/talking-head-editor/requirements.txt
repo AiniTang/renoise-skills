@@ -3,6 +3,7 @@ pillow
 numpy
 opencv-python-headless
 faster-whisper
+av<19  # faster-whisper 1.2.1 passes metadata_errors to av.open, which PyAV 19 removed
 # 可选：自动断句、剪映草稿、拼音标注
 jieba
 pyJianYingDraft

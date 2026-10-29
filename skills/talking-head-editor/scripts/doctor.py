@@ -12,6 +12,8 @@ import sys
 from pathlib import Path
 
 import fonts
+if sys.platform == "win32":  # a pipe gets the ANSI code page, which cannot hold CJK text
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 ROOT = Path(__file__).resolve().parent.parent
 OK, MISS, OPT = '✓', '✗', '·'
