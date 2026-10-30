@@ -44,6 +44,8 @@ compatibility: Needs a shell (the Renoise sandbox, or macOS / Linux / Windows) w
 | D 保姆级教程 | 16:9 | 3–8 分钟 | 参考实现 `templates/reference/tutorial-169` |
 | E 多主播多语言 | 16:9 | 3–7 分钟 | 参考实现 `templates/reference/multihost-169` |
 
+用户要剪映草稿（自己在剪映里接着改），或要中文平台（抖音、小红书、B 站、视频号）常见的高级感、综艺感口播包装时，把「交给 talking-head-editor 剪」也列进风格选项：本 skill 照第 1–5 步写稿、生成、回听、拼好口播，第 6 步换成 `load_skill talking-head-editor`，把拼好的口播交给它从素材检查开始剪，不用这里的 Remotion 模板。
+
 ### 1. 写稿 → script.json
 按选定风格的稿子写法（style-menu.md 里每种都有）。每段一句或两句，10 秒左右（约 40–55 字，Grok 中文约 5.4 字/秒），标 `shot`：`full`（全屏出镜）/ `pip`（画中画讲解）/ `vlog`（随意自拍口吻）/ `depth`（要做「文字在人身后」的段：中景、头顶两侧留背景）；多主播时标 `host`。英文缩写、网址写成好念的样子。外语段直接写目标语言的台词，标 `lang`。
 
