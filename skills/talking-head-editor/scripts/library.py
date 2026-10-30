@@ -650,7 +650,7 @@ FIELDS.update({
         where='layout 的 endcard 版式：{"mode": "endcard", "variant": "follow|name", "avatar": 头像图片, "name": "@账号", "text": "感谢关注"}；'
               '不给头像就用口播画面里的人脸', style=['web', 'variety'], auto='尾帧在画面上时常驻字幕让开；头像弹出和加号翻勾自带声音',
         variants={k: (['web', 'variety'], v) for k, v in ENDCARD_VARIANTS.items()},
-        demo=lambda A, v: {'layout': [{'t0': 0.2, 't1': 3.6, 'mode': 'endcard', 'variant': v, 'name': '@小林说剪辑', 'text': '学会了，去练'}]},
+        demo=lambda A, v: {'layout': [{'t0': 0.2, 't1': 3.6, 'mode': 'endcard', 'variant': v, 'name': '@口播剪辑课', 'text': '学会了，去练'}]},
     ),
     'opening_entry_hit': dict(
         where='顶层 "opening"：flash / zoom / boom / iris / spotlight / false', style=['premium', 'web', 'variety'],
