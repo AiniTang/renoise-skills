@@ -544,6 +544,14 @@ def build_ass(tl, st, W, H, fonts, pip_ranges, part='front'):
         elif cfg.get('shadow_alpha') is not None:
             soft_shadow(s['t0'], s['t1'], lv, tags, text, cfg['size'] * k, cfg['shadow_alpha'], 0)
         add(s['t0'], s['t1'], lv, tags, text, layer=1)
+        if s.get('en'):   # 双语字幕：中文下面一行英文小字，跟中文同进同出（发海外平台用）
+            fs = cfg['size'] * k * sub_scale
+            efs = fs * sub.get('en_scale', 0.56)
+            ey = yy + fs * 0.62 + efs * 0.75
+            etags = f"\\an5\\fn{fonts['en']}\\fs{efs:.1f}\\fsp{efs * 0.02:.1f}\\b0\\pos({x},{ey:.0f})\\1c{ass_color(sub.get('en_color', '#E8E8E8'))}\\fad(80,80)"
+            if cfg.get('shadow_alpha') is not None and not cfg.get('box'):
+                soft_shadow(s['t0'], s['t1'], lv, etags, esc(s['en']), efs, cfg['shadow_alpha'], 0)
+            add(s['t0'], s['t1'], lv, etags, esc(s['en']), layer=1)
 
     # ---------------- 定格暂停的暂停图标：半透明圆里两道竖杠，画在头像右上
     for fz in (tl.get('freezes', []) if part == 'front' else []):
